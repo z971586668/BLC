@@ -150,14 +150,9 @@ Suppose a literal $l\in\Lit(\Phi)$, if $\forall\phi\in\Phi, l\in\phi\wedge\lambd
 
 \subsection{Heuristic-based Algorithm}
 
-With different models returned by MINISAT, the result of the algorithm in previous section diverged. To shrink the gaps, greedy based literals selection strategies are proposed. With a given literals selection strategy, a chain of literals can be complemented at the same time. In other words, a chain of models will be obtained by the changing assignemnets of literals, coverage of clauses for each literals are updated simultaneously. More models will be generated in this way.
+%With different models returned by MINISAT, the result of the algorithm in previous section diverged. To shrink the gaps, greedy based literals selection strategies are proposed. With a given literals selection strategy, a chain of literals can be complemented at the same time. In other words, a chain of models will be obtained by the changing assignemnets of literals, coverage of clauses for each literals are updated simultaneously. More models will be generated in this way.
 
-Four Algorithms with different heuristic literals selection strategies are proposed in this subsection.
-Let $\NBL_0$ be the set of literals that only satisfy clauses that have at least two satisfied literals by a satisfied assignment,
-i.e., , $\NBL_0=\{x\in\Lit(\Phi) \mid \forall l_x\models\phi: \exists l_{x'}\neq\l_x, l_{x'}\models\phi\}$.
-The four different algorithms choose exactly one variable $x\in V(\Phi)$ and generate a new assignment
-$\lambda'=\lambda[\lambda(x)\mapsto\neg\lambda(x)]$.
-$\Psi$ and $\NBL_i$ defined in Algorithm \ref{alg:no-loop-w} will be updated using $\lambda'$.
+We apply a Greedy-Based Algorithm with different heuristic searching to extend the result of free literals and refereed as $\NBLap$. We leverages Greedy to depth first searches. The quota we choose are frequency represented by the number of appearance of a literal and the entropy represented by the ratio of appearance number of a literal to the total length of clauses that contains the literal. Each quota guided a Greedy search with maximal or minimal value.
 
 \begin{algorithm}
 \SetKwInOut{Input}{Input}
@@ -165,48 +160,41 @@ $\Psi$ and $\NBL_i$ defined in Algorithm \ref{alg:no-loop-w} will be updated usi
 \SetAlgoShortEnd
 \SetFillComment
 \Input{$\Phi$: a formula}
-\Output{$\NBL_i(\Phi)$: under-approximation of non-backbones}
-choose search strategy $i$ to compute $\NBL_i(\Phi)$\;
-$\Psi=\NBL_i(\Phi)=\emptyset$\;
-$(b,\lambda)=\SAT(\Phi$)\;
-\lIf{$b==0$} \Return $\Lit(\Phi)$\;
-\For{$\phi\in\Phi$}{
-    $\Psi = \Psi\cup\{\phi\in\Phi \mid \exists x_1, x_2, x_1\neq x_2,
-    \lambda(x_1), \lambda(x_2)\models\phi\}$\;
-    $\NBL_i(\Phi)=\NBL_i(\Phi)\cup \{x\in\Lit(\Phi) \mid \forall\phi\in\Phi: \lambda(x)\models\phi\Longrightarrow\phi\in\Psi\}$\;
+\Output{$\NBLap$: under-approximation of non-backbones}
+$\NBLap$=free literals of $\Phi$ to a given model $\lambda$\;
+\Repeat {No Update of $\NBLap$}{
+    select a literal using Greedy heuristic\;
+    change the selected literal to generate a new model\;
+    add new free literals to $\NBLap$.
+    % $\Psi=\Psi\setminus\{\phi\in\Psi,\lambda(x)\models\phi, |\{l\in\phi \mid \l\models\phi\}|=2\}$\;
+    % $\Psi=\Psi\cup\{\forall\phi\in\Phi, \neg\lambda(x)\models\phi\}$\;
+    % $\lambda=\lambda[x\mapsto\neg\lambda(x)]$\;
+    % $\NBL_i(\Phi)=\NBL_i(\Phi)\cup\{x\in\Lit(\Phi) \mid \forall\phi\in\Phi: \lambda(x)\models\phi\Longrightarrow\phi\in\Psi\}$\;
 }
-\Repeat {No Update of $\NBL_i(\Phi)$}{
-    select exactly one literal using strategy i\;
-    $\Psi=\Psi\setminus\{\phi\in\Psi,\lambda(x)\models\phi, |\{l\in\phi \mid \l\models\phi\}|=2\}$\;
-    $\Psi=\Psi\cup\{\forall\phi\in\Phi, \neg\lambda(x)\models\phi\}$\;
-    $\lambda=\lambda[x\mapsto\neg\lambda(x)]$\;
-    $\NBL_i(\Phi)=\NBL_i(\Phi)\cup\{x\in\Lit(\Phi) \mid \forall\phi\in\Phi: \lambda(x)\models\phi\Longrightarrow\phi\in\Psi\}$\;
-}
-\Return $\NBL_i(\Phi)$\;
+\Return $\NBLap$\;
 \caption{Heuristic extension for computing $\NBL_u$}\label{alg:whiten-greedy}
 \label{alg:wal}
 \end{algorithm}
-Heuristic searching strategies that used at Line $9$ in Algorithm \ref{alg:whiten-greedy} are:
-\begin{enumerate}
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, for every literal $x\in \NBL_1(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\}$.
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, for every literal $x\in \NBL_2(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\}$.
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_3(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\div|\Phi_{x}|\}$.
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_4(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\div|\Phi_{x}|\}$.
-\end{enumerate}
+% Heuristic searching strategies that used at Line $9$ in Algorithm \ref{alg:whiten-greedy} are:
+% \begin{enumerate}
+    %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, for every literal $x\in \NBL_1(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\}$.
+    %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, for every literal $x\in \NBL_2(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\}$.
+    %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_3(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\div|\Phi_{x}|\}$.
+    %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_4(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\div|\Phi_{x}|\}$.
+% \end{enumerate}
 
-\begin{theorem}
-Let $\NBL_1(\Phi), \NBL_2(\Phi), \NBL_3(\Phi), \NBL_4(\Phi)$ be the set of literals obtained by applying Algorithm \ref{alg:whiten-greedy} with search strategy $1,2,3,4$,
-then $\NBL_1(\Phi)\subseteq\NBL(\Phi)$, $\NBL_2(\Phi)\subseteq\NBL(\Phi)$, $\NBL_3(\Phi)\subseteq\NBL(\Phi)$, $\NBL_4(\Phi)\subseteq\NBL(\Phi)$.
-\end{theorem}
+In order to generate virous models from a given model, we need to negate more literals. We generate consecutive models by changing the assignments of literals one by one. Since enumerating every model of a satisfied formula is known as a NP hard problem, many heuristic strategies are applied to model generation. The selection of literals paly a vital role in it, with a different changing decisions, different models are generated. We take the idea of term frequency from statistic research, namely Term Frequency-Inverse Document Frequency(TF-IDF). In our context, literals are regarded as terms, clauses are regarded as documents. The frequency of terms are represented as the appearance number of literals. The inverse document frequency of a literal is represented as the ratio of appearance number to the total length of clauses that contained the literal.
+
+\begin{lemma}
+The result of Algorithm \ref{alg:wal} is a subset of $\NBL$.
+\end{lemma}
 \begin{proof}
-Given a satisfied formula $\Phi$, a literal $x\in \NBL_i(\Phi)$.
-It exists a satisfied assignment $\lambda$ such that $\forall\phi\in\Phi_{x}, x\models\lambda: \Longrightarrow \phi\in\Psi$ according to Line $7, 13$ in Algorithm \ref{alg:whiten-greedy}, i.e., it exists another variable $x', \lambda(x')\models\phi$.
-According to the satisfiability theory, it must exist a satisfied assignment $\lambda'=\lambda(x\mapsto\neg\lambda(x))\models\Phi$.
-According to Lemma \ref{lem:nBL}, $x\in\NBL(\Phi)$.
+For every model generated during the algorithms, the free literals is added to the result set of Algorithm \ref{alg:wal}.
+Since free literals is a subset of $\NBL$, the result is also a subset of $\NBL$.
 \end{proof}
-The final $\NBL_u(\Phi)$ result of our approach is $\NBL_u=\bigcup_{i=1}^4 \NBL_i(\Phi)\cup \NBL$.
+% The final $\NBL_u(\Phi)$ result of our approach is $\NBL_u=\bigcup_{i=1}^4 \NBL_i(\Phi)\cup \NBL$.
 
-Compared with $\NBL_u(\Phi)$, the strategies applied in this sections can be viewed as four different kinds of depth-first search, while $\NBL_u(\Phi)$ is a width-first search. With different search methods, we are able to explore more paths and obtain more diverse models.
+% Compared with $\NBL_u(\Phi)$, the strategies applied in this sections can be viewed as four different kinds of depth-first search, while $\NBL_u(\Phi)$ is a width-first search. With different search methods, we are able to explore more paths and obtain more diverse models.
 
 \section{Computing $\HBL(\Phi)$}
 
