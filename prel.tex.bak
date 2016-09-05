@@ -1,0 +1,88 @@
+\section{Preliminaries}\label{sec:prel}
+
+We fix a finite set  $\X$ of \emph{Boolean variables}.
+A \emph{literal} $l$ is either a Boolean variable $x\in \X$ or its negation $\neg x$.
+The negation of a literal $\neg x$ is $x$, i.e., $\neg\neg x=x$.
+A \emph{clause} $\phi$ is a disjunction of literals $\bigvee_{i=1}^n l_i$, which may be regarded as
+the set of literals $\{l_i\mid 1\leq i\leq n\}$.
+
+A \emph{formula} $\Phi$ over $\X$ is a Boolean combination of variables $\X$.
+We assume that formulae are given in conjunctive normal
+form (CNF), namely each formula $\Phi$ is a conjunction of clauses $\bigwedge_{i=1}^n\phi_i$ which may be regarded as a set of clauses $\{\phi_i\mid 1\leq i\leq n\}$.
+Given a formula $\Phi$, let $\var(\Phi)$ (resp. $\Lit(\Phi)$  and $\cls(\Phi)$) denote the set of variables (resp. literals and clauses) used in $\Phi$.
+We use $\neg\Lit(\Phi)$ to denote the set $\{\neg l \mid l\in \Lit(\Phi)\}$.
+The \emph{size} $|\Phi|$ of $\Phi$ is the number of literals of $\Phi$.
+Given a formula $\Phi$ and a literal $l\in\Lit(\Phi)$,
+let $\Phi_{l}\subseteq \Phi$ be the set of clauses $\{\phi\in\Phi\mid l\in\phi\}$.
+%and $\Phi_\downarrow$ be the set $\{(l,\Phi_{\downarrow l})\mid l\in \Lit(\Phi)\}$.
+%Given a clause $\phi$ of $\Phi$, let $\sharp(\phi,\Phi)$ be the count of occurrence of $\phi$ in the second components of tuples in $\Phi_\downarrow$.
+%Given a set of clauses $\Phi_{l_x}$, let $\Phi_{l_x}^0 = \Phi_{\downarrow l}$, let $\Phi_{\downarrow l}^k$, $\Phi_{\downarrow l}^{k-1}\subseteq\Phi_{\downarrow l}^k\subseteq\Phi_{\downarrow 1}^{k+1}\subseteq\Phi (k \geq 1)$ be the set of clauses $\{\phi\in\Phi \mid \exists l\in\Lit(\Phi_{\downarrow l}^{k-1}), \neg l\in\Lit(\phi)\} (k \geq 1)$.
+
+%A \emph{partial assignment} is a partial function $\lambda:\X\rightarrow \{0,1\}$ which assigns to each defined variable a Boolean value. Let $\lambda_x$ denote the partial assignment such that for every $y\in \X$, $\lambda_x(y)=\lambda(x)$ if $x=y$, otherwise $\lambda_x(y)$ is undefined.
+%A \emph{complete assignment} is a partial assignment in which all the variables are defined.
+
+An \emph{assignment} is a function $\lambda: \X \rightarrow \{0,1\}$, where $1$ (resp. $0$) denotes true (resp. false).
+Given an assignment $\lambda$, let $\lambda[x\mapsto b]$ for some $b\in \{0,1\}$ be the assignment which is equal to $\lambda$
+except for $\lambda[x\mapsto b](x)=b$.
+An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\models \Phi$, iff assigning $\lambda(x)$ to $x$ for $x\in\var(\Phi)$ makes $\Phi$ true. A formula $\Phi$ is \emph{satisfiable} iff there exists an assignment $\lambda$ such that $\lambda\models \Phi$.
+%A variable $x\in\phi$ \emph{satisfies} a formula $\Phi$, denoted by $x\models\Phi$, iff assigning $1$ to $x$ makes with its value $\lambda(x)$.
+Given a formula $\Phi$, the \emph{satisfiability problem} is to decide whether $\Phi$ is satisfiable or not.
+%Whenever convenient, a formula $\Phi$ is seen as a set $\cls(\Phi)$ of clauses, a clause $\phi$ is seen as a set $\Lit(\phi)$ of literals, and an assignment %$\phi$ is seen as a set of clauses.
+%In the rest of this section, we will introduce several technical concepts, amendable to our approach.
+
+\smallskip
+%Given an unsatisfiable Boolean formula $\Phi$, an \emph{unsatisfiable core} is a subset of clauses $C\subseteq \cls(\Phi)$ such that
+%$\Phi_C$ is still unsatisfiable. An unsatisfiable core $C$ of $\Phi$ is called a \emph{minimal unsatisfiable core} if
+%for every $C'\subset C$, $\Phi_{C'}$ is satisfiable. Intuitively, unsatisfiable core is a minimal unsatisfiable core it is unsatisfiable, but removing any of %its clauses makes it satisfiable.
+
+\begin{definition}[Backbone]
+\label{def:backbone}
+Given a satisfiable formula $\Phi$, a literal $l$ is a \emph{backbone literal} of $\Phi$ iff for all assignments $\lambda$ such that $\lambda\models\Phi$,
+$\lambda\models l$. The \emph{backbone} $\BL(\Phi)$ of $\Phi$ is the set of backbone literals of $\Phi$.
+\end{definition}
+
+
+
+%\begin{definition}[Nonbackbone]
+%\label{def:backbone}
+%Given a satisfiable formula $\Phi$, a variable $x\in\var(\Phi)$ is a \emph{nonbackbone variable} of $\Phi$ iff there exist two satisfying assignments
+%$\lambda_1$ and $\lambda_2$ such that $\lambda_1(x)\neq \lambda_2(x)$.
+%A clause $\phi\in \Phi$ is \emph{nonbackbone clause} iff $|\var(\phi)|\geq 2$ and there is a nonbackbone variable of $\Phi$ in $\phi$.
+%For an unsatisfiable formula $\Phi$, the set of nonbackbone variables is $\var(\Phi)$.
+%\end{definition}
+It is known that the backbone $\BL(\Phi)$ for each formula $\Phi$ is unique and a backbone literal $l$ of $\Phi$ must be in
+$\BL(\Phi)$ \cite{JLM15}.
+The backbone of an unsatisfiable formula can be defined as an empty set. Therefore, in this work, we focus on satisfiable formulae.
+We will use $\NBL(\Phi)$ to denote the set
+$\Lit(\Phi)\setminus \BL(\Phi)$.
+
+\begin{theorem}
+\label{thm:co-NP}\cite{Jan10}
+Given a satisfiable formula $\Phi$ and a literal $l$, deciding whether $l$ is a backbone literal is co-NP-complete.
+\end{theorem}
+
+\begin{definition}[Model]
+Given a satisfied formula $\Phi$, a model $\lambda$ is a truth assignment such that $\lambda\models\Phi$.
+\end{definition}
+
+\begin{definition}[Satisfied literal]
+Given a satisfied formula $\Phi$, a model $\lambda$, a clause $\phi\in\Phi$, a literal $l\in\phi$, l is a satisfied literal iff $l\models\lambda$.
+\end{definition}
+
+\begin{definition}[Unique satisfied litera]
+Given a satisfied formula $\Phi$, a model $\lambda$, a clause $\phi\in\Phi$, a satisfied literal $l$, $l$ is a unique satisfied literal iff there
+exist exactly only one satisfied literal $l$ in $\phi$ with the assignment of $\lambda$.
+\end{definition}
+
+\begin{example}
+Let us consider the formula $\Phi=\phi_1 \wedge \phi_2 \wedge \phi_3$, where $\phi_1=\neg x_1 \vee \neg x_2$, $\phi_2=x_1$, $\phi_3=x_3 \vee x_4$.
+We have that $\var(\Phi)=\{x_1, x_2, x_3, x_4\}$, $\Lit(\Phi)=\{\neg x_1, x_1, \neg x_2, x_3, x_4\}$, $\Phi_{\neg x_2}=\{\phi_1\}$ and
+$\BL(\Phi)=\{x_1, \neg x_2\}$.
+\end{example}
+
+
+
+%\begin{remark}\label{rem:na}
+%Given a formula $\Phi$,
+%a na\"{\i}ve approach for computing $\BL(\Phi)$ is to verify whether a set $B$ is a backbone or not by calling SAT solver, for every $B\subseteq \var(\Phi)$. %However, this naive approach has to call $2^{|\var(\Phi)|}$ times SAT solver in the worst case \cite{JLM15}.
+%\end{remark}

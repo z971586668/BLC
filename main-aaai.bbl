@@ -1,0 +1,130 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{Bollob{\'a}s \bgroup et al\mbox.\egroup
+  }{2001}]{BCJ2001}
+Bollob{\'a}s, B.; Borgs, C.; Chayes, J.~T.; Kim, J.~H.; and Wilson, D.~B.
+\newblock 2001.
+\newblock The scaling window of the 2-sat transition.
+\newblock {\em Random Structures \& Algorithms} 18(3):201--256.
+
+\bibitem[\protect\citeauthoryear{Culberson and Gent}{2001}]{CJG2001}
+Culberson, J., and Gent, I.
+\newblock 2001.
+\newblock Frozen development in graph coloring.
+\newblock {\em Theoretical computer science} 265(1):227--264.
+
+\bibitem[\protect\citeauthoryear{Dubois and Dequen}{2001}]{DOG2001}
+Dubois, O., and Dequen, G.
+\newblock 2001.
+\newblock A backbone-search heuristic for efficient solving of hard 3-sat
+  formulae.
+\newblock In {\em IJCAI}, volume~1,  248--253.
+
+\bibitem[\protect\citeauthoryear{Eén and Sörensson}{2004}]{MINISAT}
+Eén, N., and Sörensson, N.
+\newblock 2004.
+\newblock {\em An Extensible SAT-solver}.
+\newblock Springer Berlin Heidelberg.
+
+\bibitem[\protect\citeauthoryear{Janota, Lynce, and
+  Marques{-}Silva}{2015}]{JLM15}
+Janota, M.; Lynce, I.; and Marques{-}Silva, J.
+\newblock 2015.
+\newblock Algorithms for computing backbones of propositional formulae.
+\newblock {\em {AI} Commun.} 28(2):161--177.
+
+\bibitem[\protect\citeauthoryear{Janota}{2010}]{Jan10}
+Janota, M.
+\newblock 2010.
+\newblock {\em SAT Solving in Interactive Configuration}.
+\newblock Ph.D. Dissertation, University College Dublin.
+
+\bibitem[\protect\citeauthoryear{Kilby \bgroup et al\mbox.\egroup
+  }{2005a}]{KPJ2005}
+Kilby, P.; Slaney, J.; Thi{\'e}baux, S.; Walsh, T.; et~al.
+\newblock 2005a.
+\newblock Backbones and backdoors in satisfiability.
+\newblock In {\em AAAI}, volume~5,  1368--1373.
+
+\bibitem[\protect\citeauthoryear{Kilby \bgroup et al\mbox.\egroup
+  }{2005b}]{KPS2005}
+Kilby, P.; Slaney, J.; Walsh, T.; et~al.
+\newblock 2005b.
+\newblock The backbone of the travelling salesperson.
+\newblock In {\em IJCAI},  175--180.
+
+\bibitem[\protect\citeauthoryear{Li, Ma, and Zhou}{2009}]{LMZ09}
+Li, K.; Ma, H.; and Zhou, H.
+\newblock 2009.
+\newblock From one solution of a 3-satisfiability formula to a solution
+  cluster: frozen variables and entropy, 2009.
+\newblock {\em Physical Review E} 79:031102.
+
+\bibitem[\protect\citeauthoryear{McMillan}{2002}]{MK2002}
+McMillan, K.~L.
+\newblock 2002.
+\newblock Applying sat methods in unbounded symbolic model checking.
+\newblock In {\em International Conference on Computer Aided Verification},
+  250--264.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Mena{\"\i}}{2005}]{MM2005}
+Mena{\"\i}, M. E.~B.
+\newblock 2005.
+\newblock A two-phase backbone-based search heuristic for partial max-sat--an
+  initial investigation.
+\newblock In {\em International Conference on Industrial, Engineering and Other
+  Applications of Applied Intelligent Systems},  681--684.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Menc{\i}a, Previti, and
+  Marques-Silva}{2015}]{MPA2015}
+Menc{\i}a, C.; Previti, A.; and Marques-Silva, J.
+\newblock 2015.
+\newblock Literal-based mcs extraction.
+\newblock In {\em IJCAI}, volume~15,  1973--1979.
+
+\bibitem[\protect\citeauthoryear{Parisi}{2003}]{Par03}
+Parisi, G.
+\newblock 2003.
+\newblock On local equilibrium equations for clustering states.
+\newblock {\em Computer Science}.
+
+\bibitem[\protect\citeauthoryear{Ravi and Somenzi}{2004}]{RSF2004}
+Ravi, K., and Somenzi, F.
+\newblock 2004.
+\newblock Minimal assignments for bounded model checking.
+\newblock In {\em International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems},  31--45.
+\newblock Springer.
+
+\bibitem[\protect\citeauthoryear{Walsh and Slaney}{2001}]{WTS2001}
+Walsh, T., and Slaney, J.
+\newblock 2001.
+\newblock Backbones in optimization and approximation.
+\newblock In {\em Proceedings of the Seventeenth International Joint Conference
+  on Artificial Intelligence (IJCAI-01)}.
+
+\bibitem[\protect\citeauthoryear{Zhang and Looks}{2005}]{ZWL2005}
+Zhang, W., and Looks, M.
+\newblock 2005.
+\newblock A novel local search algorithm for the traveling salesman problem
+  that exploits backbones.
+\newblock In {\em IJCAI},  343--350.
+
+\bibitem[\protect\citeauthoryear{Zhang, Rangan, and Looks}{2003}]{ZWR2003}
+Zhang, W.; Rangan, A.; and Looks, M.
+\newblock 2003.
+\newblock Backbone guided local search for maximum satisfiability.
+\newblock In {\em IJCAI},  1179--1186.
+\newblock Citeseer.
+
+\bibitem[\protect\citeauthoryear{Zhu \bgroup et al\mbox.\egroup }{2011}]{Z11}
+Zhu, C.~S.; Weissenbacher, G.; Sethi, D.; and Malik, S.
+\newblock 2011.
+\newblock Sat-based techniques for determining backbones for post-silicon fault
+  localisation.
+\newblock In {\em IEEE International High Level Design Validation and Test
+  Workshop},  84--91.
+
+\end{thebibliography}

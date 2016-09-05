@@ -1,0 +1,30 @@
+
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\g}{\mathcal{G}}
+\newcommand{\var}{\textsf{var}}
+\newcommand{\Lit}{\textsf{lit}}
+
+\newcommand {\SAT}{\textsf{SAT}}
+\newcommand {\MUC}{\textsf{MUC}}
+\newcommand{\degr}{\textsf{d}}
+\newcommand{\BL}{\textsf{BL}}
+\newcommand{\BV}{\textsf{BV}}
+\newcommand{\HDBS}{\textsf{HDBS}\xspace}
+
+\newcommand{\tool}{\textsf{Tool}\xspace}
+\newcommand{\NBV}{\overline{\textsf{BV}}}
+\newcommand{\NBL}{\overline{\textsf{BL}}}
+\newcommand{\NBC}{\overline{\textsf{BC}}}
+
+\newcommand{\HBL}{{\sf hBL}\xspace}
+
+\newcommand{\cls}{\textsf{cls}}
+\newcommand{\NB}{{\bf NB$\downharpoonright$}}
+\newcommand{\MBNB}{{\bf MBNB$\downharpoonright$}}
+\newcommand{\HBNB}{{\bf HBNB$\downharpoonright$}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}

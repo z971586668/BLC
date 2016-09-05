@@ -1,0 +1,111 @@
+\section{Our Approaches}\label{sec:approaches}
+
+Given a formula $\mathbb F$, a solution $\gamma$, the algorithm of our approach is in Algorithm \ref{alg:greedy}
+
+\begin{algorithm}[H]
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetAlgoShortEnd
+\SetFillComment
+\Input{$\Phi$: a formula, $V$: whitening variables}
+\Output{$BV'$: over-approximation backbone variable}
+       $V_c=BV'=\emptyset$\;
+	   initialize $\Phi_\downarrow$\;
+	   \For {$\phi\in\Phi$}{
+			initialize $\sharp (\phi, \Phi)$\;
+	   }
+       greedy choose $l$ in that has the smallest second component\;
+	   \For{$\phi$ in second component of $\Phi_{\downarrow l}$}{
+			\If {$\sharp(\phi,\Phi) < 2$}{
+				break\;
+			}
+	   }
+	   \For{$\phi$ in second component of $\Phi_{\downarrow l}$}{
+			$\sharp(\phi,\Phi)--$\;
+			$BV'=BV' \cup \{\var(l)\}$\;
+	   }
+
+	   \Return $BV'$\;
+	 \caption{Greedy Algorithm}
+	 \label{alg:greedy}
+\end{algorithm}
+
+
+The Line 1 defines a list that record changed variables. Line 5 finds resources list of each Whiten Variable. Line 6 to Line 10 calculate the appearance number of $c_i \in \mathbb C$ with $CAN[i]$. Line 12 greedily picked a variable from Whiten Variables with least count of resource clauses. Line 13 decide whether the selected variable can be changed or not. Line 14 to Line 17 update $CV$ and the appearance number of each clause that affected by the change.
+
+
+\begin{theorem}
+Given a Formula $\mathbb F$, a solution $\gamma$,  un-Frozen Variables $\Lambda$, for every un-Frozen Variable $\lambda \in \gamma, l_c \notin FV$ is changed, $SAT(\gamma \prime \wedge \mathbb F)$ is true, $\gamma \prime = \gamma \backslash \{\Lambda\} \cup {\neg \lambda_1, \neg \lambda_2, ..., \lambda_n}$.
+\end{theorem}
+
+\begin{proof}
+
+\begin{lemma}[satisfiable]
+\label{lem:satisfied}
+Given a Formula $\mathbb{F}$, an assignment $\gamma$. If every clause is Satisfied Clause, $\mathbb{F}$ is satisfiable.
+\end{lemma}
+\begin{proof}
+%The proof of Lemma \ref{lem:satisfied} is nature. Given clauses $\mathbb{C} \in \mathbb{F}$, $\mathbb{F}=\bigwedge c_i$. If every clause is Satisfied Clause, $SAT(\forall c_i \wedge \gamma)$ is true $\leftrightarrow SAT((c_1 \wedge \c_2 \wedge ... \wedge c_i \wedge)\wedge \gamma)$ is true. $(c_1 \wedge \c_2 \wedge ... \wedge c_i \wedge)=\bigwedge c_i$. Therefore, $SAT(\mathbb {F} \wedge \gamma)$ is satisfied.
+\end{proof}
+
+\begin{lemma}[independent]
+\label{lem:independent}
+Given a Formula $\mathbb F$, Resources List $RL$, an assignment $\gamma$. If a literal $l \in \gamma$ is changed, clauses $c_i \cap rl_i[2] = \emptyset$, $SAT(\gamma \wedge c_i)$ will \emph{not} changed.
+\end{lemma}
+\begin{proof}
+The satisfiability of $\gamma \wedge c_i$ depends on the literals $\gamma \prime = \gamma \cap l_i \in c_i$. If the changed literal $l \notin \gamma \prime$, it's obvious that the satisfiability of $c_i$ will not be affected.
+\end{proof}
+
+\begin{lemma}
+\label{lem:at least one}
+Given a Formula $\mathbb F$, Clause Appearance Number List $CAN$, a solution $\gamma$. A clause $c_i$ is Satisfied Clause as long as $CAN[i] > 0$.
+\end{lemma}
+\begin{proof}
+Given Whiten Variables $WV$, Resources List $RL$, the number of $CAN[i]$ represents the appearance number of clause $c_i$ in $RL$. Since $\gamma$ is a solution, $SAT(\gamma \wedge \mathbb F)$ is true. According to the definition of $RL$, if a Whiten Variable $wv_i$ appears in clause $c_i$, $c_i$ will be in $RL_i$. IF $CAN[i] > 0 \leftrightarrow \exists rl_i, \langle wv_i, \{..., c_i, ...\}\rangle$. $lit(wv_i)$ is a Satisfied Literal of clause $c_i$, $\rightarrow$ $c_i$ is a Satisfied Clause.
+\end{proof}
+
+According to algorithm \ref{alg:greedy}. Given a Whiten Variable $wv_i, CAN[i] > 1,c_i \in rl_i$ has to be asserted. If $CAN[i] > 1$, \ref{lem:at least one} proofs that $c_i$ is Satisfied Clause, after $wv_i$ has been changed, $CAN[i]$ will be reduced by one. After change, the minimal value of $CAN[i]$ is 1, \ref{lem:at least one} proves that clauses that contain $wv_i$ will still be Satisfied Clause. \ref{lem:independent} proves that satisfiability of clauses doesn't contain $wv_i$ will not be affected. Therefore, a solution $\gamma$ will still be a solution $\gamma \prime$ after the change.
+\end{proof}
+
+\begin{example}
+\end{example}
+A mini case is given using clauses-variables diagram in Diagram \ref{fig:example}.
+$\varphi_1=(x_1\vee x_2\vee \neg x_3)$, $\varphi_2=(x_1\vee \neg x_2\vee x_3)$, $\varphi_3=(x_4)$, $\varphi_4=(x_1\vee \neg x_2\vee x_7)$, $\varphi_5=(x_5\vee x_6\vee x_7)$, $\varphi_6=(x_5\vee x_6\vee x_7)$. The Formula $\mathbb F$ is $\varphi_1 \wedge \varphi_2 \wedge \varphi_3 \wedge \varphi_4 \wedge \varphi_5 \wedge \varphi_6 $. The seed solution is $(x_1\wedge x_2\wedge x_3\wedge x_4\wedge x_5\wedge x_6\wedge x_7)$. The result of whiten algorithm is $(x_1\wedge x_2\wedge x_3\wedge x_4\wedge x_5\wedge x_6)$ which means that only variable $x_4$ is Frozen Variable.
+
+\begin{figure}[H]
+    \centering
+   %\includegraphics[scale=0.8]{example.jpg}
+   \caption{mini example of frozen variable algorithm}
+   \label{fig:example}
+   \begin{tikzpicture}
+    % Default actions for each node
+    \tikzstyle{every node}=[draw, shape=circle];
+    % Define and draw five nodes
+    \node (v1) {$x_1$};
+    \node (v2) [right=1cm of v1] {$x_2$};
+    \node (v3) [right=1cm of v2] {$x_3$};
+    \node (v4) [right=1cm of v3] {$x_4$};
+    \node (v5) [right=1cm of v4] {$x_5$};
+    \node (v6) [right=1cm of v5] {$x_6$};
+    \node (v7) [right=1cm of v6] {$x_7$};
+    \node [rectangle] (c1) [below right=1cm of v1]{$\varphi_1$};
+    \node [rectangle] (c2) [below right=1cm of v2]  {$\varphi_2$};
+    \node [rectangle] (c3) [below right=1cm of v3]  {$\varphi_3$};
+    \node [rectangle] (c4) [below right=1cm of v4]  {$\varphi_4$};
+    \node [rectangle] (c5) [below right=1cm of v5]  {$\varphi_5$};
+    \node [rectangle] (c6) [below right=1cm of v6]  {$\varphi_6$};
+
+    % Draw radial edges
+    \draw [dashed] (v2) -- (c4) (v3) -- (c1) (v2) -- (c2)
+    (v7) -- (c6);
+    \draw  (v1) -- (c1) (v1) -- (c2) (v1) -- (c4)
+            (v2) -- (c1) (v3) -- (c2) (v4) -- (c3)
+            (v5) -- (c6) (v6) -- (c5) (v6) -- (c6)
+            (v5) -- (c5) (v7) -- (c4) (v7) -- (c5);
+    \end{tikzpicture}
+\end{figure}
+
+In fact, there are conflicts if every Whiten Variables is changed.
+Our approach will eliminate conflicts. $RL$ is $\{\langle x_3, \{\varphi_2\}\rangle, \langle x_5, \{\varphi_5, \varphi_6\} \rangle, \langle x_6, \{\varphi_5, \varphi_6\}\rangle, \langle x_7, \{\varphi_4, \varphi_5\}\rangle, \langle x_1, \{\varphi_1, \varphi_2, \varphi_4\}\rangle\}$, $CAN$ is \{1, 2, 0, 2, 3, 2\}.
+Whiten Variables is selected in the order of $x_2$, $x_3$, $x_5$. $x_1$ is added to Frozen Variables because $CAN[1]=1$. After changing $x_2$, $x_3$ and $x_5$, $CAN$ is \{1, 1, 0, 1, 1, 1\}, $x_6$ can't be changed any more.
+

@@ -1,0 +1,76 @@
+\def\year{2016}\relax
+%File: formatting-instruction.tex
+\documentclass[letterpaper]{article}
+\usepackage{aaai16}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{hyperref}
+\usepackage[vlined,ruled,linesnumbered]{algorithm2e}
+\frenchspacing
+
+\usepackage{algpseudocode}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{calc}
+
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+\pdfinfo{
+/Title (Towards Backbone Computing: A Greedy-Whitening Based Approach)
+/Author (Yueling Zhang,Min Zhang,Fu Song,Geguang Pu)}
+\setcounter{secnumdepth}{0}
+ \begin{document}
+% The file aaai.sty is the style file for AAAI Press
+% proceedings, working notes, and technical reports.
+%
+\title{Towards Backbone Computing: A Greedy-Whitening Based Approach}
+
+%\author{Yueling Zhang \\ {\bf Min Zhang} \\ {\bf Geguang Pu} \\ Shanghai Key Laboratory of Trustworthy Computing \\ National Research Center of Trustworthy Embedded Software \\ East China Normal University, China  \\ {ylzhang, mzhang, ggpu} @sei.ecnu.edu.cn
+%Fu Song \\ School of Information Science and Technology, ShanghaiTech University \\ songfu@shanghaitech.edu.cn}
+
+% \author{Yueling Zhang \\ {\bf Min Zhang} \and {\bf Geguang Pu}
+% \\ Shanghai Key Laboratory of Trustworthy Computing
+% \\ National Research Center of Trustworthy Embedded Software
+% \\ East China Normal University, China
+% \\ \{ylzhang, mzhang, ggpu\}@sei.ecnu.edu.cn
+% \And Fu Song
+% \\ School of Information Science and Technology
+% \\ ShanghaiTech University, China
+% \\ songfu@shanghaitech.edu.cn
+% \AND Jianwen Li
+% \\ jwli@sei.ecnu.edu.cn
+%}
+
+\maketitle
+\input{macro}
+
+\begin{abstract}
+Backbone is widely used in random SAT solving, ALL-SAT computing and planning. 
+In this paper, we propose a greedy-whitening based approach for computing backbones of propositional Boolean formulae. 
+We present a greedy-based algorithm with four heuristic searches to compute an under-approximation of non-backbone, and propose
+a whitening-based algorithm to compute an approximation of backbone from which 
+the exact backbone is computed by applying iterative test backbone.
+We implemented our approach in \tool and conducted experiments on instances from industria/random track of SAT Competitions 
+between xxx and yyy. Experimental results demonstrate that \tool is comparable  
+to the state-of-the-art tool cb100. Moreover, \tool needs less SAT solver calls and outperforms cb100 on most of hard instances.
+
+%For the formulae that with disperse backbones, our approach is able to compute an estimation of literals that are highly likely to be %backbones and applied backbones extraction algorithms in the following steps.
+%Experiments show the efficiency of the approach using satisfiable instances from SAT Competition, including both SAT track and Maximal %Satisfiability Sub-formulae(MSS) extracted from UNSAT track. Moreover, compared with state-of-the-art approach proposed in 2015, our %approaches has advantages in hard formulae and MSS formulae.
+\end{abstract}
+
+\input {intr.tex}
+\input {prel.tex}
+\input {walg.tex}
+\input {expr.tex}
+\input {conc.tex}
+
+\bibliographystyle{aaai}
+\bibliography{bib}
+
+\end{document}
