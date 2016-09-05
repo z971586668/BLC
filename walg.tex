@@ -159,12 +159,12 @@ We apply a Greedy-Based Algorithm with different heuristic searching to extend t
 \SetKwInOut{Output}{Output}
 \SetAlgoShortEnd
 \SetFillComment
-\Input{$\Phi$: a formula}
+\Input{$\Phi$: a formula, $\lambda$: a model, free literals of $\lambda$}
 \Output{$\NBLap$: under-approximation of non-backbones}
-$\NBLap$=free literals of $\Phi$ to a given model $\lambda$\;
+$\NBLap$:=free literals of $\Phi$ to a given model $\lambda$\;
 \Repeat {No Update of $\NBLap$}{
-    select a literal using Greedy heuristic\;
-    change the selected literal to generate a new model\;
+    select a list of literals using Greedy heuristic\;
+    change the selected literal one by one to generate a new model\;
     add new free literals to $\NBLap$.
     % $\Psi=\Psi\setminus\{\phi\in\Psi,\lambda(x)\models\phi, |\{l\in\phi \mid \l\models\phi\}|=2\}$\;
     % $\Psi=\Psi\cup\{\forall\phi\in\Phi, \neg\lambda(x)\models\phi\}$\;
@@ -182,6 +182,8 @@ $\NBLap$=free literals of $\Phi$ to a given model $\lambda$\;
     %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_3(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\div|\Phi_{x}|\}$.
     %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_4(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\div|\Phi_{x}|\}$.
 % \end{enumerate}
+
+The algorithm take the free literals of a given model as input and assigned to $\NBLap$ as shown in Line 1. From Line 2 to Line 6, $\NBLap$ is expanded. Different heuristic are chosen at Line 3 to select a list of literals and changing the assignment of them with a increased or decreased order. 
 
 In order to generate virous models from a given model, we need to negate more literals. We generate consecutive models by changing the assignments of literals one by one. Since enumerating every model of a satisfied formula is known as a NP hard problem, many heuristic strategies are applied to model generation. The selection of literals paly a vital role in it, with a different changing decisions, different models are generated. We take the idea of term frequency from statistic research, namely Term Frequency-Inverse Document Frequency(TF-IDF). In our context, literals are regarded as terms, clauses are regarded as documents. The frequency of terms are represented as the appearance number of literals. The inverse document frequency of a literal is represented as the ratio of appearance number to the total length of clauses that contained the literal.
 
