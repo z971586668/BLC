@@ -1,6 +1,8 @@
 \section{Experiments results}\label{sec:expr}
 
-Our tool MEB (Multi Estimation Based Backbones Extraction) was built with C++ using minisat\cite{MINISAT} as the underlying SAT solver. It contains the $\NBL_u$ computing and $\HDBS$ computing proposed in Section 3. The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1 hour and memory limit of 8 GB.
+Our tool MEB (Multi Estimation Based Backbones Extraction) was built with C++ using minisat\cite{MINISAT} as the underlying SAT solver. It contains the $\NBL_u$ computing and $\HDBS$ computing proposed in Section 3. 
+
+The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1 hour and memory limit of 8 GB.
 
 Since SAT solver is an oracle in the extraction of backbones, calling a SAT solver and waiting for results takes the majority of CPU time. We set up two metrics for comparisons, total SAT solvers CPU time(st) and SAT solver calls number(sc).
 
