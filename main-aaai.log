@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2015.12.20)  5 SEP 2016 15:06
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2015.3.26)  5 SEP 2016 18:13
 entering extended mode
 **main-aaai.tex
-(C:\我的坚果云\SAT\main-aaai.tex
+(C:\360云盘\Papers\SAT\main-aaai.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for loaded.
 (C:\CTEX\MiKTeX\tex\latex\base\article.cls
@@ -20,7 +20,7 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (C:\我的坚果云\SAT\aaai16.sty
+) (C:\360云盘\Papers\SAT\aaai16.sty
 Conference Style for AAAI for LaTeX 2e -- version of 1 January 2016
 \titlebox=\skip43
 ) (C:\CTEX\MiKTeX\tex\latex\psnfss\times.sty
@@ -597,7 +597,7 @@ LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count144
 \calc@Cskip=\skip73
 )
-(C:\我的坚果云\SAT\main-aaai.aux)
+(C:\360云盘\Papers\SAT\main-aaai.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
@@ -645,9 +645,8 @@ LaTeX Info: Redefining \ref on input line 28.
 LaTeX Info: Redefining \pageref on input line 28.
 LaTeX Info: Redefining \nameref on input line 28.
 
-(C:\我的坚果云\SAT\main-aaai.out) (C:\我的坚果云\SAT\main-aaai.out)
+(C:\360云盘\Papers\SAT\main-aaai.out) (C:\360云盘\Papers\SAT\main-aaai.out)
 \@outlinefile=\write4
-
 ABD: EveryShipout initializing macros
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 51.
@@ -673,7 +672,7 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
- (C:\我的坚果云\SAT\macro.tex
+ (C:\360云盘\Papers\SAT\macro.tex
 \c@theorem=\count152
 \c@lemma=\count153
 \c@corollary=\count154
@@ -683,15 +682,15 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
 \c@remark=\count157
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 53.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 59.
-
-(C:\CTEX\MiKTeX\tex\latex\psnfss\ot1phv.fd
-File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
-) (C:\我的坚果云\SAT\intr.tex
+(C:\360云盘\Papers\SAT\intr.tex
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 17.
+ (C:\CTEX\MiKTeX\tex\latex\psnfss\ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
@@ -702,7 +701,7 @@ Missing character: There is no � in font ptmr7t!
 
 
 ])
-(C:\我的坚果云\SAT\prel.tex
+(C:\360云盘\Papers\SAT\prel.tex
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 42.
 
@@ -712,92 +711,116 @@ $\OML/cmm/m/it/10 x[]\OMS/cmsy/m/n/10 g$\OT1/ptm/m/n/10 , then, $[]\OT1/cmr/m/n
  g$\OT1/ptm/m/n/10 , $[]\OT1/cmr/m/n/10 () =$
  []
 
-) (C:\我的坚果云\SAT\walg.tex
-<flow.png, id=115, 275.52937pt x 467.49657pt>
-File: flow.png Graphic file (type png)
- <use flow.png>
-Package pdftex.def Info: flow.png used on input line 4.
-(pdftex.def)             Requested size: 137.76434pt x 233.74771pt.
- [2]
+) (C:\360云盘\Papers\SAT\walg.tex
+<Framework.pdf, id=115, 569.12625pt x 72.27pt>
+File: Framework.pdf Graphic file (type pdf)
+ <use Framework.pdf>
+Package pdftex.def Info: Framework.pdf used on input line 4.
+(pdftex.def)             Requested size: 512.2089pt x 65.04237pt.
+
+Overfull \hbox (6.3189pt too wide) in paragraph at lines 4--5
+ [][] 
+ []
+
+[2]
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 33.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 33.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 33.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 33.
+(hyperref)                removing `math shift' on input line 43.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@@overline' on input line 33.
+(hyperref)                removing `\@@overline' on input line 43.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 33.
+(hyperref)                removing `subscript' on input line 43.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\Phi' on input line 33.
+(hyperref)                removing `\Phi' on input line 43.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 33.
+(hyperref)                removing `math shift' on input line 43.
 
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 38.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 53.
+
+LaTeX Warning: Reference `fig:flow' on page 3 undefined on input line 62.
+
+
+Underfull \hbox (badness 1577) in paragraph at lines 69--73
+[]\OT1/ptm/m/n/10 We pro-pose t-wo al-go-rithm-s for com-put-ing $[][]\OT1/cmr/
+m/n/10 ()$\OT1/ptm/m/n/10 .
+ []
+
+
+Underfull \hbox (badness 4205) in paragraph at lines 69--73
+\OT1/ptm/m/n/10 The first al-go-rith-m \OT1/ptm/b/n/10 MBNB$\U/msa/m/n/10 $\OT
+1/ptm/m/n/10 . Sec-ond one \OT1/ptm/b/n/10 HBNB$\U/msa/m/n/10 $\OT1/ptm/m/n/10
+ ....
+ []
+
 [3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.77 \end{lemma}
-                \label{lem:nBL}pdfTeX warning (ext4): destination with the same
- identifier (name{algocf.1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.77 \end{lemma}
-                \label{lem:nBL} <C:/我的坚果云/SAT/flow.png>]
-
-LaTeX Warning: Command \l invalid in math mode on input line 113.
+l.82 
+      <C:/360云盘/Papers/SAT/Framework.pdf>]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 85.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 100.
 
 
-LaTeX Warning: Command \l invalid in math mode on input line 140.
+LaTeX Warning: Command \l invalid in math mode on input line 157.
 
-[4pdfTeX warning (ext4): destination with the same identifier (name{algocf.2}) 
+
+LaTeX Warning: Command \l invalid in math mode on input line 184.
+
+[4pdfTeX warning (ext4): destination with the same identifier (name{algocf.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.166 
+l.193     \item L
+                 et $|\Lit(\phi)|$ be the number of clauses that used in a c...
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 211.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\Phi' on input line 211.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 211.
+
+[5pdfTeX warning (ext4): destination with the same identifier (name{algocf.2}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.262 
+      pdfTeX warning (ext4): destination with the same identifier (name{algocf.
+3}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.262 
       ]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 167.
 
+LaTeX Warning: Reference `fig:flow' on page 6 undefined on input line 284.
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 167.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\Phi' on input line 167.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 167.
-
-[5pdfTeX warning (ext4): destination with the same identifier (name{algocf.3}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.237 \end{proof}
-                 ]) (C:\我的坚果云\SAT\expr.tex
+) (C:\360云盘\Papers\SAT\expr.tex
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
 Missing character: There is no � in font ptmr7t!
@@ -807,15 +830,15 @@ Missing character: There is no � in font ptmr7t!
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.26 F
-      igure \ref{fig:mcs-time} describes a comparison of SAT call time is co...
-] <mcs-time.png, id=255, 517.935pt x 307.90031pt>
+l.5 S
+     ince SAT solver is an oracle in the extraction of backbones, calling a ...
+] <mcs-time.png, id=270, 517.935pt x 307.90031pt>
 File: mcs-time.png Graphic file (type png)
  <use mcs-time.png>
 Package pdftex.def Info: mcs-time.png used on input line 30.
 (pdftex.def)             Requested size: 155.38168pt x 92.3708pt.
 
-<ind-time.png, id=258, 518.6878pt x 311.66437pt>
+<ind-time.png, id=273, 518.6878pt x 311.66437pt>
 File: ind-time.png Graphic file (type png)
  <use ind-time.png>
 Package pdftex.def Info: ind-time.png used on input line 45.
@@ -823,32 +846,38 @@ Package pdftex.def Info: ind-time.png used on input line 45.
 
 Underfull \vbox (badness 1874) has occurred while \output is active []
 
+ [7pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
+ has been already used, duplicate ignored
 
-<bb-10.png, id=260, 692.5875pt x 410.53375pt>
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.54 
+      <C:/360云盘/Papers/SAT/mcs-time.png>]
+<bb-10.png, id=288, 692.5875pt x 410.53375pt>
 File: bb-10.png Graphic file (type png)
  <use bb-10.png>
 Package pdftex.def Info: bb-10.png used on input line 58.
 (pdftex.def)             Requested size: 118.41682pt x 70.19072pt.
 
-<bb-30.png, id=261, 692.5875pt x 415.5525pt>
+<bb-30.png, id=289, 692.5875pt x 415.5525pt>
 File: bb-30.png Graphic file (type png)
  <use bb-30.png>
 Package pdftex.def Info: bb-30.png used on input line 59.
 (pdftex.def)             Requested size: 118.41682pt x 71.0488pt.
 
-<bb-70.png, id=262, 691.58376pt x 417.56pt>
+<bb-70.png, id=290, 691.58376pt x 417.56pt>
 File: bb-70.png Graphic file (type png)
  <use bb-70.png>
 Package pdftex.def Info: bb-70.png used on input line 60.
 (pdftex.def)             Requested size: 118.98589pt x 71.83803pt.
 
-<bb-90.png, id=263, 692.5875pt x 417.56pt>
+<bb-90.png, id=291, 692.5875pt x 417.56pt>
 File: bb-90.png Graphic file (type png)
  <use bb-90.png>
 Package pdftex.def Info: bb-90.png used on input line 61.
 (pdftex.def)             Requested size: 118.98589pt x 71.73608pt.
 )
-(C:\我的坚果云\SAT\conc.tex
+(C:\360云盘\Papers\SAT\conc.tex
 Underfull \hbox (badness 2088) in paragraph at lines 2--5
 \OT1/ptm/m/n/10 bones ex-trac-tion. It's de-vis-es new pre-pro-cess-ing tech-
  []
@@ -858,28 +887,7 @@ Underfull \hbox (badness 2376) in paragraph at lines 2--5
 \OT1/ptm/m/n/10 niques for back-bones ex-trac-tion by com-put-ing under-
  []
 
-[7pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.5 
-    pdfTeX warning (ext4): destination with the same identifier (name{figure.3}
-) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.5 
-    pdfTeX warning (ext4): destination with the same identifier (name{figure.4}
-) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.5 
-     <C:/我的坚果云/SAT/mcs-time.png> <C:/我的坚果云/SAT/ind-time.png
-> <C:/我的坚果云/SAT/bb-10.png> <C:/我的坚果云/SAT/bb-30.png> <C:/我
-的坚果云/SAT/bb-70.png> <C:/我的坚果云/SAT/bb-90.png>])
-(C:\我的坚果云\SAT\main-aaai.bbl
+) (C:\360云盘\Papers\SAT\main-aaai.bbl
 Underfull \hbox (badness 3386) in paragraph at lines 17--22
 []\OT1/ptm/m/n/10 Dubois, O., and D-e-quen, G.
  []
@@ -897,16 +905,32 @@ Underfull \hbox (badness 3690) in paragraph at lines 44--48
 []\OT1/ptm/m/n/10 Kilby, P.; S-laney, J.; Thi[]ebaux, S.;
  []
 
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
+has been already used, duplicate ignored
 
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.79 
+     pdfTeX warning (ext4): destination with the same identifier (name{figure.4
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.79 
+      <C:/360云盘/Papers/SAT/ind-time.png> <C:/360云盘/Papers/SAT/bb-10.png
+> <C:/360云盘/Papers/SAT/bb-30.png> <C:/360云盘/Papers/SAT/bb-70.png> <C:/3
+60云盘/Papers/SAT/bb-90.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 82--86
 []\OT1/ptm/m/n/10 Menca, C.;
  []
 
 )
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 76.
- [8]
+ [9
+
+]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 76.
- (C:\我的坚果云\SAT\main-aaai.aux)
+ (C:\360云盘\Papers\SAT\main-aaai.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 76.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 76.
 
@@ -916,17 +940,20 @@ Package rerunfilecheck Warning: File `main-aaai.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main-aaai.out':
-(rerunfilecheck)             Before: 4E3088ED493C287CD32CA8484F4DD63A;2869
-(rerunfilecheck)             After:  929524D9AF8A9ED0AD0DA2E08D3CE310;833.
+(rerunfilecheck)             Before: 7AEF44C82953C915AEC0DEF93D8586DC;2869
+(rerunfilecheck)             After:  1092163641F4CBA1A3462BAD565EBC1A;833.
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 16258 strings out of 495354
- 273707 string characters out of 3183858
- 387052 words of memory out of 3000000
- 18955 multiletter control sequences out of 15000+200000
- 48473 words of font info for 100 fonts, out of 3000000 for 9000
+ 16256 strings out of 495354
+ 273694 string characters out of 3183859
+ 391060 words of memory out of 3000000
+ 18953 multiletter control sequences out of 15000+200000
+ 47466 words of font info for 98 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,19n,55p,1087b,550s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,19n,55p,1087b,551s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/CTEX/MiKTeX/fonts/enc/dvips/fontname/8r.enc}<C:/CTEX/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmex10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmm
 i10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/CTEX/MiKTe
@@ -934,19 +961,19 @@ X/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/CTEX/MiKTeX/fonts/type1/public/a
 msfonts/cm/cmmi8.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/CTEX/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmr5.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmr7.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/CTEX/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/CTEX/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmsy5.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/CTEX/MiKTeX/fon
-ts/type1/public/amsfonts/symbols/msam10.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/hel
-vetic/uhvb8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/CTEX/M
-iKTeX/fonts/type1/urw/helvetic/uhvro8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/time
-s/utmb8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/CTEX/MiKTeX/
-fonts/type1/urw/times/utmr8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/times/utmri8a.
-pfb>
-Output written on main-aaai.pdf (8 pages, 558682 bytes).
+/cmr7.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/CTEX/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmss12.pfb><C:/CTEX/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.
+pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/CTEX/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmsy9.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfo
+nts/symbols/msam10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/symbols/msam
+7.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/CTEX/MiKTeX/fonts
+/type1/urw/helvetic/uhvr8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/helvetic/uhvro8a
+.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/CTEX/MiKTeX/fonts/typ
+e1/urw/times/utmr8a.pfb><C:/CTEX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main-aaai.pdf (9 pages, 580080 bytes).
 PDF statistics:
- 382 PDF objects out of 1000 (max. 8388607)
+ 407 PDF objects out of 1000 (max. 8388607)
  125 named destinations out of 1000 (max. 500000)
  152 words of extra memory for PDF output out of 10000 (max. 10000000)
 
