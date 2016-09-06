@@ -68,7 +68,7 @@ To get more non-backbone literals, we propose the Greedy-based algorithm shown i
 \Input{a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$}
 \Output{a set of literals $\NBLap(\Phi)$}
 $\NBLap(\Phi)$:=$L(\Phi,\lambda)$\; \label{alg1:init}
-%\Repeat{No Update}{\label{alg1:loopstart}
+\Repeat{No Update}{\label{alg1:loopstart}
     C:={\sf HS}($\Phi$)\;
     i:=0\;
     \While{$i<|C|$}{
@@ -86,8 +86,7 @@ $\NBLap(\Phi)$:=$L(\Phi,\lambda)$\; \label{alg1:init}
     % $\Psi=\Psi\cup\{\forall\phi\in\Phi, \neg\lambda(x)\models\phi\}$\;
     % $\lambda=\lambda[x\mapsto\neg\lambda(x)]$\;
     % $\NBL_i(\Phi)=\NBL_i(\Phi)\cup\{x\in\Lit(\Phi) \mid \forall\phi\in\Phi: \lambda(x)\models\phi\Longrightarrow\phi\in\Psi\}$\;
-  %}
-\label{alg1:loopend}
+}\label{alg1:loopend}
 \Return $\NBLap$\;
 \caption{Greedy-based algorithm computing $\NBLap(\Phi)$}
 \label{alg:greedy}
@@ -99,7 +98,7 @@ During each iteration, we first compute an ordered list $C$ of literals based on
 $C$. For the select literal $l$, we obtain a new assignment $\lambda[\neg l]$ from the model
 $\lambda$ and check whether  $\lambda[\neg l]$ satisfies $\Phi$ or not.
 If $\lambda[\neg l]$ satisfies $\Phi$, then we add the set of non-backbone literals $L(\Phi,\lambda[\neg l])$ into $\NBLap(\Phi)$, and
-assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Phi$ at step).
+assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Phi$ at the next step).
 Obviously,  $\NBLap(\Phi)$ is an under-approximation of non-backbone of $\Phi$.
 
 \begin{lemma}
@@ -107,21 +106,27 @@ $\NBLap(\Phi)\subseteq\NBL$.
 \end{lemma}
 
 Once, a model $\lambda$ of $\Phi$ is given, Algorithm \ref{alg:greedy} does not need to call any SAT solver which may be time-cost.
-Instead, we manage to generate new models by changing values of literals in the known model.
-We use the following four heuristic searching strategies to select literals for generating new models.
+Instead, we manage to generate new models by changing assignments of literals in the known model.
+We use the following four heuristic searching strategies to select literals with an order for generating new models.
 
 \begin{enumerate}
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, for every literal $x\in \NBL_1(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\}$.
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, for every literal $x\in \NBL_2(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\}$.
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_3(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\div|\Phi_{x}|\}$.
-    \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_4(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\div|\Phi_{x}|\}$.
+    \item ${\sf HS}_1(\Phi$): select maximal $\f(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf max}\{\f(l), l\in\Lit(\Phi)\}$
+    \item ${\sf HS}_2(\Phi$): select minimal $\f(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf min}\{\f(l), l\in\Lit(\Phi)\}$
+    \item ${\sf HS}_3(\Phi$): select maximal $\f(l)\div\dens(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf max}\{\f(l)\div\dens(l), l\in\Lit(\Phi)\}$
+    \item ${\sf HS}_4(\Phi$): select maximal $\f(l)\div\dens(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf min}\{\f(l)\div\dens(l), l\in\Lit(\Phi)\}$
  \end{enumerate}
+ 
+ The insight are taken from term frequency from text analysis called Term Frequency Inverse Document Frequency(TF-IDF), which is an efficient method to analysis the importance(entropy) of terms in documents. 
+ We regard literals as terms, and clauses as documents, the frequency of literals as TF, the density of literals as IDF. In this way, we can analysis the importance of literals in clauses using TF-IDF. (We can even use the matrix techniques to simplify the calculating process of heuristic strategies).
+ 
+ The frequency of literals indicated the importance of literals in the formula trivially. The density of literals consider the clauses length. With a longer clauses, there is a higher possibility that the clauses can be satisfied by another literal.
+ 
 
 
 
 %\subsection{Heuristic-based Algorithm}
 
-%With different models returned by MINISAT, the result of the algorithm in previous section diverged. To shrink the gaps, greedy based literals selection strategies are proposed. With a given literals selection strategy, a chain of literals can be complemented at the same time. In other words, a chain of models will be obtained by the changing assignemnets of literals, coverage of clauses for each literals are updated simultaneously. More models will be generated in this way.
+%With different models returned by MINISAT, the result of the algorithm in previous section diverged. To shrink the gaps, greedy based literals selection strategies are proposed. With a given literals selection strategy, a chain of literals can be complemented at the same time. In other words, a chain of models will be obtained by the changing assignments of literals, coverage of clauses for each literals are updated simultaneously. More models will be generated in this way.
 
 %We apply a Greedy-Based Algorithm with different heuristic searching to extend the result of free literals and refereed as $\NBLap$. We leverages Greedy to depth first %searches. The quota we choose are frequency represented by the number of appearance of a literal and the entropy represented by the ratio of appearance number of a literal to %the total length of clauses that contains the literal. Each quota guided a Greedy search with maximal or minimal value.
 
