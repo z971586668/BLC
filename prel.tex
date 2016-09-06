@@ -67,7 +67,7 @@ Given a satisfiable formula $\Phi$ and a literal $l$, deciding whether $l$ is a 
 % \end{definition}
 
 \begin{definition}[Satisfied literal]
-Given a model $\lambda$ of the formula $\Phi$ and a clause $\phi\in\Phi$, for each literal $l\in\phi$, $l$ is a \emph{satisfied literal} 
+Given a model $\lambda$ of the formula $\Phi$ and a clause $\phi\in\Phi$, for each literal $l\in\phi$, $l$ is a \emph{satisfied literal}
 of $\phi$ iff $\lambda\models l$. $l$ is a \emph{unique satisfied literal} of $\phi$ if there is no satisfied literal $l'$ of $\phi\setminus\{l\}$.
 \end{definition}
 
@@ -77,8 +77,8 @@ of $\phi$ iff $\lambda\models l$. $l$ is a \emph{unique satisfied literal} of $\
 %\end{definition}
 
 %\begin{example}
-Let us consider the formula $\Phi=\{\neg x_1 \vee \neg x_2, x_1, x_3 \vee x_4\}$,
-then, $\var(\Phi)=\{x_1, x_2, x_3, x_4\}$, $\Lit(\Phi)=\{\neg x_1, x_1, \neg x_2, x_3, x_4\}$, $\Phi_{\neg x_2}=\{\neg x_1 \vee \neg x_2\}$ and $\BL(\Phi)=\{x_1, \neg x_2\}$.
+Consider the formula $\Phi=\{\neg x_1 \vee \neg x_2, x_1, x_3 \vee x_4\}$,
+$\var(\Phi)=\{x_1, x_2, x_3, x_4\}$, $\Lit(\Phi)=\{\neg x_1, x_1, \neg x_2, x_3, x_4\}$, $\Phi_{\neg x_2}=\{\neg x_1 \vee \neg x_2\}$ and $\BL(\Phi)=\{x_1, \neg x_2\}$.
 %\end{example}
 
 
