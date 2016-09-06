@@ -20,8 +20,8 @@ Dubois, O., and Dequen, G.
   formulae.
 \newblock In {\em IJCAI}, volume~1,  248--253.
 
-\bibitem[\protect\citeauthoryear{EÃ©n and SÃ¶rensson}{2004}]{MINISAT}
-EÃ©n, N., and SÃ¶rensson, N.
+\bibitem[\protect\citeauthoryear{E¨¦n and S?rensson}{2004}]{MINISAT}
+E¨¦n, N., and S?rensson, N.
 \newblock 2004.
 \newblock {\em An Extensible SAT-solver}.
 \newblock Springer Berlin Heidelberg.
@@ -83,12 +83,6 @@ Menc{\i}a, C.; Previti, A.; and Marques-Silva, J.
 \newblock 2015.
 \newblock Literal-based mcs extraction.
 \newblock In {\em IJCAI}, volume~15,  1973--1979.
-
-\bibitem[\protect\citeauthoryear{Parisi}{2003}]{Par03}
-Parisi, G.
-\newblock 2003.
-\newblock On local equilibrium equations for clustering states.
-\newblock {\em Computer Science}.
 
 \bibitem[\protect\citeauthoryear{Ravi and Somenzi}{2004}]{RSF2004}
 Ravi, K., and Somenzi, F.
