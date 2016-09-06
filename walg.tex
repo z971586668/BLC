@@ -57,15 +57,6 @@ Otherwise, if $\lambda$ satisfies $l$ and for all clauses $\phi\in\Phi$, $\phi$ 
 $l$ or contains another literal $l'$ which is also satisfied by the model $\lambda$, then it is easy to see that
 the assignment $\lambda[\neg l]$ satisfies $\Phi$.
 In this case, $l$ is also a non-backbone literal.
-
-<<<<<<< HEAD
-=======
-%We propose two algorithms for computing $\NBL_u{\Phi}$. The first algorithm computing \MBNB.
-%Second one \HBNB....
-
->>>>>>> 2570b7cb16b06ec3a8dd410d3b8d1c1ddef7080b
-$\Phi$.
-
 Given a formula $\Phi$ and a model $\lambda$ of $\Phi$, let $L(\Phi,\lambda)$
 denote the set $\{l\in\Lit(\Phi) \mid \lambda\models \neg l \ \mbox{or} \  \forall \phi\in\Phi, l\in\phi\Rightarrow \exists l'\in\phi\setminus\{l\}: \ \lambda\models l'\}$.
 
@@ -115,10 +106,10 @@ $\NBLap(\Phi)$:=$L(\Phi,\lambda)$\; \label{alg1:init}
 \caption{Greedy-based algorithm computing $\NBLap(\Phi)$}
 \label{alg:greedy}
 \end{algorithm}
-Given a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$, 
+Given a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$,
 we assign $L(\Phi,\lambda)$ to $\NBLap(\Phi)$ at Line \ref{alg1:init}. Next, we iteratively update
 $\NBLap(\Phi)$ until no more non-backbone literals can be added into $\NBLap(\Phi)$ at Lines \ref{alg1:loopstart}-\ref{alg1:loopend}.
-During each iteration, we first compute a ordered list $C$ of literals based on heuristic searching strategies, then select one literal  by one literal from 
+During each iteration, we first compute a ordered list $C$ of literals based on heuristic searching strategies, then select one literal  by one literal from
 $C$. For the select literal $l$, we obtain a new assignment $\lambda[\neg l]$ from the model
 $\lambda$ and check whether  $\lambda[\neg l]$ satisfies $\Phi$ or not.
 If $\lambda[\neg l]$ satisfies $\Phi$, then we add the set of non-backbone literals $L(\Phi,\lambda[\neg l])$ into $\NBLap(\Phi)$, and
@@ -130,7 +121,7 @@ $\NBLap(\Phi)\subseteq\NBL$.
 \end{lemma}
 
 Once, a model $\lambda$ of $\Phi$ is given, Algorithm \ref{alg:greedy} does not need to call any SAT solver which may be time-cost.
-Instead, we manage to generate new models by changing values of literals in the known model. 
+Instead, we manage to generate new models by changing values of literals in the known model.
 We use the following four heuristic searching strategies to select literals for generating new models.
 
 \begin{enumerate}
@@ -139,7 +130,7 @@ We use the following four heuristic searching strategies to select literals for 
     \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_3(\Phi)$, select exactly one literal at each iteration of the loop such that $\max\{|\phi_{x}|\div|\Phi_{x}|\}$.
     \item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_4(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\div|\Phi_{x}|\}$.
  \end{enumerate}
- 
+
 
 
 %\subsection{Heuristic-based Algorithm}
@@ -148,7 +139,7 @@ We use the following four heuristic searching strategies to select literals for 
 
 %We apply a Greedy-Based Algorithm with different heuristic searching to extend the result of free literals and refereed as $\NBLap$. We leverages Greedy to depth first %searches. The quota we choose are frequency represented by the number of appearance of a literal and the entropy represented by the ratio of appearance number of a literal to %the total length of clauses that contains the literal. Each quota guided a Greedy search with maximal or minimal value.
 
- 
+
 %The algorithm take the free literals of a given model as input and assigned to $\NBLap$ as shown in Line 1. From Line 2 to Line 6, $\NBLap$ is expanded. Different heuristic %are chosen at Line 3 to select a list of literals and changing the assignment of them with a increased or decreased order.
 
 %In order to generate different models from a given model, we need to negate more literals. We generate consecutive models by changing the assignments of literals one by one. %Since enumerating every model of a satisfied formula is known as a NP hard problem, many heuristic strategies are applied to model generation. The selection of literals paly %a vital role in it, with a different changing decisions, different models are generated. We take the idea of term frequency from statistic research, namely Term %Frequency-Inverse Document Frequency(TF-IDF). In our context, literals are regarded as terms, clauses are regarded as documents. The frequency of terms are represented as the %appearance number of literals. The inverse document frequency of a literal is represented as the ratio of appearance number to the total length of clauses that contained the %literal.
