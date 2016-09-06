@@ -6,7 +6,7 @@
    \label{flow}
 \end{figure*}
 
-Figure \ref{flow} presents the overview of our approach \tool which consists of three components. Taking a satisfiable formula
+Figure \ref{flow} presents the overview of our approach \tool, which consists of three components. Taking a satisfiable formula
 $\Phi$ as an input, \tool first computes an under-approximation $\NBLap(\Phi)\subseteq \NBL(\Phi)$ of the non-backbone of
 $\Phi$. Then, \tool computes an approximation $\BLap(\Phi)$ of the backbone of $\Phi$ based on the set $\NBLap(\Phi)$, where each literal in $l\in \BLap(\Phi)$ has a high possibility to be a backbone literal of $\Phi$.
 Finally, \tool removes non-backbone literals from $\BLap(\Phi)$ and adds backbone literals into $\BLap(\Phi)$ to compute the exact backbone of $\Phi$.
@@ -14,7 +14,7 @@ Finally, \tool removes non-backbone literals from $\BLap(\Phi)$ and adds backbon
 \medskip
 \noindent{\bf Computing an under-approximation of non-backbone.}
 Given a satisfiable formula $\Phi$, we first compute a model $\lambda$ of $\Phi$ by calling a SAT solver.
-From the model $\lambda$, we can compute a base under-approximation of non-backbone.
+From the model $\lambda$, we compute a base under-approximation of non-backbone.
 Later, we apply a Greedy-based algorithm to add more non-backbone literals into the base under-approximation, which results in the
 under-approximation $\NBLap(\Phi)$.
 
@@ -25,17 +25,17 @@ under-approximation $\NBLap(\Phi)$.
 At this step, we apply an improved Whitening-based algorithm to compute the approximation $\BLap(\Phi)$.
 The improved Whitening-based algorithm is an extension of the Whitening-based algorithm proposed by \cite{LMZ09} which
 was used to compute \emph{frozen variables}, that are the variables whose values are fixed in a non-singleton set of models.
-We use the Whitening-based algorithm of \cite{LMZ09} to compute the approximation $\BLap(\Phi)$ in which some non-backbone literals are removed by
+We use the Whitening-based algorithm of \cite{LMZ09} to compute the approximation $\BLap(\Phi)$ which is then refined by
 a heuristic approach.
 
 
 \medskip
-\noindent{\bf Removing non-backbone literals and adding backbone literals.}
+\noindent{\bf Computing exact backbone.}
 Finally, we first iteratively select one literal $l$ from $\BLap(\Phi)\setminus \NBLap(\Phi)$ such that $\lambda \models \neg l$ and test whether
 $l$ is a backbone literal or not by checking the satisfiability of $\Phi\wedge l$. Intuitively, literals in $\BLap(\Phi)\setminus \NBLap(\Phi)$ have a high probability to be backbone literals.
 If $\Phi\wedge l$ is satisfiable, then $l$ is a non-backbone literal.
 Otherwise, $l$ is a backbone literal. Then, we do the same testing for literals from $\Lit(\Phi)\setminus (\NBLap(\Phi)\cup\BLap(\Phi))$.
-
+After this step, the exact backbone and non-backbone are found.
 
 
 
