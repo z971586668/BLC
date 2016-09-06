@@ -1,4 +1,4 @@
-\section{Overview of Our Approach}\label{sec:walg}
+\section{Overview of our Approach}\label{sec:walg}
 \begin{figure*}
 \centering
     \includegraphics[scale=0.9]{Framework}
@@ -6,8 +6,7 @@
    \label{flow}
 \end{figure*}
 
-In this section, we present the overview of our approach \tool which is depicted in Figure
-\ref{flow}. \tool comprises three components. Taking a satisfiable formula
+Figure \ref{flow} presents the overview of our approach \tool which consists of three components. Taking a satisfiable formula
 $\Phi$ as an input, \tool first computes an under-approximation $\NBLap(\Phi)\subseteq \NBL(\Phi)$ of the non-backbone of
 $\Phi$. Then, \tool computes an approximation $\BLap(\Phi)$ of the backbone of $\Phi$ based on the set $\NBLap(\Phi)$, where each literal in $l\in \BLap(\Phi)$ has a high possibility to be a backbone literal of $\Phi$.
 Finally, \tool removes non-backbone literals from $\BLap(\Phi)$ and adds backbone literals into $\BLap(\Phi)$ to compute the exact backbone of $\Phi$.
@@ -80,11 +79,11 @@ The satisfiable problem trying to find an assignment that satisfy each clause in
 According to the definition of backbone, it's obvious that the set of free literals is a subset of $\NBL(\Phi)$.
 \begin{proof}
 \label{pro:free literal}
-Given a formula $\Phi$, a model $\lambda\models\Phi$. 
+Given a formula $\Phi$, a model $\lambda\models\Phi$.
 Suppose a literal $l\in\Lit(\Phi)$ is a free literal. If $l$ never shows up in any clause (trivial), then there is no such $\phi\in\Phi$ such that $l\in\phi\wedge\lambda\models l$, $\exists l'\in\phi, l'\neq l\wedge\lambda\models l'$ always holds. If $l$ shows up in some clauses, then there is a new model $\lambda[l\mapsto\neg l]\models\Phi$, no clause changes to unsatisfiable because of the changing of $l$. It means that $\forall\phi\in\Phi$, if $l\in\phi$, there must exists another literal $l'\neg l$, assigning $\phi$ to TRUE. Therefore, $\forall\phi\in\Phi, l\in\phi\wedge\lambda\models l \Longrightarrow \exists l'\in\phi, l'\neq l\wedge\lambda\models l'$.
 
 Suppose a literal $l\in\Lit(\Phi)$, if $\forall\phi\in\Phi, l\in\phi\wedge\lambda\models l \Longrightarrow \exists l'\in\phi, l'\neq l\wedge\lambda\models l'$, it means that for every clause that containing $l$, the satisfiable will maintain when changing $l$ to its negation by $l'$. Therefore, there must exist a new model $\lambda[l\mapsto\neg l]\models\Phi$.
-\end{proof} 
+\end{proof}
 
 %Whitening Algorithm can't be applied to backbones extraction directly because it suffers from the over-estimation of non-backbones, i.e, backbones can also be selected to the $\NBL_u(\Phi)$ by the Whitening Algorithm. To fix this defect, only a part of Whitening Algorithm is employed.
 %Given a model $\lambda$, there is a possibility that more models can be obtained only by complementing several literals in $\lambda$ without calling a SAT solver. According to the theory of satisfiability, a model $\lambda$ is a truth assignment that satisfies every clause in the formula, i.e., there does not exist a clause $\phi$ that contains no literal in model $\lambda$. With a given model $\lambda$, non-backbones estimation approach is able to compute several similar models that only one literal in complemented. The literals that has been complemented are non-backbones.
@@ -183,7 +182,7 @@ $\NBLap$:=free literals of $\Phi$ to a given model $\lambda$\;
     %\item Let $|\Lit(\phi)|$ be the number of clauses that used in a clause $\phi\in\Phi$, let $|\Phi_{x}|$ be the total length of clauses $\phi\in\Phi$ that used $x$, i.e., $|\Phi_{x}|=\sum\{\phi\in\Phi \mid \phi\in\Phi_{x}\}$ for every literal $x\in \NBL_4(\Phi)$, select exactly one literal at each iteration of the loop such that $\min\{|\phi_{x}|\div|\Phi_{x}|\}$.
 % \end{enumerate}
 
-The algorithm take the free literals of a given model as input and assigned to $\NBLap$ as shown in Line 1. From Line 2 to Line 6, $\NBLap$ is expanded. Different heuristic are chosen at Line 3 to select a list of literals and changing the assignment of them with a increased or decreased order. 
+The algorithm take the free literals of a given model as input and assigned to $\NBLap$ as shown in Line 1. From Line 2 to Line 6, $\NBLap$ is expanded. Different heuristic are chosen at Line 3 to select a list of literals and changing the assignment of them with a increased or decreased order.
 
 In order to generate virous models from a given model, we need to negate more literals. We generate consecutive models by changing the assignments of literals one by one. Since enumerating every model of a satisfied formula is known as a NP hard problem, many heuristic strategies are applied to model generation. The selection of literals paly a vital role in it, with a different changing decisions, different models are generated. We take the idea of term frequency from statistic research, namely Term Frequency-Inverse Document Frequency(TF-IDF). In our context, literals are regarded as terms, clauses are regarded as documents. The frequency of terms are represented as the appearance number of literals. The inverse document frequency of a literal is represented as the ratio of appearance number to the total length of clauses that contained the literal.
 
@@ -243,7 +242,7 @@ $\BLap:=\Lit(\Phi)\setminus{\textsf{Whitening}}(\Phi,\NBLap)$\;
 
 In Line 1, Whitening Algorithms is applied with a given formula $\Phi$ and the under-approximation of non-backbone obtained in Algorithm \ref{alg:wal}. From Line 2 to Line 12, a heuristic searching approach is applied to search paths in the community structure graph. $\Phi^k_x$ represents the $i_th$ vertex literal in a path starting from literal x. Only clauses that contain the negation of current vertex literal will be explored to reduce the searching space as shown in Line 6.
 
-With a community structure graph, the dependency between literal and clauses can be obtained. However, the graph is usually too complex to analysis. Therefore, we only manage to search paths that may indicated a possibility of changing assignments of multi literals at the same time. 
+With a community structure graph, the dependency between literal and clauses can be obtained. However, the graph is usually too complex to analysis. Therefore, we only manage to search paths that may indicated a possibility of changing assignments of multi literals at the same time.
 
 %To increase the density of backbones, we propose $\HDBS$ approach to estimate literals that are highly likely to be backbones. In other words, $\HDBS$ increase the backbones density by estimations. There are two parts of $\HDBS$ approach. The first part extends $\NBL_u$ to find more likely backbone literals. The new estimation of variables is called $\NBL_e$. It relax the constraint of estimation selection constraints.
 
@@ -258,7 +257,7 @@ With a community structure graph, the dependency between literal and clauses can
 \begin{example}
 Given a formula, suppose $\phi_1$, $\phi_2$, $\phi_3$ are in $\Phi$, suppose $x_1$, $\neg x_1$, $x_2$, $\neg x_2$, $x_3$, $\neg x_3$ $\in\BLap$, $x_1\in\phi_1, \neg x_2\in\phi_1$, $x_2\in\phi_2, \neg x_3\in\phi_2$, $x_3\in\phi_3, \neg x_1\in\phi_3$.
 Given a model $\lambda$, where $\lambda(x_1)=1, \lambda(x_2)=1, \lambda(x_3)=1$. $x_1, x_2, x_3$ are the only satisfied literal in $\phi_1, \phi_2, \phi_3$ respectively.
-It can be observed that if $x_1$ is a non-backbone literal, in order to generate a $\lambda'$ that satisfy $\phi_1, \phi_2$ and $\phi_3$, $x_1, x_2, x_3$ have to complemented simultaneously. 
+It can be observed that if $x_1$ is a non-backbone literal, in order to generate a $\lambda'$ that satisfy $\phi_1, \phi_2$ and $\phi_3$, $x_1, x_2, x_3$ have to complemented simultaneously.
 \end{example}
 
 The paths that we found using Algorithm \ref{alg:nBLo} fits the pattern that shown in previous example.
