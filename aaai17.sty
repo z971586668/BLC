@@ -1,26 +1,26 @@
-\def\year{2016}
+\def\year{2017}
 %
 %Filename: aaai.sty
 %
-\typeout{Conference Style for AAAI for LaTeX 2e -- version of 1 January 2016}
+\typeout{Conference Style for AAAI for LaTeX 2e -- version of 1 January 2017}
 % WARNING: IF YOU ARE USING THIS STYLE SHEET FOR AN AAAI PUBLICATION, YOU
 % MAY NOT MODIFY IT FOR ANY REASON. MODIFICATIONS (IN YOUR SOURCE 
 % OR IN THIS STYLE SHEET WILL RESULT IN REJECTION OF YOUR PAPER).
-
-% NOTICE: DO NOT MODIFY THIS FILE WITHOUT CHANGING ITS NAME. This style
-% file is called aaai.sty. Modifications to this file are permitted,
+%
+% NOTICE: DO NOT MODIFY THIS FILE WITHOUT CHANGING ITS NAME. 
+% This style file is called aaai17.sty. Modifications to this file are permitted,
 % provided that your modified version does not include the acronym "aaai"
 % in its name, that credit to the authors and supporting agencies is
 % retained, and that further modification or reuse is not restricted. This
 % file was originally prepared by Peter F. Patel-Schneider, liberally
 % using the ideas of other style hackers, including Barbara Beeton. It was
-% modified in April 1999 by J. Scott Penberthy and George Ferguson. It was
-% modified in 2007 by AAAI. It was modified in February 2009  
-% and in November 2009 by Hans W. Guesgen and Giuseppe De Giacomo. It
-% was further modified in March 2010 by AAAI.
+% modified in April 1999 by J. Scott Penberthy and George Ferguson. It was 
+% modified in February 2009 and in November 2009 by Hans W. Guesgen and 
+% Giuseppe De Giacomo. It has been modified annually by AAAI since 2010.
 % The original preparation of this file was supported by 
 % Schlumberger Palo Alto Research, AT\&T Bell Laboratories, AAAI, and 
-% Morgan Kaufmann Publishers.
+% Morgan Kaufmann Publishers. The current version was supported by the
+% Association for the Advancement of Artificial Intelligence.
 % 
 % WARNING: This style is NOT guaranteed to work. It is provided in the
 % hope that it might make the preparation of papers easier, but this style
@@ -28,43 +28,34 @@
 % implied, including but not limited to the implied warranties of
 % merchantability, fitness for a particular purpose, or noninfringement.
 % You use this style file at your own risk. Standard disclaimers apply.
-% 
-% Do not use this file unless you are an experienced LaTeX user. To
-% satisfy AAAI's requirements, you must change your paper's configuration
-% to use Times fonts. AAAI will not accept your paper if it is formatted
-% using obsolete type 3 Computer Modern bitmapped fonts. Please ensure
-% that your version of dvips maps to type 1 fonts. Place this document in
-% a file called aaai.sty in the TeX search path. (Placing it in the same
-% directory as the paper should also work.)
-%
-% You must also format your paper for US letter-sized paper.
-% 
 % There are undoubtably bugs in this style. If you would like to submit
 % bug fixes, improvements, etc. please let us know. Please use the contact form
 % at www.aaai.org.
 % 
-% USE OF PDFTeX IS NOW REQUIRED
-% \documentclass[letterpaper]{article}
-% \usepackage{aaai}
+% Do not use this file unless you are an experienced LaTeX user. 
+%
+% The following packages are required and must be placed in your preamble:
+% \documentclass[letterpaper]article 
+% REQUIRED PACKAGES
+% \usepackage{aaai} 
 % \usepackage{times}
 % \usepackage{helvet}
-% \usepackage{courier}
 % \setlength{\pdfpagewidth}{8.5in} 
 % \setlength{\pdfpageheight}{11in}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% IMPORTANT -- ADDITION OF A PDF MARK WITH YOUR PAPER TITLE
-% AND ALL AUTHOR NAMES IS REQUIRED ON ALL AAAI PAPERS
-% COMMENT OUT AUTHOR NAMES FOR SUBMISSION
-% ENABLE AUTHOR NAMES FOR FINAL CAMERA READY COPY
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% PDFINFO for PDFTeX
-% Uncomment and complete the following for metadata if
-% your paper is typeset using PDFTeX
-% \pdfinfo{
-% /Title (Input Your Paper Title Here)
-% /Subject (Input the Proceedings Title Here)
-% /Author (John Doe, Jane Doe)
-% }
+% % PDFINFO for PDFLATEX% \pdfinfo{% /Title (Leave the parentheses and type in your title here)% /Author (Leave the parentheses and type in all author names. Do not use LaTeX commands)% }
+%
+% INCOMPATIBLE PACKAGES
+% The following packages are incompatible with aaai.sty and must not be used:
+% authblk 
+% caption
+% fullpage 
+% floats
+% geometry 
+% hyperref 
+% layout
+% natbib
+% savetrees
+% titlesec
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Section Numbers
 % Uncomment if you want to use section numbers
