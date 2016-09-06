@@ -24,7 +24,7 @@ let $\Phi_{l}\subseteq \Phi$ be the set of clauses $\{\phi\in\Phi\mid l\in\phi\}
 An \emph{assignment} is a function $\lambda: \X \rightarrow \{0,1\}$, where $1$ (resp. $0$) denotes true (resp. false).
 Given an assignment $\lambda$ and a literal $l$ that is $x$ or $\neq x$, let $\lambda[\neg l]$ be the assignment which is equal to $\lambda$
 except for $\lambda[\neg l](x)=\neg \lambda(x)$.
-An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\models \Phi$, iff assigning $\lambda(x)$ to $x$ for $x\in\var(\Phi)$ makes $\Phi$ true. 
+An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\models \Phi$, iff assigning $\lambda(x)$ to $x$ for $x\in\var(\Phi)$ makes $\Phi$ true.
 An assignment $\lambda$ is a \emph{model} of $\Phi$ if $\lambda\models \Phi$.
 A formula $\Phi$ is \emph{satisfiable} iff there exists an assignment $\lambda$ such that $\lambda\models \Phi$.
 %A variable $x\in\phi$ \emph{satisfies} a formula $\Phi$, denoted by $x\models\Phi$, iff assigning $1$ to $x$ makes with its value $\lambda(x)$.
@@ -83,7 +83,13 @@ $\var(\Phi)=\{x_1, x_2, x_3, x_4\}$, $\Lit(\Phi)=\{\neg x_1, x_1, \neg x_2, x_3,
 %\end{example}
 
 
+\begin{definition}[Literals Frequency]
+Given a formula $\Phi$, the \emph{Frequency} of a literal $l\in\Lit(\Phi)$ is the number of clauses that contain $l$, refereed as $\f(l)$.
+\end{definition}
 
+\begin{definition}[Literals Density]
+Given a formula $\Phi$, the \emph{Density} of a literal $l\in\Lit(\Phi)$ is the ratio of the frequency of the literal to the total length of clauses that contain the literal, refereed as $\d(l)$, i.e., $\d(l)=\f(l)\div|\Phi_l|$.
+\end{definition}
 %\begin{remark}\label{rem:na}
 %Given a formula $\Phi$,
 %a na\"{\i}ve approach for computing $\BL(\Phi)$ is to verify whether a set $B$ is a backbone or not by calling SAT solver, for every $B\subseteq \var(\Phi)$. %However, this naive approach has to call $2^{|\var(\Phi)|}$ times SAT solver in the worst case \cite{JLM15}.
