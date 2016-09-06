@@ -112,15 +112,15 @@ We use the following four heuristic searching strategies to select literals with
 \begin{enumerate}
     \item ${\sf HS}_1(\Phi$): select maximal $\f(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf max}\{\f(l), l\in\Lit(\Phi)\}$
     \item ${\sf HS}_2(\Phi$): select minimal $\f(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf min}\{\f(l), l\in\Lit(\Phi)\}$
-    \item ${\sf HS}_3(\Phi$): select maximal $\f(l)\div\dens(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf max}\{\f(l)\div\dens(l), l\in\Lit(\Phi)\}$
-    \item ${\sf HS}_4(\Phi$): select maximal $\f(l)\div\dens(l), l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf min}\{\f(l)\div\dens(l), l\in\Lit(\Phi)\}$
+   \item ${\sf HS}_3(\Phi$): select maximal  $\frac{\f(l)}{\dens(l)}, l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf max}\{\f(l)\div\dens(l), l\in\Lit(\Phi)\}$
+    \item ${\sf HS}_4(\Phi$): select maximal $\frac{\f(l)}{\dens(l)}, l\in\Lit(\Phi)$ for each iteration, i.e., $\forall l, {\sf min}\{\f(l)\div\dens(l), l\in\Lit(\Phi)\}$
  \end{enumerate}
- 
- The insight are taken from term frequency from text analysis called Term Frequency Inverse Document Frequency(TF-IDF), which is an efficient method to analysis the importance(entropy) of terms in documents. 
+
+ The insight are taken from term frequency from text analysis called Term Frequency Inverse Document Frequency(TF-IDF), which is an efficient method to analysis the importance(entropy) of terms in documents.
  We regard literals as terms, and clauses as documents, the frequency of literals as TF, the density of literals as IDF. In this way, we can analysis the importance of literals in clauses using TF-IDF. (We can even use the matrix techniques to simplify the calculating process of heuristic strategies).
- 
+
  The frequency of literals indicated the importance of literals in the formula trivially. The density of literals consider the clauses length. With a longer clauses, there is a higher possibility that the clauses can be satisfied by another literal.
- 
+
 
 
 
