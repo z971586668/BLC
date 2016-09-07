@@ -25,7 +25,17 @@ An \emph{assignment} is a function $\lambda: \X \rightarrow \{0,1\}$, where $1$ 
 Given an assignment $\lambda$ and a literal $l$ that is $x$ or $\neq x$, let $\lambda[\neg l]$ be the assignment which is equal to $\lambda$
 except for $\lambda[\neg l](x)=\neg \lambda(x)$.
 An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\models \Phi$, iff assigning $\lambda(x)$ to $x$ for $x\in\var(\Phi)$ makes $\Phi$ true.
+
 An assignment $\lambda$ is a \emph{model} of $\Phi$ if $\lambda\models \Phi$.
+Given two models $\lambda_1$ and $\lambda_2$ of $\Phi$, $\lambda_2$ can be \emph{generated} from $\lambda_1$, denoted by $\lambda_1\Rightarrow_\Phi\lambda_2$, if there exists a literal $l$ such that $\lambda_2=\lambda_1[\neg l]$.
+Let $\Rightarrow^*_\Phi$ denote the \emph{reflexive transitive} closure of $\Rightarrow_\Phi$.
+Formally, for every model $\lambda$ of $\Phi$, $\lambda\Rightarrow^*_\Phi\lambda$ and $\lambda_1\Rightarrow^*_\Phi\lambda_3$ if $\lambda_1\Rightarrow\Phi\lambda_2$ and $\lambda_2\Rightarrow^*_\Phi\lambda_3$.
+A \emph{model cluster} $\cl_\Phi(\lambda)$ of $\lambda$ is the set of models $\{\lambda'\mid \lambda\Rightarrow^*_\Phi\lambda'\}$.
+A literal $l$ is a \emph{frozen literal} in a model $\lambda$ of $\Phi$, 
+if $l$ takes the same value in all the models of $\cl_\Phi(\lambda)$.   
+Let $\cl_\Phi$ denote the union of all the model clusters of $\Phi$.
+
+ 
 A formula $\Phi$ is \emph{satisfiable} iff there exists an assignment $\lambda$ such that $\lambda\models \Phi$.
 %A variable $x\in\phi$ \emph{satisfies} a formula $\Phi$, denoted by $x\models\Phi$, iff assigning $1$ to $x$ makes with its value $\lambda(x)$.
 Given a formula $\Phi$, the \emph{satisfiability problem} is to decide whether $\Phi$ is satisfiable or not.
@@ -44,6 +54,13 @@ $\lambda\models l$. The \emph{backbone} $\BL(\Phi)$ of $\Phi$ is the set of back
 \end{definition}
 
 
+Since a backbone literal takes same value in all the models and a frozen literal takes same value in a model cluster instead of all the models,
+we get that:
+
+\begin{proposition}\label{Frozen-backbone}
+For any formula $\Phi$, $\BL(\Phi)\subseteq\cl_\Phi$.
+\end{proposition}
+
 
 %\begin{definition}[Nonbackbone]
 %\label{def:backbone}
@@ -52,8 +69,7 @@ $\lambda\models l$. The \emph{backbone} $\BL(\Phi)$ of $\Phi$ is the set of back
 %A clause $\phi\in \Phi$ is \emph{nonbackbone clause} iff $|\var(\phi)|\geq 2$ and there is a nonbackbone variable of $\Phi$ in $\phi$.
 %For an unsatisfiable formula $\Phi$, the set of nonbackbone variables is $\var(\Phi)$.
 %\end{definition}
-It is known that the backbone $\BL(\Phi)$ for each formula $\Phi$ is unique and a backbone literal $l$ of $\Phi$ must be in
-$\BL(\Phi)$ \cite{JLM15}.
+It is known that the backbone $\BL(\Phi)$ for each formula $\Phi$ is unique \cite{JLM15}.
 The backbone of an unsatisfiable formula can be defined as an empty set. Therefore, in this work, we focus on satisfiable formulae.
 We will use $\NBL(\Phi)$ to denote the set
 $\Lit(\Phi)\setminus \BL(\Phi)$.

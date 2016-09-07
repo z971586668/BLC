@@ -1,8 +1,14 @@
-
-
 \section{Computing $\BLap(\Phi)$}
 In this section, we propose an Whitening-based Algorithm to compute an approximation $\BLap(\Phi)$ of backbone.
-Whitening Algorithm was proposed in \cite{CJG2001} originated from the coloring problem of graphs. Some non-backbone literals are removed from the result of Whitening Algorithm using heuristic strategy.
+Whitening algorithm was proposed in \cite{Par03} for the coloring problem of random graphs, which identify nodes that always have the same color in all legal colorings. It was well-known that SAT problem can be transformed into coloring problem, vice versa.
+Therefore, the Whitening algorithm could be used to compute literals that should have same value in all the models.
+If the under-approximation $\NBLap(\Phi)$ of non-backbone contains at least one literal, 
+then, we can find all the non-backbone literals, as well as backbone literals.
+However, 
+
+
+ 
+ originated from the coloring problem of graphs. Some non-backbone literals are removed from the result of Whitening Algorithm using heuristic strategy.
 
 
  We apply Whitening Algorithm to compute the approximation of backbone and remove part of the non-backbone literals using dependency structure of a formula.
