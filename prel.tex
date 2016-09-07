@@ -8,8 +8,8 @@ the set of literals $\{l_i\mid 1\leq i\leq n\}$.
 
 A \emph{formula} $\Phi$ over $\X$ is a Boolean combination of variables $\X$.
 We assume that formulae are given in conjunctive normal
-form (CNF), namely each formula $\Phi$ is a conjunction of clauses $\bigwedge_{i=1}^n\phi_i$ which may be regarded as a set of clauses $\{\phi_i\mid 1\leq i\leq n\}$.
-Given a formula $\Phi$, let $\var(\Phi)$ (resp. $\Lit(\Phi)$  and $\cls(\Phi)$) denote the set of variables (resp. literals and clauses) used in $\Phi$.
+form (CNF), namely each formula $\Phi$ is a conjunction of clauses $\bigwedge_{i=1}^n\phi_i$ which may be regarded as a set of clauses $\{\phi_i\mid 1\leq i\leq n\}$. Given a formula $\Phi$, let $\var(\Phi)$ (resp. $\Lit(\Phi)$  and $\cls(\Phi)$) denote the set of variables (resp. literals and clauses) used in $\Phi$.
+We use $\|\Phi\|$ to denote $\sum_{\phi\in\Phi}|\phi|$.
 We use $\neg\Lit(\Phi)$ to denote the set $\{\neg l \mid l\in \Lit(\Phi)\}$.
 The \emph{size} $|\Phi|$ of $\Phi$ is the number of literals of $\Phi$.
 Given a formula $\Phi$ and a literal $l\in\Lit(\Phi)$,
@@ -82,14 +82,22 @@ Let us consider the formula $\Phi=\{\neg x_1 \vee \neg x_2, x_1, x_3 \vee x_4\}$
 $\var(\Phi)=\{x_1, x_2, x_3, x_4\}$, $\Lit(\Phi)=\{\neg x_1, x_1, \neg x_2, x_3, x_4\}$, $\Phi_{\neg x_2}=\{\neg x_1 \vee \neg x_2\}$ and $\BL(\Phi)=\{x_1, \neg x_2\}$.
 %\end{example}
 
+Given a formula $\Phi$ and a literal $l$, let $\Cnt(\Phi,l)$ denote the number of occurrence of $l$ in $\Phi$.
+The \emph{density} $\dens(\Phi,l)$ of $l$ in $\Phi$ is defined as
+\[
+\dens(\Phi, l)=\frac{\Cnt(\Phi,l)}{\|\Phi_l\|}.
+\]
 
-\begin{definition}[Literals Frequency]
-Given a formula $\Phi$, the \emph{Frequency} of a literal $l\in\Lit(\Phi)$ is the number of clauses that contain $l$, refereed as $\f(l)$.
-\end{definition}
+%The \emph{frequency} $\f(l)$ and \emph{density} $\dens(l)$ of $l$ in $\Phi$ is defined as
+%\[
+%\f(l)=\frac{\Cnt(\Phi,l)}{\sum_{l'\in\Lit(\Phi)}\Cnt(\Phi,l')} \ \mbox{and} \ \dens(l)=\frac{\Cnt(\Phi,l)}{|\Phi_l|}.
+%\]
 
-\begin{definition}[Literals Density]
-Given a formula $\Phi$, the \emph{Density} of a literal $l\in\Lit(\Phi)$ is the ratio of the frequency of the literal to the total length of clauses that contain the literal, refereed as $\d(l)$, i.e., $\d(l)=\f(l)\div|\Phi_l|$.
-\end{definition}
+%  the \emph{Density} of a literal $l\in\Lit(\Phi)$ is the ratio of the frequency of the literal to the total length of clauses that contain the literal, %refereed as $\d(l)$, i.e., $\d(l)=\f(l)\div|\Phi_l|$.
+
+%\begin{definition}[Density]
+%Given a formula $\Phi$,
+%\end{definition}
 %\begin{remark}\label{rem:na}
 %Given a formula $\Phi$,
 %a na\"{\i}ve approach for computing $\BL(\Phi)$ is to verify whether a set $B$ is a backbone or not by calling SAT solver, for every $B\subseteq \var(\Phi)$. %However, this naive approach has to call $2^{|\var(\Phi)|}$ times SAT solver in the worst case \cite{JLM15}.
