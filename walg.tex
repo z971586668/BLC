@@ -31,15 +31,24 @@ a heuristic approach.
 
 \medskip
 \noindent{\bf Computing exact backbone.}
-Finally, we first iteratively select one literal $l$ from $\BLap(\Phi)\setminus \NBLap(\Phi)$ such that $\lambda \models \neg l$ and test whether
-$l$ is a backbone literal or not by checking the satisfiability of $\Phi\wedge l$.
-In general, one can direct applying this test to compute backbone without the two approximations. However, 
-the test heavily replies on SAT solver which may be time-cost. 
-Intuitively, literals in $\BLap(\Phi)\setminus \NBLap(\Phi)$ have a high probability to be backbone literals.
-If $\Phi\wedge l$ is satisfiable, then $l$ is a non-backbone literal.
-Otherwise, $l$ is a backbone literal. Then, we do the same testing for literals from $\Lit(\Phi)\setminus (\NBLap(\Phi)\cup\BLap(\Phi))$.
-After this step, the exact backbone and non-backbone are found.  As shown in the right part of Figure \ref{flow}, 
-our approach reduces the number of SAT solver calls, as we only do test to literals in the dashed area. 
+At this step, we use Algorithm 3 (Iterative algorithm) from \cite{JLM15} to compute backbone.
+This algorithm uses SAT testing to check whether a literal is a backbone literal or not.
+For instance, if $\Phi\vee \neg l$ is unsatisfiable but $\Phi$ is satisfiable, then $l$ must be a backbone literal of $\Phi$.
+
+
+We first iteratively select one literal $l$ from $\BLap(\Phi)\setminus \NBLap(\Phi)$ such that $\lambda \models \neg l$ and test whether
+$l$ is a backbone literal or not by checking the satisfiability of $\Phi\wedge l$ (dashed area in Figure \ref{flow}).
+If $l$ is a backbone, we will add $l$ into $\Phi$ as a clause. Adding known backbone literals into $\Phi$ as clauses potentially speedups the later SAT testing \cite{JLM15,MPA2015}.
+Then, we do the same testing for literals from $\Lit(\Phi)\setminus (\NBLap(\Phi)\cup\BLap(\Phi))$ (dotted area in Figure \ref{flow}).
+After this step, the exact backbone and non-backbone are found.  
+
+
+In general, one can directly test all the literals to compute backbone without the two approximations. 
+However, the test heavily replies on SAT testing which may be time-cost. 
+Our approach makes two contributions compared to this na\"{\i}ve approach. 
+One is that we reduce the number of SAT calls using the known non-backbone literals $\BLap(\Phi)$.
+The another one is that we first check literals that have high probability to be backbone literals so that backbone literals can be found as early as possible.
+ 
 
 
 \section{Computing $\NBLap(\Phi)$}
