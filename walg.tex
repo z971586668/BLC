@@ -1,10 +1,10 @@
 \section{Overview of our Approach}\label{sec:walg}
-\begin{figure*}
-\centering
-   \includegraphics[scale=0.9]{Framework}
+\begin{figure*}[t]
+   \includegraphics[scale=0.75]{Framework}
+  \hspace*{-15mm} \includegraphics[scale=0.75]{Fig-backbone}
    \caption{Overview of our approach}
    \label{flow}
-\end{figure*}
+\end{figure*} 
 
 Figure \ref{flow} presents the overview of our approach \tool, which consists of three components. Taking a satisfiable formula
 $\Phi$ as an input, \tool first computes an under-approximation $\NBLap(\Phi)\subseteq \NBL(\Phi)$ of the non-backbone of
@@ -32,11 +32,14 @@ a heuristic approach.
 \medskip
 \noindent{\bf Computing exact backbone.}
 Finally, we first iteratively select one literal $l$ from $\BLap(\Phi)\setminus \NBLap(\Phi)$ such that $\lambda \models \neg l$ and test whether
-$l$ is a backbone literal or not by checking the satisfiability of $\Phi\wedge l$. Intuitively, literals in $\BLap(\Phi)\setminus \NBLap(\Phi)$ have a high probability to be backbone literals.
+$l$ is a backbone literal or not by checking the satisfiability of $\Phi\wedge l$.
+In general, one can direct applying this test to compute backbone without the two approximations. However, 
+the test heavily replies on SAT solver which may be time-cost. 
+Intuitively, literals in $\BLap(\Phi)\setminus \NBLap(\Phi)$ have a high probability to be backbone literals.
 If $\Phi\wedge l$ is satisfiable, then $l$ is a non-backbone literal.
 Otherwise, $l$ is a backbone literal. Then, we do the same testing for literals from $\Lit(\Phi)\setminus (\NBLap(\Phi)\cup\BLap(\Phi))$.
-After this step, the exact backbone and non-backbone are found.
-
+After this step, the exact backbone and non-backbone are found.  As shown in the right part of Figure \ref{flow}, 
+our approach reduces the number of SAT solver calls, as we only do test to literals in the dashed area. 
 
 
 \section{Computing $\NBLap(\Phi)$}
