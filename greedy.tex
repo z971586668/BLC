@@ -49,7 +49,7 @@ $\NBLap(\Phi):=L(\Phi,\lambda)$\; \label{alg1:init}
     % $\lambda=\lambda[x\mapsto\neg\lambda(x)]$\;
     % $\NBL_i(\Phi)=\NBL_i(\Phi)\cup\{x\in\Lit(\Phi) \mid \forall\phi\in\Phi: \lambda(x)\models\phi\Longrightarrow\phi\in\Psi\}$\;
 }\label{alg1:loopend}
-\Return $\NBLap$\;
+\Return $\NBLap(\Phi)$\;
 \caption{Greedy-based algorithm}
 \label{alg:greedy}
 \end{algorithm}
@@ -64,7 +64,7 @@ assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Ph
 Obviously,  $\NBLap(\Phi)$ is an under-approximation of non-backbone of $\Phi$.
 
 \begin{theorem}
-$\NBLap(\Phi)\subseteq\NBL$.
+$\NBLap(\Phi)\subseteq\NBL(\Phi)$.
 \end{theorem}
 
 Once, a model $\lambda$ of $\Phi$ is given, Algorithm \ref{alg:greedy} does not need to call any SAT solver which may be time-cost.
