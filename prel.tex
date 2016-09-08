@@ -31,11 +31,11 @@ Given two models $\lambda_1$ and $\lambda_2$ of $\Phi$, $\lambda_2$ can be \emph
 Let $\Rightarrow^*_\Phi$ denote the \emph{reflexive transitive} closure of $\Rightarrow_\Phi$.
 Formally, for every model $\lambda$ of $\Phi$, $\lambda\Rightarrow^*_\Phi\lambda$ and $\lambda_1\Rightarrow^*_\Phi\lambda_3$ if $\lambda_1\Rightarrow\Phi\lambda_2$ and $\lambda_2\Rightarrow^*_\Phi\lambda_3$.
 A \emph{model cluster} $\cl_\Phi(\lambda)$ of $\lambda$ is the set of models $\{\lambda'\mid \lambda\Rightarrow^*_\Phi\lambda'\}$.
-A literal $l$ is a \emph{frozen literal} in a model $\lambda$ of $\Phi$, 
-if $l$ takes the same value in all the models of $\cl_\Phi(\lambda)$.   
-Let $\cl_\Phi$ denote the union of all the model clusters of $\Phi$.
+A literal $l$ is a \emph{frozen literal} in a model $\lambda$ of $\Phi$,
+if $l$ takes the same value in all the models of $\cl_\Phi(\lambda)$. Let $\FL(\Phi,\lambda)$ denote the set of all the frozen literals
+in the model $\lambda$ of $\Phi$. %, and $\FL(\Phi)$ denote the intersection of $\FL(\Phi,\lambda)$ for all the models $\lambda$ of $\Phi$.
 
- 
+
 A formula $\Phi$ is \emph{satisfiable} iff there exists an assignment $\lambda$ such that $\lambda\models \Phi$.
 %A variable $x\in\phi$ \emph{satisfies} a formula $\Phi$, denoted by $x\models\Phi$, iff assigning $1$ to $x$ makes with its value $\lambda(x)$.
 Given a formula $\Phi$, the \emph{satisfiability problem} is to decide whether $\Phi$ is satisfiable or not.
@@ -57,8 +57,8 @@ $\lambda\models l$. The \emph{backbone} $\BL(\Phi)$ of $\Phi$ is the set of back
 Since a backbone literal takes same value in all the models and a frozen literal takes same value in a model cluster instead of all the models,
 we get that:
 
-\begin{proposition}\label{Frozen-backbone}
-For any formula $\Phi$, $\BL(\Phi)\subseteq\cl_\Phi$.
+\begin{proposition}\label{prop:Frozen-backbone}
+For any formula $\Phi$ and model $\lambda$ of $\Phi$, $\BL(\Phi)\subseteq\FL(\Phi,\lambda)$.
 \end{proposition}
 
 

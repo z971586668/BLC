@@ -11,7 +11,7 @@ This algorithm was also used to compute (non-)frozen literals of model clusters 
 \SetAlgoShortEnd
 \SetFillComment
 \Input{a formula $\Phi$ and a model $\lambda$ of $\Phi$}
-\Output{White clauses and white variables}
+\Output{white clauses $W_c$ and white variables $W_v$}
 $W_c:= \{\phi\in\Phi \mid \exists l_1,l_2\in\phi: \  \lambda\models l_1\wedge l_2\}$\;   
 $W_v:=\{x\in \var(\Phi)\mid \lambda\models x\Rightarrow x\not\in \Lit(\Psi\setminus W_c),
         \ \lambda\models \neg x\Rightarrow \neg x\not\in \Lit(\Psi\setminus W_c)\}$\;
@@ -30,6 +30,10 @@ Algorithm \ref{alg:whitening} computes a set of white clauses $W_c$ and white va
 Initially, all the clauses which contain at least two satisfied literals by $\lambda$ are marked as white.
 Then, all the variables whose values in $\lambda$ do not satisfy any non-white clause are marked as white.
 Next, Algorithm \ref{alg:whitening} iteratively and alternatively marks clauses that contain at least one white variable and variables whose values in $\lambda$ do not satisfy any non-white clause are marked as white, until no more clause or variable can be marked as white.
+After Algorithm \ref{alg:whitening} has terminated, if a variable $x$ is non-white, i.e., $x\not\in W_v$, then there does not exist 
+a model $\lambda'\in \cl_\Phi(\lambda)$ such that $\lambda(x)\neq \lambda(x')$. This implies that the literal $x$ (resp. $\neg x$) is a frozen literal
+in the model $\lambda$ if $x\in \Lit(\Phi)$ (resp. $\neg x\in \Lit(\Phi)$). We refer to \cite{LMZ09} for details.
+
 
 Given a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$, we use $W_v(\Phi,\lambda)$ (resp. $W_c(\Phi,\lambda)$) to denote the set
 $W_v$ (resp. $W_c$) obtained by Algorithm \ref{alg:whitening} taking $\Phi$ and $\lambda$ as inputs, and
@@ -38,8 +42,13 @@ $F(\Phi,\lambda)$ to denote the set of literals $\Lit(\Phi)\cap \{x,\neg x\mid x
 
 
 \begin{theorem}\cite{LMZ09}
-$F(\Phi,\lambda)\subseteq\cl_\Phi(\lambda)$.
+\label{thm:whiten}
+$F(\Phi,\lambda)\subseteq\FL(\Phi,\lambda)$.
 \end{theorem}
+
+From Proposition \ref{prop:Frozen-backbone} (i.e., $\BL(\Phi)\subseteq\FL(\Phi,\lambda)$) and Theorem \ref{thm:whiten}, 
+we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be backbone literals. However, the set $F(\Phi,\lambda)$ also contains non-backbone literals. We propose a heuristic strategy that intends to remove non-backbone literals from $F(\Phi,\lambda)$.
+
 
 
 
