@@ -1,0 +1,219 @@
+
+\section{Computing $\NBLap(\Phi)$}
+In this section, we propose a Greedy-based algorithm that computes an under-approximation of non-backbone for a given formula
+$\Phi$.
+
+Given a formula $\Phi$ and a model $\lambda$ of $\Phi$, let $L(\Phi,\lambda)$
+denote the set $\{l\in\Lit(\Phi) \mid \lambda\models \neg l \ \mbox{or} \  \forall \phi\in\Phi, l\in\phi\Rightarrow \exists l'\in\phi\setminus\{l\}: \ \lambda\models l'\}$.
+
+
+\begin{lemma} \label{lem:navie}
+ $L(\Phi,\lambda)\subseteq\NBL(\Phi)$.
+\end{lemma}
+Intuitively, suppose $l$ is a literal in $\Lit(\Phi)$ and $\lambda$ is a model of $\Phi$.
+If $\lambda$ does not satisfy $l$, i.e.,  $\lambda\models  \neg l$, then $l$ must be a non-backbone literal of $\Phi$.
+Otherwise, if $\lambda$ satisfies $l$ and for all clauses $\phi\in\Phi$, $\phi$ either does not contain the literal
+$l$ or contains another literal $l'$ which is also satisfied by the model $\lambda$, then it is easy to see that
+the assignment $\lambda[\neg l]$ satisfies $\Phi$.
+In this case, $l$ is also a non-backbone literal.
+
+However, $L(\Phi,\lambda)$ may excludes many other non-backbone literals.
+To get more non-backbone literals, we propose the Greedy-based algorithm shown in Algorithm \ref{alg:greedy}.
+
+\begin{algorithm}
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\SetAlgoShortEnd
+\SetFillComment
+\Input{a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$}
+\Output{a set of literals $\NBLap(\Phi)$}
+$\NBLap(\Phi):=L(\Phi,\lambda)$\; \label{alg1:init}
+%\Repeat{No Update}{\label{alg1:loopstart}
+\For{${\sf HS}$ from ${\sf HS}_1$ to ${\sf HS}_2$}{
+    $C:={\sf HS}(\Phi)$\;
+    $i:=0$\;
+    \While{$i<|C|$}{
+        $i:=i+1$,  $l:=C[i]$\;
+        \If{$\lambda[\neg l]\models \Phi$}
+        {
+           $\NBLap(\Phi):=\NBLap(\Phi)\cup L(\Phi,\lambda[\neg l])$\;
+           $\lambda:=\lambda[\neg l]$\;
+        }
+}
+%    }
+
+   % change the selected literal one by one to generate a new model\;
+   % add new free literals to $\NBLap$.
+    % $\Psi=\Psi\setminus\{\phi\in\Psi,\lambda(x)\models\phi, |\{l\in\phi \mid \l\models\phi\}|=2\}$\;
+    % $\Psi=\Psi\cup\{\forall\phi\in\Phi, \neg\lambda(x)\models\phi\}$\;
+    % $\lambda=\lambda[x\mapsto\neg\lambda(x)]$\;
+    % $\NBL_i(\Phi)=\NBL_i(\Phi)\cup\{x\in\Lit(\Phi) \mid \forall\phi\in\Phi: \lambda(x)\models\phi\Longrightarrow\phi\in\Psi\}$\;
+}\label{alg1:loopend}
+\Return $\NBLap$\;
+\caption{Greedy-based algorithm}
+\label{alg:greedy}
+\end{algorithm}
+Given a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$,
+we assign $L(\Phi,\lambda)$ to $\NBLap(\Phi)$ at Line \ref{alg1:init}. Next, we update
+$\NBLap(\Phi)$ using two heuristic searching strategies. % to select literalsat Lines \ref{alg1:loopstart}-\ref{alg1:loopend}.
+Each heuristic searching strategy will give us a ordered set $C$ of literals, then select one literal by one literal from
+$C$. For the select literal $l$, we obtain a new assignment $\lambda[\neg l]$ from the model
+$\lambda$ and check whether  $\lambda[\neg l]$ satisfies $\Phi$ or not.
+If $\lambda[\neg l]$ satisfies $\Phi$, then we add the set of non-backbone literals $L(\Phi,\lambda[\neg l])$ into $\NBLap(\Phi)$, and
+assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Phi$ at the next step).
+Obviously,  $\NBLap(\Phi)$ is an under-approximation of non-backbone of $\Phi$.
+
+\begin{theorem}
+$\NBLap(\Phi)\subseteq\NBL$.
+\end{theorem}
+
+Once, a model $\lambda$ of $\Phi$ is given, Algorithm \ref{alg:greedy} does not need to call any SAT solver which may be time-cost.
+Instead, we manage to generate new models by changing assignments of literals in the known model.
+We use the following two heuristic searching strategies to select literals. % with an order for generating new models.
+\begin{quote}
+Let $S$ be the ordered set of literals such that for every $i: 0\leq i<j<|S|$,
+$f(\Phi,S[i])\leq f(\Phi,S[j])$, where $f$ is $\Cnt$ if $i=1$, and $f=\dens$ if $i=2$.
+We define ${\sf HS}_i(\Phi)$ as the prefix sequence $S[0,xn]$ of $S$, for some $x\in[0,1]$.
+\end{quote}
+
+Intuitively, we choose the maximum $xn$ literals from the ordered set of literals.
+The idea is that if the number $\Cnt(\Phi,l)$ of occurrence of a literal $c$ is smaller,
+then the number of clauses that include the literal $l$ is smaller. This implies that the assignment $\lambda[\neg l]$ has a high probability to be a model of
+$\Phi$. From the new model $\lambda[\neg l]$, we may find new non-backbone literals.
+The intuition underlying ${\sf HS}_2(\Phi)$ is similar, in which we use densities of literals to sort literals instead of the numbers of occurrence.
+The reason is that in longer clauses, there is a high possibility that the clauses can be satisfied by another literal. The longer the clauses are, the smaller the density of literal is. Therefore, literals with smaller density are more likely to give a new model of $\Phi$.
+
+
+
+
+%\subsection{Heuristic-based Algorithm}
+
+%With different models returned by MINISAT, the result of the algorithm in previous section diverged. To shrink the gaps, greedy based literals selection strategies are proposed. With a given literals selection strategy, a chain of literals can be complemented at the same time. In other words, a chain of models will be obtained by the changing assignments of literals, coverage of clauses for each literals are updated simultaneously. More models will be generated in this way.
+
+%We apply a Greedy-Based Algorithm with different heuristic searching to extend the result of free literals and refereed as $\NBLap$. We leverages Greedy to depth first %searches. The quota we choose are frequency represented by the number of appearance of a literal and the entropy represented by the ratio of appearance number of a literal to %the total length of clauses that contains the literal. Each quota guided a Greedy search with maximal or minimal value.
+
+
+%The algorithm take the free literals of a given model as input and assigned to $\NBLap$ as shown in Line 1. From Line 2 to Line 6, $\NBLap$ is expanded. Different heuristic %are chosen at Line 3 to select a list of literals and changing the assignment of them with a increased or decreased order.
+
+%In order to generate different models from a given model, we need to negate more literals. We generate consecutive models by changing the assignments of literals one by one. %Since enumerating every model of a satisfied formula is known as a NP hard problem, many heuristic strategies are applied to model generation. The selection of literals paly %a vital role in it, with a different changing decisions, different models are generated. We take the idea of term frequency from statistic research, namely Term %Frequency-Inverse Document Frequency(TF-IDF). In our context, literals are regarded as terms, clauses are regarded as documents. The frequency of terms are represented as the %appearance number of literals. The inverse document frequency of a literal is represented as the ratio of appearance number to the total length of clauses that contained the %literal.
+
+%\begin{lemma}
+%The result of Algorithm \ref{alg:wal} is a subset of $\NBL$.
+%\end{lemma}
+%\begin{proof}
+%For every model generated during the algorithms, the free literals is added to the result set of Algorithm \ref{alg:wal}.
+%Since free literals is a subset of $\NBL$, the result is also a subset of $\NBL$.
+%\end{proof}
+% The final $\NBL_u(\Phi)$ result of our approach is $\NBL_u=\bigcup_{i=1}^4 \NBL_i(\Phi)\cup \NBL$.
+
+% Compared with $\NBL_u(\Phi)$, the strategies applied in this sections can be viewed as four different kinds of depth-first search, while $\NBL_u(\Phi)$ is a width-first search. With different search methods, we are able to explore more paths and obtain more diverse models.
+
+%<<<<<<< HEAD
+%=======
+%We propose two algorithms for computing $\NBL_u{\Phi}$. The first algorithm computing \MBNB.
+%Second one \HBNB....
+%We propose two algorithms for computing $\NBL_u{\Phi}$. The first algorithm computing \MBNB.
+%Second one \HBNB....
+
+%\MBNB computes a complete non-backbone literals set of a given model.
+%It extracts the relation between literals and clauses, and generate a new model by applying single model rotation.
+%The satisfiability of an assignment generated by single model rotation is related with the literal that complemented in the rotation. If a complementing a literal won't make any clause unsatisfiable, then a new model is generated. It's obvious that is there are at least two satisfied literal in a clause, then a new assignment generated by complementing one of the literals won't change the satisfiability of this clause. Therefore, by only complementing such literals, new models obtained from single model rotation.
+
+%\HBNB computes extends the result of \MBNB with chain model rotation. With multiply rotations, we generate more models with from the initial model. It employs four heuristic depth first searches using Greedy strategies to find virous possible combinations of model rotation. The search is guided by the least/most coverage of literals which indicates the frequency of literals, and the maximal/minimal ratio of literals number to total length of clauses that contain the literal which indicated the importance of the literal to the formula.
+
+%\medskip
+%Based on $\NBL_u{\Phi}$, we apply optimized Whitening Algorithm to compute an approximation of backbone literals by eliminating one of the pattern that cause a false positive of Whitening Algorithm.
+%We observe that Whitening Algorithm fail to recognize non-backbone literals when there is a large proportion of clauses that only have unique satisfied literal to a given model. We rule out non-backbone literals in this situation by distinguishing a special pattern among them. Among a group of clauses that only contain unique satisfied literal, there may exists a possible model rotation chain. By complementing the unique satisfied literal and more literals in each clause, another satisfied literal may emerge.
+%....
+
+%\medskip
+
+% The basic idea is that if a clause is only satisfied by exactly one literal, no models can be obtained by only complementing the unique satisfied literal. Therefore, if a literal $l$ is not a unique satisfied literal for any clause, a new model $\lambda[l\mapsto\neg\lambda(x)]$ can be obtained. Literal $l$ is a non-backbone literal and will be added to $\NBL_u$.  Besides clauses-literals coverage analysis, we also propose different estimating strategies to extend and find more non-backbones. The strategies is a depth first search approach based on literals weights.
+% We leverage whitening algorithm\cite{Par03,LMZ09} to extend the set of $\NBL_u$ to an estimation of backbones literals $\HDBS$ by complementing the result set of whitening algorithm. We refine $\HDBS$ iteratively by exploring model rotation chains. In the end, $\HDBS$ will be an estimation that literals in it are highly likely to be backbones.
+%With $\NBL_u$, we are capable to estimate $\HDBS$. $\HDBS$ is initialized with the complement of $\NBL_u$, extensions are achieved by an iterative generation of a clauses estimation, called $\NBC$. For a clause $\phi$ that contains at least one literal $l\in\NBL_u$ or $\neg l \in\NBL_u$,  $\phi$ is added to $\NBC$. Given a model $\lambda$, for a literal $l\models\lambda, l\notin\NBL_u$, if $l$ appears in $\phi\notin\NBC$, $l$ is added to $\HDBS$.
+
+
+
+%\subsection{An Na\"{\i}ve Algorithm}
+%Definition.  Lemma.  Intuition. Proof.
+
+%\begin{definition}[Free Literals of a Given Model]
+%Given a formula $\Phi$, a model $\lambda\models\Phi$, a free literal $l\in\Lit(\Phi)$ is a literal such that a new model will generated by complementing $l$, i.e., %$\lambda[l\mapsto\neg l]\models\Phi$.
+%\end{definition}
+
+%\begin{lemma}[Free Literals]
+%Given a formula $\Phi$, a model $\lambda\models\Phi$, a literal $l\in\Lit(\Phi)$ is a \emph{free literal} iff $\forall\phi\in\Phi, l\in\phi\wedge\lambda\models l %\Longrightarrow \exists l'\in\phi, l'\neq l\wedge\lambda\models l'$.
+%\end{lemma}
+
+%The satisfiable problem trying to find an assignment that satisfy each clause in a given formula. For a clause that satisfied by the given model, it will change to %unsatisfiable or maintain satisfiable when the model changes. We try to make every clause maintains satisfiable and generate a new model by negating the assignment of only %one literal.It's trivial that clauses will maintain satisfiable when the complementing literal doesn't appear in the clause. For clauses that contain the changing literal, %satisfiable will be maintained iff there is at least another literal which continues assigning the clause to TRUE. Therefore, if a literal only satisfy clauses that have at %least two satisfied literals, it's safe to conclude that it's a free literal.
+%
+%According to the definition of backbone, it's obvious that the set of free literals is a subset of $\NBL(\Phi)$.
+%\begin{proof}
+%\label{pro:free literal}
+%Given a formula $\Phi$, a model $\lambda\models\Phi$.
+%Suppose a literal $l\in\Lit(\Phi)$ is a free literal. If $l$ never shows up in any clause (trivial), then there is no such $\phi\in\Phi$ such that %$l\in\phi\wedge\lambda\models l$, $\exists l'\in\phi, l'\neq l\wedge\lambda\models l'$ always holds. If $l$ shows up in some clauses, then there is a new model %$\lambda[l\mapsto\neg l]\models\Phi$, no clause changes to unsatisfiable because of the changing of $l$. It means that $\forall\phi\in\Phi$, if $l\in\phi$, there must exists %another literal $l'\neg l$, assigning $\phi$ to TRUE. Therefore, $\forall\phi\in\Phi, l\in\phi\wedge\lambda\models l \Longrightarrow \exists l'\in\phi, l'\neq %l\wedge\lambda\models l'$.
+
+%Suppose a literal $l\in\Lit(\Phi)$, if $\forall\phi\in\Phi, l\in\phi\wedge\lambda\models l \Longrightarrow \exists l'\in\phi, l'\neq l\wedge\lambda\models l'$, it means that %for every clause that containing $l$, the satisfiable will maintain when changing $l$ to its negation by $l'$. Therefore, there must exist a new model $\lambda[l\mapsto\neg %l]\models\Phi$.
+%\end{proof}
+
+%Whitening Algorithm can't be applied to backbones extraction directly because it suffers from the over-estimation of non-backbones, i.e, backbones can also be selected to the $\NBL_u(\Phi)$ by the Whitening Algorithm. To fix this defect, only a part of Whitening Algorithm is employed.
+%Given a model $\lambda$, there is a possibility that more models can be obtained only by complementing several literals in $\lambda$ without calling a SAT solver. According to the theory of satisfiability, a model $\lambda$ is a truth assignment that satisfies every clause in the formula, i.e., there does not exist a clause $\phi$ that contains no literal in model $\lambda$. With a given model $\lambda$, non-backbones estimation approach is able to compute several similar models that only one literal in complemented. The literals that has been complemented are non-backbones.
+
+%\begin{algorithm}
+%\SetKwInOut{Input}{Input}
+%\SetKwInOut{Output}{Output}
+%\SetAlgoShortEnd
+%\SetFillComment
+%\Input{$\Phi$: a formula}
+%\Output{$\NBLap(\Phi)$: under-approximation of non-backbones}
+
+%$\Psi:=\NBLap(\Phi):=\emptyset$\;
+%$(b,\lambda):=\SAT(\Phi$)\;
+%\lIf{$b==0$} \Return $\Lit(\Phi)$\;
+%$\Psi := \Psi\cup\{\phi\in\Phi \mid \exists l_1, l_2\in \phi, l_1\neq l_2 \wedge\lambda\models l_1\wedge l_2\}$\;
+%$\NBLap(\Phi):=\{l\in\Lit(\Phi) \mid  \forall\phi\in\Phi: (\lambda\models l\wedge l\in\phi)\Longrightarrow\phi\in\Psi\}\cup \NBLap(\Phi)$\;
+%\Return $\NBLap(\Phi)$\;
+%\caption{Non-backbones under-approximation}
+%\label{alg:no-loop-w}
+%\end{algorithm}
+
+%Given a formula $\Phi$, Algorithm \ref{alg:no-loop-w} computes a set of backbone literals $\NBL_u(\Phi)$ which is a under-approximation of $\NBL(\Phi)$.
+%Algorithm \ref{alg:no-loop-w} maintains a set $\Psi$ of clauses and a set of candidate literals of $\NBL_u(\Phi)$, both of them are initialized to $\emptyset$ at Line $1$.
+%At Line $2$, an off-the-shelf SAT Solver is called which returns a pair $(b,\lambda)$, where $b$ denotes whether $\Phi$ is satisfiable or not. If $b$ is TRUE, then $\lambda$ is an assignment that satisfies
+%$\Phi$. If $b$ is FALSE, $\lambda=\emptyset$, Algorithm \ref{alg:no-loop-w} terminates and returns the set $\Lit(\Phi)$ at Line $3$.
+%The Loop at Lines $4-6$ iteratively updates the sets $\NBL_u$ and $\Psi$ for each clause $\phi\in\Phi$. For each clause $\phi\in\Phi$, if there are at least two literals in %$\phi$
+%that are satisfied by the assignment $\lambda$, then the clause $\phi$ is added into $\Psi$ at Line $5$. If there is a literal that only satisfy clauses in $\Psi$, the literal is added into $\NBL_u(\Phi)$ at Line $6$.
+
+%\begin{lemma}
+%Given a satisfied formula $\Phi$, a model $\lambda$. Let $\NBL(\Phi)$ be the non-backbones of $\Phi$.
+%$x\in\Lit(\Phi), x\in\NBL(\Phi)$ iff $\exists\lambda'\models\Phi, \lambda\neq\lambda',
+%\lambda(x)=\neg\lambda'(x)$.
+%\end{lemma}\label{lem:nBL}
+%\begin{proof}
+%Suppose literal $x\in\Lit(\Phi)\in\NBL(\Phi)$, according to the definition of $\NBL(\Phi)$,
+%it must exist two satisfied $\lambda, \lambda'\models\Phi$
+%such that $\lambda(x)=\neg\lambda'(x)$, i.e.,
+%$\forall x\in\NBL(\Phi)\Longrightarrow\exists \lambda\neq\lambda', \lambda(x)=\neg\lambda'(x), \lambda\models\Phi,\lambda'\models\Phi$.
+
+%Suppose $\lambda, \lambda'$ are two satisfied assignments for a formula $\Phi$,
+%$\lambda(x)=\neg\lambda'(x)$.
+%According to the definition of $\NBL(\Phi)$, $x$ is in $\NBL(\Phi)$.
+%\end{proof}
+
+%\begin{theorem}
+%Given a satisfiable formula $\Phi$, let $\NBL_u(\Phi)$ be the set of variables obtained by applying Algorithm \ref{alg:no-loop-w}, then $\NBL_u(\Phi)\subseteq\NBL(\Phi)$.
+%\end{theorem}
+%\begin{proof}
+
+%Given a satisfied formula $\Phi$, a satisfied assignment $\lambda\models\Phi$.
+%Suppose literal $x\in \NBL_u(\Phi)$, let $\Phi_{x}$ be the set of clauses that uses $x$.
+
+%Since $\Phi$ is a satisfied formula, according to the theory of satisfiability, it must exist at least one model $\lambda\models\Phi$. It exists a model $\lambda'=\lambda[x\mapsto\neg\lambda(x)]$, $\lambda'\models\Phi\setminus\Phi_{x}$.
+%For every clause $\phi\in\Phi_{x}$, there exists another ${x_1}$, $x\neq x_1$ such that $\lambda(x_1)\models\phi$ (Line $5,6$), $\lambda'(x_1)=\lambda(x_1)$ therefore $\lambda'\models\Phi_{x}$.
+%For every clause $\phi\in\Phi_{\neg x}$, $\lambda(x)\not\models\phi$, it exists another ${x_2}$, such that $\lambda(x_2)\models\phi$ (Line $7$), $\lambda'(x_2)=\lambda(x_2)$, therefore $\lambda'\models\Phi_{\neg x}$.
+%According to the above proof $\lambda'\models\Phi\setminus\Phi_{x}\cup\Phi_{x}\cup\Phi_{\neg x}=\Phi$.
+%According to Lemma \ref{lem:nBL}, $\exists \lambda, \lambda'\models\Phi, \lambda(x)=\neg \lambda'(x)\Longrightarrow x\in\NBL(\Phi)$.
+%\end{proof}
+
+%In this section, we proved that there is no backbones in $\NBL_u(\Phi)$, it's safe to directly remove the literals in $\NBL_u(\Phi)$ from backbones estimation.
+
