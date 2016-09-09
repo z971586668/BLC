@@ -105,6 +105,12 @@ Given a model $\lambda$ of $\Phi$ and a valid mutable path $\pi$ in $G_\Phi$,
 suppose $L(\pi)=\{l_1,...,l_n\}$,  then the assignment $\lambda[\neg l_1]...[\neg l_n]$ satisfies $\Phi_\pi$.
 \end{proposition}
  
+Given a literal $l\in \Lit(\Phi)$, if there does not exist any valid mutable path $\pi\in\Pi(l)$, then $l$ must be a non-backbone literal.
+
+
+Given a literal $l\in \Lit(\Phi)$, if for every $l'$ such that $l,l'\in \phi$ for some $\phi\in\Phi$,
+there exists valid mutable path $\pi\in\Pi(l')$, then $l$ must be a non-backbone literal.
+  
  
  For every path in $\Pi(l)$, if $\Lit(\Pi(l))\setminus\{l\}$ is non-backbone literals and a new model formed when complementing every literal on the path simultaneously, then $l$ is a non-backbone literal.
 
