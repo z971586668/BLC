@@ -50,10 +50,10 @@ From Proposition \ref{prop:Frozen-backbone} (i.e., $\BL(\Phi)\subseteq\FL(\Phi,\
 we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be backbone literals. However, the set $F(\Phi,\lambda)$ also contains non-backbone literals. We propose a heuristic strategy that intends to remove non-backbone literals from $F(\Phi,\lambda)$.
 
 \textcolor{red}{Stopped here}
- 
+
  Our strategy is based on the following observation about the relationship between result of Whitening Algorithm and backbone literals:
  Consider the formula $(a\vee\neg b)\wedge(b\vee\neg c)\wedge(c\vee\neg a)$. The backbone of the formula is $\emptyset$. The result of Algorithm \ref{alg:whitening} is $(\emptyset, \emptyset)$. $F(\Phi,\lambda)$ is $\Lit(\Phi)$. However, it's obvious that we can obtain a new model $\lambda(\neg a, \neg b, \neg c)$ from $\lambda$. We construct a dependency graph to recognize such literals like $a,b,c$ from $F(\Phi, \lambda)$ in the given formula automatically.
- 
+
  A dependency graph is a directed graph that describes the adjacent relationship between literals. The literals are the vertexes in the graph. For two literals that in the same clause, there is an edge between them labeled with the clause, for a pair of complementing literals $l$ and $\neg l$, there is an edge between them. For unit clauses, there is a circle edge that pointed back to the literal itself.Intuitively, the literals in unit clauses are backbone literals. Therefore, literals with a circle edge is a backbone literal. Fig \ref{fig:depend} presents an example of dependency graph.
  \begin{figure}
     \centering
@@ -63,11 +63,11 @@ we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be back
 \end{figure}
 
  For a path in a dependency graph with a length longer than two, and containing at least two different variables, we call it a \emph{valid path}. Paths that only containing one variable is a trivial path that between a pari of complementing literals. Paths with a length of two is a inside-clause that between two literals in the same clause. Neither of them is useful in recognizing the non-backbone literals automatically.
- 
- For valid paths, we want to check the possibility that complementing the literals on paths simultaneously. Given a path $\pi$, we use $\pi[i]$ to denote the $i_{th}$ literal on the path. Suppose a path with a length of four literals, $x, \neg y, y, \neg x$ respectively. It implies that $x$ and $\neg y$ are in the same clause, such as $\phi_1$ and $y, \neg x$ are in the same clause such as $\phi_2$. It's obvious that both $\phi_1$ and $\phi_2$ are still satisfy by the new assignment $\lambda[\neg x, \neg y]$ from the path. The assignment $\lambda[\neg x, \neg y]$ will be a new model if $\Phi_x$ and $\Phi_y$ are either white clauses or clauses labeled in a such path. More generally, if a path with length k, contains several complementing pair of literals started from $\pi[2]$ to $\pi[k-1]$, refereed as \emph{mutate path} then a new assignment $\lambda[\neg l, l\in\{\pi[i] | l\in[2, k-1]\}]$ will satisfy the labeled clauses in this path. If $\Phi_l$, $l\in\{\pi[i] | l\in[2, k-1]\}$ are all white clauses clauses labeled in a mutate path, a new model is obtained from the path. 
- 
+
+ For valid paths, we want to check the possibility that complementing the literals on paths simultaneously. Given a path $\pi$, we use $\pi[i]$ to denote the $i_{th}$ literal on the path. Suppose a path with a length of four literals, $x, \neg y, y, \neg x$ respectively. It implies that $x$ and $\neg y$ are in the same clause, such as $\phi_1$ and $y, \neg x$ are in the same clause such as $\phi_2$. It's obvious that both $\phi_1$ and $\phi_2$ are still satisfy by the new assignment $\lambda[\neg x, \neg y]$ from the path. The assignment $\lambda[\neg x, \neg y]$ will be a new model if $\Phi_x$ and $\Phi_y$ are either white clauses or clauses labeled in a such path. More generally, if a path with length k, contains several complementing pair of literals started from $\pi[2]$ to $\pi[k-1]$, refereed as \emph{mutate path} then a new assignment $\lambda[\neg l, l\in\{\pi[i] | l\in[2, k-1]\}]$ will satisfy the labeled clauses in this path. If $\Phi_l$, $l\in\{\pi[i] | l\in[2, k-1]\}$ are all white clauses clauses labeled in a mutate path, a new model is obtained from the path.
+
  Our approach applying the counterexample idea to the facts presented above, consider a literal $l\in F(\Phi, \lambda)$ if there is a non-mutate path starting from $l$, we consider that there is no immediate model generated the literal $l$.
- 
+
  However, it's possible to obtain a new model by complementing the literal that have a non-mutate path. But it's usually time-cost. In order to avoid calling SAT solvers, our approach just remove the literals that have an non-mutate path. We will apply an iteratively SAT testing Algorithm to deal with this literals.
 
 
@@ -107,3 +107,7 @@ $\BLap:=F(\Phi, \lambda)\setminus\{l | \forall \pi, \pi[1]==l\Longrightarrow\pi[
 \end{algorithm}
 
 Algorithm \ref{alg:nBLo} works on the dependency graph of a formula. For each literal in $F(\Phi, \lambda)$ it find all valid paths starting from the literal. If every valid path is a mutate path for the literal, then it's removed from $\BLap$. Otherwise, it kept in $\BLap$ since there may not exist a model generated from complementing the literal.
+
+Given a satisfiable formula $\Phi$, the dependency graph of $\Phi$ is $G(\Phi)$. Algorithm \ref{alg:nBLo} computes a approximation of backbone literals $\BLap$ by checking paths in $G$ started from a literal $l\in\F(\Phi, \lambda)$ is a mutate path or not. If there is a not mutate path starting from literal $l$, $l$ is removed from $F(\Phi, \lambda)$.
+
+After Algorithm \ref{alg:nBLo} has terminated, if a literal is in $F(\Phi, \lambda)$, we consider that there is a higher probability for the literal to be a backbone literal.
