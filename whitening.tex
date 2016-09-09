@@ -106,3 +106,4 @@ $\BLap:=F(\Phi, \lambda)\setminus\{l | \forall \pi, \pi[1]==l\Longrightarrow\pi[
 \label{alg:nBLo}
 \end{algorithm}
 
+Algorithm \ref{alg:nBLo} works on the dependency graph of a formula. For each literal in $F(\Phi, \lambda)$ it find all valid paths starting from the literal. If every valid path is a mutate path for the literal, then it's removed from $\BLap$. Otherwise, it kept in $\BLap$ since there may not exist a model generated from complementing the literal.
