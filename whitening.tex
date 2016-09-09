@@ -33,18 +33,18 @@ $F(\Phi,\lambda)=\Lit(\Phi)\cap \{x,\neg x\mid x\in \var(\Phi)\setminus W_v(\Phi
 
 Initially, all the clauses which contain at least two satisfied literals by $\lambda$ are marked as white.
 Then, each variable $x$ whose value in $\lambda$ do not satisfy any non-white clauses is marked as white.
-Intuitively, if $\lambda(x)$ is $1$ and the literal $x$ does not appear in any non-white clauses $\Phi\setminus W_c$, then $x$ is marked as white. In this case, 
+Intuitively, if $\lambda(x)$ is $1$ and the literal $x$ does not appear in any non-white clauses $\Phi\setminus W_c$, then $x$ is marked as white. In this case,
 the assignment $\lambda[\neg x]$ satisfies all the non-white clauses, because no literal
 $x$ appears in them, while the assignment $\lambda[\neg x]$ also satisfies white clauses, because there are at least two literals in each of white clauses
-satisfied by $\lambda$. We get that the assignment $\lambda[\neg x]$ is a model of $\Phi$ which implies that $\lambda[\neg x]\in \cl_\Phi(\lambda)$. 
+satisfied by $\lambda$. We get that the assignment $\lambda[\neg x]$ is a model of $\Phi$ which implies that $\lambda[\neg x]\in \cl_\Phi(\lambda)$.
 On the other hand, if $\lambda(x)$ is $0$ and the literal $\neg x$ does not appear in any non-white clauses $\Phi\setminus W_c$, then $x$ is marked as white.
 Since the assignment $\lambda[\neg x]$ satisfies all the non-white clauses thanks to the absence of the literal
 $\neg x$ in them, and satisfies all the white clauses due to fact that there are at least two literals in each of white clauses satisfied by $\lambda$.
-We still get that the assignment $\lambda[\neg x]$ is a model of $\Phi$ and $\lambda[\neg x]\in \cl_\Phi(\lambda)$. 
+We still get that the assignment $\lambda[\neg x]$ is a model of $\Phi$ and $\lambda[\neg x]\in \cl_\Phi(\lambda)$.
 Therefore, we can infer that if the variable is $x$ white, then the literals $\neg x$ and $x$ cannot be frozen literals.
 
-Next, Algorithm \ref{alg:whitening} iteratively and alternatively marks each clause that contain at least one white variable and each variable whose value in $\lambda$ do not satisfy any non-white clause are marked as white, until no more clause or variable can be marked as white. 
-This loop manages to mark as many as variables as white. 
+Next, Algorithm \ref{alg:whitening} iteratively and alternatively marks each clause that contain at least one white variable and each variable whose value in $\lambda$ do not satisfy any non-white clause are marked as white, until no more clause or variable can be marked as white.
+This loop manages to mark as many as variables as white [possible?].
 After Algorithm \ref{alg:whitening} has terminated, if a variable $x$ is non-white, i.e., $x\not\in W_v$, then there does not exist a model $\lambda'\in \cl_\Phi(\lambda)$ such that $\lambda(x)\neq \lambda(x')$. This implies that the literal $x$ (resp. $\neg x$) is a frozen literal
 in the model $\lambda$ if $x\in \Lit(\Phi)$ (resp. $\neg x\in \Lit(\Phi)$).  However, it was pointed out by \cite{LMZ09} that there are cases in which
 a literal $l$ is not a frozen literal, but the corresponding variable $\var(l)$ is marked as white. We refer to \cite{LMZ09} for details.
@@ -72,13 +72,13 @@ $W_v(\Phi,\lambda)=\emptyset$, from which we get that $F(\Phi,\lambda)=\Lit(\Phi
 from $F(\Phi,\lambda)$,  we introduce a dependency graph to characterize such literals $a, \ b, \ c, \ \neg a, \ \neg b$ and  $\neg c$ from  the given formula $\Phi$.
 
 
-Given a formula $\Phi$, the \emph{dependency graph} $G_\Phi$ of $\Phi$ is a undirected graph $(V,E)$, where  
-$V=\Lit(\Phi)$ is a finite set of vertices, and $E\subseteq V\times V$ is a finite set of edges which is defined as follows: 
+Given a formula $\Phi$, the \emph{dependency graph} $G_\Phi$ of $\Phi$ is a undirected graph $(V,E)$, where
+$V=\Lit(\Phi)$ is a finite set of vertices, and $E\subseteq V\times V$ is a finite set of edges which is defined as follows:
 for every literals $l_1,l_2\in\Lit(\Phi)$, $(l_1,l_2)\in E$ iff one of the following conditions hold:
 \begin{itemize}
-\item there exists a clause $\phi\in\Phi$ with $l_1,l_2\in \phi$, 
-\item  $l_1=\neg l_2$,
-\item $l_1=l_2\in\Phi$ (i.e., $l_1$ is a clause in $\Phi$).
+\item there exists a clause $\phi\in\Phi$ with $l_1,l_2\in \phi$, labeled with $\phi$
+\item  $l_1=\neg l_2$, without labels
+\item $l_1=l_2\in\Phi$ (i.e., $l_1$ is a clause in $\Phi$), with out labels.
 \end{itemize}
 
 It is easy to see that if a node $l$ has a self-cycle (i.e., $l\in\Phi$), then $l$ must be a backbone literal of $\Phi$.
@@ -91,16 +91,17 @@ Figure \ref{fig:depend} depicts the dependency graph of the formula $(a\vee\neg 
 \end{figure}
 
 A \emph{path} of a dependency graph  $G_\Phi=(V,E)$ is a sequence $l_1l_2...l_n$ of nodes, such that for every $i:\ 1\leq i<n$, $(l_i,l_{i+1})\in E$.
-A path $l_1l_2...l_n$ is \emph{valid} if $n>2$ and $|\var(\bigwedge_{1\leq i\leq n} l_i)|\geq 2$, i.e., there are at least two different variables used in 
-the literals  $l_1,l_2,...,l_n$. A path $l_1l_2...l_n$ is \emph{trivial} if $|\var(\bigwedge_{1\leq i\leq n} l_i)|=2$.
-A path $l_1l_2...l_n$ is \emph{useless} if $n=2$ and there exists a clause $\phi$ such that $l_1,l_2\in\phi$.
+A path $l_1l_2...l_n$ is \emph{valid} if $n>2$ and $|\var(\bigwedge_{1\leq i\leq n} l_i)|\geq 2$, i.e., there are at least two different variables used in
+the literals  $l_1,l_2,...,l_n$. A path $l_1, l_2$ is \emph{trivial} if $l_1=\neg l_2$ or there exists a clause $\phi$ such that $l_1,l_2\in\phi$.
 
-  Paths that only containing one variable is a trivial path that between a pari of complementing literals. Paths with a length of two is a inside-clause that between two literals in the same clause. Neither of them is useful in recognizing the non-backbone literals automatically.
 
- For valid paths, we want to check the possibility that complementing the literals on paths simultaneously. Given a path $\pi$, we use $\pi[i]$ to denote the $i_{th}$ literal on the path. Suppose a path with a length of four literals, $x, \neg y, y, \neg x$ respectively. It implies that $x$ and $\neg y$ are in the same clause, such as $\phi_1$ and $y, \neg x$ are in the same clause such as $\phi_2$. It's obvious that both $\phi_1$ and $\phi_2$ are still satisfy by the new assignment $\lambda[\neg x, \neg y]$ from the path. The assignment $\lambda[\neg x, \neg y]$ will be a new model if $\Phi_x$ and $\Phi_y$ are either white clauses or clauses labeled in a such path. More generally, if a path with length k, contains several complementing pair of literals started from $\pi[2]$ to $\pi[k-1]$, refereed as \emph{mutate path} then a new assignment $\lambda[\neg l, l\in\{\pi[i] | l\in[2, k-1]\}]$ will satisfy the labeled clauses in this path. If $\Phi_l$, $l\in\{\pi[i] | l\in[2, k-1]\}$ are all white clauses clauses labeled in a mutate path, a new model is obtained from the path.
+ For a path, the literals on the path is refereed as the literals on the path is refereed as $\Lit(\pi)$. A valid path $l_1l_2l_3...l_{n-2}l_{n-1}l_n$ is \emph{mutate} if $l_2=\neg l_3...l_{2k}=\neg l_{2k+1}, 1<k<\frac{2}{n}-1$. Suppose every literal in $\Lit(\pi)$ just appears in the set of label clauses on this path, refereed $\Phi_{\pi}$. The assignment generated by complementing every literal in $\Lit(\pi)$ will satisfy every clause in $\Phi_{\pi}$. The set of valid paths that started from literal $l$ is refereed as $\Pi(l)$. For every path in $\Pi(l)$, if $\Lit(\Pi(l))\setminus\{l\}$ is non-backbone literals and a new model formed when complementing every literal on the path simultaneously, then $l$ is a non-backbone literal.
+  
+ Such non-backbone checks of literals may be nested due to the dependency of literals. Therefore, instead of checking every literal in a path, we use the counterexample idea, if there exists a path $\pi$ in $\Pi(l)$, that $\Phi_{\pi}$ will be unsatisfied when complementing every literal in $\Lit(\pi)$ at the same time, then there is no immediate model from mutating a path starting from $l$.
+ 
+ However, with the help of SAT solver, it's still possible to generate a model by complementing a literal that doesn't have a immediate model from mutating a path. A Mutate path just implies one possible set of literals which complementing simultaneously to generate a new model, other sets of literals are still available to generate new models.
 
- Our approach applying the counterexample idea to the facts presented above, consider a literal $l\in F(\Phi, \lambda)$ if there is a non-mutate path starting from $l$, we consider that there is no immediate model generated the literal $l$.
-
+ [Explanation]For valid paths, we want to check the possibility that complementing the literals on paths simultaneously. Given a path $\pi$, we use $\pi[i]$ to denote the $i_{th}$ literal on the path. Suppose a path with a length of four literals, $x, \neg y, y, \neg x$ respectively. It implies that $x$ and $\neg y$ are in the same clause $\phi_1$ and $y, \neg x$ are in the same clause $\phi_2$. It's obvious that both $\phi_1$ and $\phi_2$ are still satisfy by the new assignment $\lambda[\neg x, \neg y]$ from the path. The assignment $\lambda[\neg x, \neg y]$ will be a new model if $\Phi_x$ and $\Phi_y$ are either white clauses or clauses labeled in a such path. More generally, if a path with length k, contains several complementing pair of literals started from $\pi[2]$ to $\pi[k-1]$, it is refereed as \emph{mutate path}. A new assignment $\lambda[\neg l, l\in\{\pi[i] | l\in[2, k-1]\}]$ will satisfy the labeled clauses in this path. If $\Phi_l$, $l\in\{\pi[i] | l\in[2, k-1]\}$ are all white clauses or clauses labeled in a mutate path, a new model is obtained from the path.Our approach applying the counterexample idea to the facts presented above, consider a literal $l\in F(\Phi, \lambda)$ if there is a non-mutate path starting from $l$, we consider that there is no immediate model generated the literal $l$.
  However, it's possible to obtain a new model by complementing the literal that have a non-mutate path. But it's usually time-cost. In order to avoid calling SAT solvers, our approach just remove the literals that have an non-mutate path. We will apply an iteratively SAT testing Algorithm to deal with this literals.
 
 
@@ -139,7 +140,7 @@ $\BLap:=F(\Phi, \lambda)\setminus\{l | \forall \pi, \pi[1]==l\Longrightarrow\pi[
 \label{alg:nBLo}
 \end{algorithm}
 
-Algorithm \ref{alg:nBLo} works on the dependency graph of a formula. For each literal in $F(\Phi, \lambda)$ it find all valid paths starting from the literal. If every valid path is a mutate path for the literal, then it's removed from $\BLap$. Otherwise, it kept in $\BLap$ since there may not exist a model generated from complementing the literal.
+Algorithm \ref{alg:nBLo} works on the dependency graph of a formula. For each literal in $F(\Phi, \lambda)$ it find all valid paths starting from the literal. If every valid path is a mutate path for the literal, then it's removed from $\BLap$. Otherwise, the literal is kept in $\BLap$ since there may not exist a model generated from complementing the literal.
 
 Given a satisfiable formula $\Phi$, the dependency graph of $\Phi$ is $G(\Phi)$. Algorithm \ref{alg:nBLo} computes a approximation of backbone literals $\BLap$ by checking paths in $G$ started from a literal $l\in F(\Phi, \lambda)$ is a mutate path or not. If there is a not mutate path starting from literal $l$, $l$ is removed from $F(\Phi, \lambda)$.
 
