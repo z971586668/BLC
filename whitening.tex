@@ -108,6 +108,6 @@ $\BLap:=F(\Phi, \lambda)\setminus\{l | \forall \pi, \pi[1]==l\Longrightarrow\pi[
 
 Algorithm \ref{alg:nBLo} works on the dependency graph of a formula. For each literal in $F(\Phi, \lambda)$ it find all valid paths starting from the literal. If every valid path is a mutate path for the literal, then it's removed from $\BLap$. Otherwise, it kept in $\BLap$ since there may not exist a model generated from complementing the literal.
 
-Given a satisfiable formula $\Phi$, the dependency graph of $\Phi$ is $G(\Phi)$. Algorithm \ref{alg:nBLo} computes a approximation of backbone literals $\BLap$ by checking paths in $G$ started from a literal $l\in\F(\Phi, \lambda)$ is a mutate path or not. If there is a not mutate path starting from literal $l$, $l$ is removed from $F(\Phi, \lambda)$.
+Given a satisfiable formula $\Phi$, the dependency graph of $\Phi$ is $G(\Phi)$. Algorithm \ref{alg:nBLo} computes a approximation of backbone literals $\BLap$ by checking paths in $G$ started from a literal $l\in F(\Phi, \lambda)$ is a mutate path or not. If there is a not mutate path starting from literal $l$, $l$ is removed from $F(\Phi, \lambda)$.
 
 After Algorithm \ref{alg:nBLo} has terminated, if a literal is in $F(\Phi, \lambda)$, we consider that there is a higher probability for the literal to be a backbone literal.
