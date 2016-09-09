@@ -79,28 +79,28 @@ we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be back
 \Input{$\Phi$: a formula, $\NBLap$: under-approximation of non-backbone}
 \Output{$\BLap(\Phi)$: backbone approximation of $\Phi$}
 
-$\BLap:=F(\Phi, \lambda)$\;
-\For{$l\in\BLap(\Phi)$}{
-    \For{$\phi\in\Phi_l$}{
-        $found:=TRUE$\;
-        $k:=1$\;
-        $\Phi_{l}^0:=\{l\}$\;
-        \Repeat {$\Phi_{l_l}^k==\Phi$}{
-            $\Phi_{l}^k:=\{\phi\in\Phi \mid \neg\Lit(\Phi_{l}^{k-1})\in\phi\}$\;
-            \If{$\neg l\in\Lit(\Phi_{l}^k)$}{
-                    break\;
-            }
-            $k++$\;
-        }
-        \If{$\Phi_{l_l}^k==\Phi$}{
-            $found:=FALSE$\;
-            break\;
-        }
-    }
-    \If{found}{
-        $\BLap(\Phi):=\BLap(\Phi)\setminus\{l\}$\;
-    }
-}
+$\BLap:=F(\Phi, \lambda)\setminus\{l | \forall \pi, \pi[1]==l\Longrightarrow\pi[2k]==\neg\pi[2k+1], k\in[2,n-1]\}$\;
+%\For{$l\in\BLap(\Phi)$}{
+%    \For{$\phi\in\Phi_l$}{
+%        $found:=TRUE$\;
+%        $k:=1$\;
+%        $\Phi_{l}^0:=\{l\}$\;
+%        \Repeat {$\Phi_{l_l}^k==\Phi$}{
+%            $\Phi_{l}^k:=\{\phi\in\Phi \mid \neg\Lit(\Phi_{l}^{k-1})\in\phi\}$\;
+%            \If{$\neg l\in\Lit(\Phi_{l}^k)$}{
+%                    break\;
+%            }
+%            $k++$\;
+%        }
+%        \If{$\Phi_{l_l}^k==\Phi$}{
+%            $found:=FALSE$\;
+%            break\;
+%        }
+%    }
+%    \If{found}{
+%        $\BLap(\Phi):=\BLap(\Phi)\setminus\{l\}$\;
+%    }
+%}
 \Return $\BLap(\Phi)$\;
 \caption{Backbones approximation of $\Phi$}
 \label{alg:nBLo}
