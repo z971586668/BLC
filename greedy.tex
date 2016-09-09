@@ -56,12 +56,15 @@ $\NBLap(\Phi):=L(\Phi,\lambda)$\; \label{alg1:init}
 Given a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$,
 we assign $L(\Phi,\lambda)$ to $\NBLap(\Phi)$ at Line \ref{alg1:init}. Next, we update
 $\NBLap(\Phi)$ using two heuristic searching strategies. % to select literalsat Lines \ref{alg1:loopstart}-\ref{alg1:loopend}.
-Each heuristic searching strategy will give us a ordered set $C$ of literals, then select one literal by one literal from
-$C$. For the select literal $l$, we obtain a new assignment $\lambda[\neg l]$ from the model
+Each heuristic searching strategy will give us an ordered set $C$ of literals, then select one literal by one literal from
+$C$. For each selected literal $l$, we construct a new assignment $\lambda[\neg l]$ from the model
 $\lambda$ and check whether  $\lambda[\neg l]$ satisfies $\Phi$ or not.
 If $\lambda[\neg l]$ satisfies $\Phi$, then we add the set of non-backbone literals $L(\Phi,\lambda[\neg l])$ into $\NBLap(\Phi)$, and
 assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Phi$ at the next step).
 Obviously,  $\NBLap(\Phi)$ is an under-approximation of non-backbone of $\Phi$.
+Notices that a literal $l$ such that $\lambda[\neg l]$ does not satisfy $\Phi$ may could be used 
+later, i.e., $\lambda'[\neg l]$ does satisfy $\Phi$ for the later new model $\lambda'$. To make the algorithm efficient,
+we do not consider such literals twice in one iteration. 
 
 \begin{theorem}
 $\NBLap(\Phi)\subseteq\NBL(\Phi)$.
