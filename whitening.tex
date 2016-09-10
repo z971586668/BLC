@@ -76,8 +76,8 @@ Given a formula $\Phi$, the \emph{dependency graph} $G_\Phi$ of $\Phi$ is a undi
 $V=\Lit(\Phi)$ is a finite set of vertices, and $E\subseteq V\times V$ is a finite set of edges which is defined as follows:
 for every literals $l_1,l_2\in\Lit(\Phi)$, $(l_1,l_2)\in E$ iff one of the following conditions hold:
 \begin{itemize}
-\item there exists a clause $\phi\in\Phi$ with $l_1,l_2\in \phi$, 
-\item  $l_1=\neg l_2$,  
+\item there exists a clause $\phi\in\Phi$ with $l_1,l_2\in \phi$,
+\item  $l_1=\neg l_2$,
 \item $l_1=l_2\in\Phi$ (i.e., $l_1$ is a clause in $\Phi$).
 \end{itemize}
 
@@ -98,23 +98,34 @@ A path $l_1l_2...l_n$ is \emph{valid} if $n>2$ and $|\var(\bigwedge_{1\leq i\leq
 the literals  $l_1,l_2,...,l_n$. Let $\Pi(l)$ denote the set of all the valid paths starting from $l$.
 A path $l_1l_2$ is \emph{trivial} if $l_1=\neg l_2$ or there exists a clause $\phi$ such that $l_1,l_2\in\phi$.
 %A path $\pi=l_1...l_n$ is a \emph{pure clause path} if $l_1,...,l_n\in \Lit(\Phi_\pi)$ and $l_1,...,l_n\not\in \Lit(\Phi\setminus\Phi_\pi)$.
-A valid path $l_1...l_{2n}$ is \emph{mutable} if $l_1=\neg l_{2n}$, for every $1\leq k < n$, $l_{2k}=\neg l_{2k+1}$.
+A valid path $l_1...l_{2n}$ is \emph{mutable} if $l_1=\neg l_{2n}$ or $l_{2n}\in\NBL(\Phi)$, for every $1\leq k < n$, $l_{2k}=\neg l_{2k+1}$.
 
 \begin{proposition}
-Given a model $\lambda$ of $\Phi$ and a valid mutable path $\pi$ in $G_\Phi$, 
+Given a model $\lambda$ of $\Phi$ and a valid mutable path $\pi$ in $G_\Phi$,
 suppose $L(\pi)=\{l_1,...,l_n\}$,  then the assignment $\lambda[\neg l_1]...[\neg l_n]$ satisfies $\Phi_\pi$.
 \end{proposition}
+
+ A \emph{mutating set} $M(\pi)$ of a path $\pi$, is a set of literals in $\Lit(\pi)$ at the position of $2k$. For example, given a path $l_1l_2l_3l_4...l_{2k-1}l{2k}$, a mutating set of $\pi$ is $\{l_2, l_4, l_{2k}\}$.
  
-Given a literal $l\in \Lit(\Phi)$, if there does not exist any valid mutable path $\pi\in\Pi(l)$, then $l$ must be a non-backbone literal.
-
-
-Given a literal $l\in \Lit(\Phi)$, if for every $l'$ such that $l,l'\in \phi$ for some $\phi\in\Phi$,
-there exists valid mutable path $\pi\in\Pi(l')$, then $l$ must be a non-backbone literal.
-  
+ For a literal $l$, $l\in\NBL(\Phi)$ if for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, $l'\in\NBL(\Phi)$ or there exists a valid mutable path $\pi$ $ll'...l_{2n}$ such that for every $\pi$, the conjunction of $M(\pi)$ is satisfiable.
  
- For every path in $\Pi(l)$, if $\Lit(\Pi(l))\setminus\{l\}$ is non-backbone literals and a new model formed when complementing every literal on the path simultaneously, then $l$ is a non-backbone literal.
+ \begin{proof}
+ Suppose that for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, $l'\in\NBL(\Phi)$, then every clauses in $\Phi_l$ will be satisfied by $l'$ to the assignment of $\lambda[\neg l]$. Therefore, $l\in\NBL(\Phi)$.
+ 
+ \end{proof}
 
- Such non-backbone checks of literals may be nested due to the dependency of literals. Therefore, instead of checking every literal in a path, we use the counterexample idea, if there exists a path $\pi$ in $\Pi(l)$, that $\Phi_{\pi}$ will be unsatisfied when complementing every literal in $\Lit(\pi)$ at the same time, then there is no immediate model from mutating a path starting from $l$.
+
+% Given a literal $l\in \Lit(\Phi)$, if there does not exist any valid mutable path $\pi\in\Pi(l)$, then $l$ must be a non-backbone literal.
+
+
+% Given a literal $l\in \Lit(\Phi)$, if for every $l'$ such that $l,l'\in \phi$ for some $\phi\in\Phi$,
+% there exists valid mutable path $\pi\in\Pi(l')$, then $l$ must be a non-backbone literal.
+
+
+ Consider a more general case in \ref{prop:nonbackbone}, if $l_1, l_n\in\Phi\setminus\Phi_\pi$, if for every $l'$ such that $l, l'\in\phi$ for some $\phi\in\Phi$, there exist a valid mutable path $\pi$, such that $\Lit(\pi)\notin\Phi\setminus\Phi_\pi$, then 
+ %For every path in $\Pi(l)$, if $\Lit(\Pi(l))\setminus\{l\}$ is non-backbone literals and a new model formed when complementing every literal on the path simultaneously, then $l$ is a non-backbone literal.
+
+ %Such non-backbone checks of literals may be nested due to the dependency of literals. Therefore, instead of checking every literal in a path, we use the counterexample idea, if there exists a path $\pi$ in $\Pi(l)$, that $\Phi_{\pi}$ will be unsatisfied when complementing every literal in $\Lit(\pi)$ at the same time, then there is no immediate model from mutating a path starting from $l$.
 
  However, with the help of SAT solver, it's still possible to generate a model by complementing a literal that doesn't have a immediate model from mutating a path. A Mutate path just implies one possible set of literals which complementing simultaneously to generate a new model, other sets of literals are still available to generate new models.
 
