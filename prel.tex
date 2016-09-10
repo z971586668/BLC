@@ -4,7 +4,8 @@ We fix a finite set  $\X$ of \emph{Boolean variables}.
 A \emph{literal} $l$ is either a Boolean variable $x\in \X$ or its negation $\neg x$.
 The negation of a literal $\neg x$ is $x$, i.e., $\neg\neg x=x$.
 A \emph{clause} $\phi$ is a disjunction of literals $\bigvee_{i=1}^n l_i$, which may be regarded as
-the set of literals $\{l_i\mid 1\leq i\leq n\}$.
+the set of literals $\{l_i\mid 1\leq i\leq n\}$. W.l.o.g., we assume that for every
+clause $\phi$, if $l\in\phi$, then $\neg l\not\in \phi$.
 
 A \emph{formula} $\Phi$ over $\X$ is a Boolean combination of variables $\X$.
 We assume that formulae are given in conjunctive normal
@@ -23,7 +24,8 @@ let $\Phi_{l}\subseteq \Phi$ be the set of clauses $\{\phi\in\Phi\mid l\in\phi\}
 
 An \emph{assignment} is a function $\lambda: \X \rightarrow \{0,1\}$, where $1$ (resp. $0$) denotes true (resp. false).
 Given an assignment $\lambda$ and a literal $l$ that is $x$ or $\neq x$, let $\lambda[\neg l]$ be the assignment which is equal to $\lambda$
-except for $\lambda[\neg l](x)=\neg \lambda(x)$.
+except for $\lambda[\neg l](x)=\neg \lambda(x)$. Given a set of variables $x=\{x_1,...,x_n\}$, let $\lambda[\neg L]$ denote the assignment
+$\lambda[\neg x_1]...[\neg x_n]$.
 An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\models \Phi$, iff assigning $\lambda(x)$ to $x$ for $x\in\var(\Phi)$ makes $\Phi$ true.
 
 An assignment $\lambda$ is a \emph{model} of $\Phi$ if $\lambda\models \Phi$.
