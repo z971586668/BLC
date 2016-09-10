@@ -105,13 +105,14 @@ Given a model $\lambda$ of $\Phi$ and a valid mutable path $\pi$ in $G_\Phi$,
 suppose $L(\pi)=\{l_1,...,l_n\}$,  then the assignment $\lambda[\neg l_1]...[\neg l_n]$ satisfies $\Phi_\pi$.
 \end{proposition}
 
- A \emph{mutating set} $M(\pi)$ of a path $\pi$, is a set of literals in $\Lit(\pi)$ at the position of $2k$. For example, given a path $l_1l_2l_3l_4...l_{2k-1}l{2k}$, a mutating set of $\pi$ is $\{l_2, l_4, l_{2k}\}$.
+ A \emph{mutating set} $M(\pi)$ of a path $\pi$, is a set of literals in $\Lit(\pi)$ at the position of $2k$. For example, given a path $l_1l_2l_3l_4...l_{2k-1}l_{2k}$, a mutating set of $\pi$ is $\{l_2, l_4, l_{2k}\}$.
  
  For a literal $l$, $l\in\NBL(\Phi)$ if for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, $l'\in\NBL(\Phi)$ or there exists a valid mutable path $\pi$ $ll'...l_{2n}$ such that for every $\pi$, the conjunction of $M(\pi)$ is satisfiable.
  
  \begin{proof}
  Suppose that for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, $l'\in\NBL(\Phi)$, then every clauses in $\Phi_l$ will be satisfied by $l'$ to the assignment of $\lambda[\neg l]$. Therefore, $l\in\NBL(\Phi)$.
  
+ Suppose that for every $l'$ such that $l,l'\in\phi$
  \end{proof}
 
 
@@ -121,8 +122,6 @@ suppose $L(\pi)=\{l_1,...,l_n\}$,  then the assignment $\lambda[\neg l_1]...[\ne
 % Given a literal $l\in \Lit(\Phi)$, if for every $l'$ such that $l,l'\in \phi$ for some $\phi\in\Phi$,
 % there exists valid mutable path $\pi\in\Pi(l')$, then $l$ must be a non-backbone literal.
 
-
- Consider a more general case in \ref{prop:nonbackbone}, if $l_1, l_n\in\Phi\setminus\Phi_\pi$, if for every $l'$ such that $l, l'\in\phi$ for some $\phi\in\Phi$, there exist a valid mutable path $\pi$, such that $\Lit(\pi)\notin\Phi\setminus\Phi_\pi$, then 
  %For every path in $\Pi(l)$, if $\Lit(\Pi(l))\setminus\{l\}$ is non-backbone literals and a new model formed when complementing every literal on the path simultaneously, then $l$ is a non-backbone literal.
 
  %Such non-backbone checks of literals may be nested due to the dependency of literals. Therefore, instead of checking every literal in a path, we use the counterexample idea, if there exists a path $\pi$ in $\Pi(l)$, that $\Phi_{\pi}$ will be unsatisfied when complementing every literal in $\Lit(\pi)$ at the same time, then there is no immediate model from mutating a path starting from $l$.
