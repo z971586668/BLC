@@ -1,5 +1,6 @@
 \section{Computing $\BLap(\Phi)$}
 In this section, we propose an Whitening-based Algorithm to compute an approximation $\BLap(\Phi)$ of backbone.
+We fix the satisfiable formula $\Phi$.
 
 \cite{Par03} proposed an Whitening algorithm which was supposed to determine nodes that always have the same color in all legal colorings of the coloring problem.
 This algorithm was also used to compute (non-)frozen literals of model clusters in SAT problem \cite{LMZ09}, from which we can compute (non-)backbone literals.
@@ -62,7 +63,7 @@ $W_v$ (resp. $W_c$) obtained by Algorithm \ref{alg:whitening} taking $\Phi$ and 
 
 
 From Proposition \ref{prop:Frozen-backbone} (i.e., $\BL(\Phi)\subseteq\FL(\Phi,\lambda)$) and Theorem \ref{thm:whiten},
-we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be backbone literals. However, the set $F(\Phi,\lambda)$ also contains non-backbone literals. We propose a heuristic strategy that intends to remove non-backbone literals from $F(\Phi,\lambda)$.
+we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be backbone literals. However, the set $F(\Phi,\lambda)$ also contains non-backbone literals. We propose a heuristic strategy to remove non-backbone literals from $F(\Phi,\lambda)$.
 
 
 Our strategy is based on the observation of the relationship between $W_c(\Phi,\lambda)$ and backbone literals.
@@ -72,17 +73,19 @@ $W_v(\Phi,\lambda)=\emptyset$, from which we get that $F(\Phi,\lambda)=\Lit(\Phi
 from $F(\Phi,\lambda)$,  we introduce a dependency graph to characterize such literals $a, \ b, \ c, \ \neg a, \ \neg b$ and  $\neg c$ from  the given formula $\Phi$.
 
 
-Given a formula $\Phi$, the \emph{dependency graph} $G_\Phi$ of $\Phi$ is a undirected graph $(V,E)$, where
-$V=\Lit(\Phi)$ is a finite set of vertices, and $E\subseteq V\times V$ is a finite set of edges which is defined as follows:
-for every literals $l_1,l_2\in\Lit(\Phi)$, $(l_1,l_2)\in E$ iff one of the following conditions hold:
-\begin{itemize}
-\item there exists a clause $\phi\in\Phi$ with $l_1,l_2\in \phi$,
-\item  $l_1=\neg l_2$,
-\item $l_1=l_2\in\Phi$ (i.e., $l_1$ is a clause in $\Phi$).
-\end{itemize}
+Given a formula $\Phi$, the \emph{dependency graph} $G_\Phi$ of $\Phi$ is a directed graph $(V,E)$, where
+$V=\Lit(\Phi)$ is a finite set of vertices, and $E\subseteq V\times \Phi\times V$ is a finite set of labeled edges such that 
+$(l_1,\phi, l_2)\in E$ iff $l_1,\neg l_2\in \phi$.
 
-It is easy to see that if a node $l$ has a self-cycle (i.e., $l\in\Phi$), then $l$ must be a backbone literal of $\Phi$.
-Figure \ref{fig:depend} depicts the dependency graph of the formula $(a\vee\neg b)\wedge(b\vee\neg c)\wedge(c\vee\neg a)$.
+%which is defined as follows:
+%for every literals $l_1,l_2\in\Lit(\Phi)$, $(l_1,l_2)\in E$ iff one of the following conditions hold:
+%\begin{itemize}
+%\item there exists a clause $\phi\in\Phi$ with $l_1,l_2\in \phi$,
+%\item  $l_1=\neg l_2$,
+%\item $l_1=l_2\in\Phi$ (i.e., $l_1$ is a clause in $\Phi$).
+%\end{itemize} 
+Figure \ref{fig:depend} depicts the dependency graph of the formula $\Phi=\phi_1\wedge\phi_2\wedge\phi_2$, where
+$\phi_1=(a\vee\neg b)$, $\phi_2=(b\vee\neg c)$ and $\phi_3=(c\vee\neg a)$.
  \begin{figure}
     \centering
     \includegraphics[scale=0.7]{dependency.pdf}
@@ -90,30 +93,72 @@ Figure \ref{fig:depend} depicts the dependency graph of the formula $(a\vee\neg 
    \label{fig:depend}
 \end{figure}
 
-A \emph{path} $\pi$ of a dependency graph  $G_\Phi=(V,E)$ is a sequence $l_1...l_n$ of nodes, such that for every $i:\ 1\leq i<n$, $(l_i,l_{i+1})\in E$.
-We use $\Lit(\pi)$ to denote the set of literals appeared in $\pi$ and $E(\pi)$ to denote the set of edges used in $\pi$.
-Let $\Phi_\pi$ denote the set of clauses $\{\phi\in\Phi\mid \exists (l,l')\in E(\pi): l,l'\in \phi\}$.
+A \emph{path} $\pi$ of a dependency graph $G_\Phi=(V,E)$ is a sequence $l_1...l_n$ of nodes such that for every $i:\ 1\leq i<n$, $(l_i,\phi_i,l_{i+1})\in E$.
+%We use $\var(\pi)$ (resp. $\Lit(\pi)$) to denote the set of variables (resp. literals) appeared in $\pi$ and $E(\pi)$ to denote the set of edges used in $\pi$.
+%Let $\Phi_\pi$ denote the set of clauses labeled to the edges of $\pi$.
+%
+A \emph{strongly connected component} (SCC) $s$ of $G_\Phi$ is subgraph of $G_\Phi$ such that there is a path between each nodes.
+We use $G_\Phi^{scc}$ to denote the set of SCCs of $G_\Phi$. 
+Let $\var_{scc}(\Phi)$ (resp. $\Lit_{scc}(\Phi)$, $E_{scc}(\Phi)$) denote the set of variables (resp. literals and edges) appeared in $G_\Phi^{scc}$,
+and $\Phi_{scc}$ denote the set of clauses labeled to the edges in $G_\Phi^{scc}$.
 
-A path $l_1l_2...l_n$ is \emph{valid} if $n>2$ and $|\var(\bigwedge_{1\leq i\leq n} l_i)|\geq 2$, i.e., there are at least two different variables used in
-the literals  $l_1,l_2,...,l_n$. Let $\Pi(l)$ denote the set of all the valid paths starting from $l$.
-A path $l_1l_2$ is \emph{trivial} if $l_1=\neg l_2$ or there exists a clause $\phi$ such that $l_1,l_2\in\phi$.
+%D. B. Johnson, "Finding All the Elementary Circuits of a Directed Graph," SIAM Journal of Computing, 4(1), 1975 pp. 77¨C84.
+ 
+%A path $\pi=l_1l_2...l_n$ is \emph{valid} if $(l_1,l_2)\in\phi$ for some $\phi\in\Phi$ and for every $\phi\in\Phi$ there is at most 
+%one edge $(l,l')$ of $E(\pi)$ such that $l,l'\in\phi$. Therefore, the length of valid paths in $G_\Phi$ is bounded by $|\Phi|$.
+%Let $\Pi(\pi)$ denote the set of all the valid paths whose prefixes are $\pi$.
+%A path $l_1l_2$ is \emph{trivial} if $l_1=\neg l_2$ or there exists a clause $\phi$ such that $l_1,l_2\in\phi$.
 %A path $\pi=l_1...l_n$ is a \emph{pure clause path} if $l_1,...,l_n\in \Lit(\Phi_\pi)$ and $l_1,...,l_n\not\in \Lit(\Phi\setminus\Phi_\pi)$.
-A valid path $l_1...l_{2n}$ is \emph{mutable} if $l_1=\neg l_{2n}$ or $l_{2n}\in\NBL(\Phi)$, for every $1\leq k < n$, $l_{2k}=\neg l_{2k+1}$.
+%A valid path $l_1...l_{2n}$ is \emph{mutable} if for every $1\leq k < n$, $l_{2k}=\neg l_{2k+1}$ and $l_1=\neg l_{2n}$.
 
-\begin{proposition}
-Given a model $\lambda$ of $\Phi$ and a valid mutable path $\pi$ in $G_\Phi$,
-suppose $L(\pi)=\{l_1,...,l_n\}$,  then the assignment $\lambda[\neg l_1]...[\neg l_n]$ satisfies $\Phi_\pi$.
+\begin{proposition}\label{prop:scc-path}
+Given a formula $\Phi$, the formula $\Phi_{scc}$ is satisfiable. Moveover, for every model $\lambda$ of $\Phi_{scc}$, 
+the assignment $\lambda[\neg \var_{scc}(\Phi)]$ is a model $\Phi_\pi$.
+%For every valid mutable path $\pi$ in $G_\Phi$, $\Phi_\pi$ is satisfiable. Moveover,
+%for every model $\lambda$ of $\Phi_\pi$, the assignment $\lambda[\neg l_1]...[\neg l_n]$ also satisfies $\Phi_\pi$.
 \end{proposition}
 
- A \emph{mutating set} $M(\pi)$ of a path $\pi$, is a set of literals in $\Lit(\pi)$ at the position of $2k$. For example, given a path $l_1l_2l_3l_4...l_{2k-1}l_{2k}$, a mutating set of $\pi$ is $\{l_2, l_4, l_{2k}\}$.
+\begin{proof}
+Consider the assignment $\lambda$ of $\Phi_{scc}$ such that for each pair of edges $(l_1,\phi,l_2),(l_1',\phi,l_2')\in E_{scc}(\Phi)$,
+$\lambda\models l_1$ iff $\lambda\models l_1'$. If $\lambda\models l_1$ holds for every edge $(l_1,\phi,l_2)\in E_{scc}(\Phi)$,
+then, $\lambda$ is a model of  $\Phi_{scc}$. On the other hand, if $\lambda\models l_1$ does not hold (i.e., $\lambda\models \neg l_1$ holds)
+then  $\lambda\models l_2'$ holds for every edge $(l_1',\phi,l_2')\in E_{scc}(\Phi)$. The results immediately follows.
+\end{proof}
+%A \emph{mutating set} $M(\pi)$ of a path $\pi$, is a set of literals in $\Lit(\pi)$ occurred at even positions, i.e., $M(\pi)=\{l_{2k}\mid 1\leq k\leq %\frac{|\pi|}{2}\}$. For example, given a path $\pi=l_1l_2...l_{2k}$, $M(\pi)=\{l_2, ..., l_{2k}\}$.
+
+
+\begin{lemma}
+Given a satisfiable formula $\Phi$, if $\var_{scc}(\Phi)\cap \var(\Phi\setminus\Phi_{scc})=\emptyset$ or $\Lit_{scc}(\Phi)\cap \Lit(\Phi\setminus\Phi_{scc})=\{l\}$, where the literal $l$ is a non-backbone literal for the formula $\Phi\setminus\Phi_{scc}$, then the literals in $\Lit_{scc}(\Phi)$ are non-backbone literals.
+%$l$ is a non-backbone literal if for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, either $l'$ is a non-backbone literal or there exists a valid %mutable path $\pi\in\Pi(ll')$ in $G_\Phi$ such that the formula $\Phi\wedge\bigwedge_{l''\in M(\pi)} l''$ is satisfiable.
+
+%Given a satisfiable formula $\Phi$, for every valid mutable path $\pi$ in $G_\Phi$, %$\in \Pi(l)$, 
+%if $\var(\pi)\cap \var(\Phi\setminus\Phi_\pi)=\emptyset$ or $\var(\pi)\cap \var(\Phi\setminus\Phi_\pi)=\{x\}$, where the literals $x$ and $\neg x$ are %non-backbone literals for the formula $\Phi\setminus\Phi_\pi$, then the literals in $\Lit(\pi)$ are non-backbone literals.
+%$l$ is a non-backbone literal if for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, either $l'$ is a non-backbone literal or there exists a valid %mutable path $\pi\in\Pi(ll')$ in $G_\Phi$ such that the formula $\Phi\wedge\bigwedge_{l''\in M(\pi)} l''$ is satisfiable.
+\end{lemma}
+
+\begin{proof}
+%Suppose $\pi=l_1...l_n$ is a valid mutable path $\pi$ in $G_\Phi$.
+If $\var_{scc}(\Phi)\cap \var(\Phi\setminus\Phi_{scc})=\emptyset$, then for every $x\in\var_{scc}(\Phi)$, $\Phi\setminus\Phi_{scc}$ does not contain any
+literal of the form $x$ or $\neg x$. Let $\lambda$ be a model of $\Phi$.
+By Proposition \ref{prop:scc-path}, $\lambda[\neg\var_{scc}(\Phi) ]\models\Phi_{scc}$.
+Therefore, $\lambda[\neg\var_{scc}(\Phi) ]\models\Phi\setminus\Phi_{scc}$.
+The result immediately follows. 
+
+If $\Lit_{scc}(\Phi)\cap \Lit(\Phi\setminus\Phi_{scc})=\{l\}$, where the literal $l$ is a non-backbone literal for the formula $\Phi\setminus\Phi_{scc}$,
+there exist two models $\lambda_0$ and $\lambda_1$ of $\Phi$ such that $\lambda_0(x)\neq \lambda_1(x)$.
+Let $\lambda_i'$ for $i\in\{0,1\}$ be the assignment such that 
+for every $y\in\var_{scc}(\Phi)$, $\lambda_i'(y)=i$, and for every $y'\in \var(\Phi)\setminus\var_{scc}(\Phi)$,
+$\lambda_i'(y')=\lambda_j(y')$ for some $j\in\{0,1\}$ with $\lambda_j(x)=\lambda_i'(x)$. 
+Obviously, $\lambda_0'$ and $\lambda_1'$ are two models of $\Phi$. Therefore,
+the literals in $\Lit_{scc}(\Phi)$ are non-backbone literals.
  
- For a literal $l$, $l\in\NBL(\Phi)$ if for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, $l'\in\NBL(\Phi)$ or there exists a valid mutable path $\pi$ $ll'...l_{2n}$ such that for every $\pi$, the conjunction of $M(\pi)$ is satisfiable.
- 
- \begin{proof}
- Suppose that for every $l'$ such that $l,l'\in\phi$ for some $\phi\in\Phi$, $l'\in\NBL(\Phi)$, then every clauses in $\Phi_l$ will be satisfied by $l'$ to the assignment of $\lambda[\neg l]$. Therefore, $l\in\NBL(\Phi)$.
- 
- Suppose that for every $l'$ such that $l,l'\in\phi$
  \end{proof}
+ 
+We need to use a SAT solver to check the condition of $M(\pi)\wedge\Phi$ are satisfiable in Lemma 2, which is time-cost. We avoid using SAT solvers in this step by trade-offs between time-cost and accuracy, that is, for every valid mutable path, we assume that if $M(\pi)$ are satisfiable, then $M(\pi)\wedge\Phi$ are satisfiable. In this case, an over-approximation of non-backbone literals are computed and removed from $\BLap$ using $F(\Phi, \lambda)$.
+ 
+ 
+
+there exist a valid mutable path $\pi^i$ $ll^i...l^i_{2n}$ such that $\bigwedge M(\pi^i)$ is satisfiable, then assignments $\lambda[\neg l][\neg l^i]...[\neg l^i_{2n}]$ satisfy $\Phi_\pi^i$. Since $\bigwedge M(\pi^i)$ is satisfiable, every complementing in the assignments of $\lambda[\neg l][\neg l_1^i]...[\neg l^i_{2n}]$ can be take out at the same time, and generates a new assignment??? $\lambda[\neg l][\neg l_1^i]...[\neg l^i_{2n}]$
 
 
 % Given a literal $l\in \Lit(\Phi)$, if there does not exist any valid mutable path $\pi\in\Pi(l)$, then $l$ must be a non-backbone literal.
