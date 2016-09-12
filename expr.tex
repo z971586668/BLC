@@ -1,19 +1,22 @@
 \section{Experiments results}\label{sec:expr}
 
-The experimental study compared the presented \tool algorithm to the state-of-the-art cb100 with metrics of the total CPU time that algorithms need (\emph{st}) and the total SAT solver calls that algorithms need (\emph{sc}).
+The experimental study compared the presented \tool algorithm to the state-of-the-art cb100 with metrics of the total CPU time (\emph{st}) and total SAT solver calls (\emph{sc}).
 
-It comprises two parts: the first one devoted to compute backbone of Maximal Satisfiable Subset generated from unsatisfiable formulae and the second one to industrial satisfiable formulae. All algorithms introduced in this paper have been implemented in \tool, written in C++ interfacing Minisat 2.2 \cite{MINISAT}. 
+It comprises two parts: the first one devoted to compute backbone of Maximal Satisfiable Subset(MSS) generated from unsatisfiable formulae and the second one to compute backbone of industrial satisfiable formulae. MSS Formulae generated from the same unsatisfiable formula have fixed upper bound of clauses number and variables number, but the SAT solving time is different. It implies that the complexity of formula related to the performance of backbone computing. Formulae need longer time to compute a model will also need more time to compute backbone.
+Instances from the SAT competition between 2002 and 2015 were selected to industrial benchmark, including classes of \emph{maris, grieu, ibm} and so on. The selected instances are solved by a modern SAT solver in a few minutes (usually less than 180 seconds) with around 5 thousand variables and 10 thousand clauses. In total, 500 instances from MSS formulae and 100 instances from industrial application were selected.
+
+All algorithms introduced in this paper have been implemented in \tool, written in C++ interfacing Minisat 2.2 \cite{MINISAT}.
 
 The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1800 seconds and memory limit of 8 GB.
 
-\subsection{Experimental Strategies}
+% \subsection{Experimental Strategies}
 
-Earlier work\cite{JLM15} carried out numerous evaluations of different backbones extraction Algorithms. It shows that Core Based algorithms is more consistent and efficiency for large scale instances. Hence, we compared \tool against cb100 from the st and sc aspects.
-In order to present an overall evaluations, we focus on the following cluster of benchmarks: (1) Maximal Satisfiable Subset(MSS) from unsatisfiable instances. (2) Satisfiable instances from SAT competition\footnote{http://www.satcompetition.org/}.
+% Earlier work\cite{JLM15} carried out numerous evaluations of different backbones extraction Algorithms. It shows that Core Based algorithms is more consistent and efficiency for large scale instances. Hence, we compared \tool against cb100 from the st and sc aspects.
+% In order to present an overall evaluations, we focus on the following cluster of benchmarks: (1) Maximal Satisfiable Subset(MSS) from unsatisfiable instances. (2) Satisfiable instances from SAT competition\footnote{http://www.satcompetition.org/}.
 
-The reason we choose MSS instances is that due to the theory of satisfiability, the density of backbones in MSS instances will be higher on average. It helps reveal how \tool and CB performances with a higher density backbones.
+% The reason we choose MSS instances is that due to the theory of satisfiability, the density of backbones in MSS instances will be higher on average. It helps reveal how \tool and CB performances with a higher density backbones.
 
-The selected satisfiable instances are all from industrial and is guarantied that both \tool and cb100 is able to finish computing under the resource limits.
+% The selected satisfiable instances are all from industrial and is guarantied that both \tool and cb100 is able to finish computing under the resource limits.
 
 \subsection{MSS Extraction Experimental Results}
 In this section, the effectiveness of \tool and cb100 for MSS instances are presented.
@@ -47,6 +50,13 @@ This is because that both cb100 and \tool requires iterations of SAT solver call
     \includegraphics[scale=0.7]{ind.pdf}
    \caption{Total time use for formulae from industrial}
    \label{fig:ind-time}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{ind2.pdf}
+   \caption{Total time use for formulae from industrial}
+   \label{fig:ind-time2}
 \end{figure}
 
 %\subsection{Fixed Percentage Experiments Results}
