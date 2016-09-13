@@ -1,34 +1,57 @@
 \section{Experiments results}\label{sec:expr}
 
-The experimental study compared the presented \tool algorithm to the state-of-the-art cb100 with metrics of the total CPU time (\emph{st}) and total SAT solver calls (\emph{sc}).
+The experimental study compared the presented \tool algorithm with respect to the state of the art cb100.
 
-It comprises two parts: the first one devoted to compute backbone of Maximal Satisfiable Subset(MSS) generated from unsatisfiable formulae and the second one to compute backbone of industrial satisfiable formulae. MSS Formulae generated from the same unsatisfiable formula have fixed upper bound of clauses number and variables number, but the SAT solving time is different. It implies that the complexity of formula related to the performance of backbone computing. Formulae need longer time to compute a model will also need more time to compute backbone.
-Instances from the SAT competition between 2002 and 2015 were selected to industrial benchmark, including classes of \emph{maris, grieu, ibm} and so on. The selected instances are solved by a modern SAT solver in a few minutes (usually less than 180 seconds) with around 5 thousand variables and 10 thousand clauses. In total, 500 instances from MSS formulae and 100 instances from industrial application were selected.
+The benchmark consists two parts: the first one are formulae from industrial verification and the second one are random formulae. The industrial formulae are selected from SAT competition between 2002 and 2015. There are 769 industrial formulae out of 1318 formulae in these benchmarks. 388 formulae are selected from industrial formulae that a model can returned from MINISAT in 1800 seconds. The random formulae are generated from unsatisfiable random formulae using the tool of LBX \cite{MPA2015} with over 6000 formulae. For every random formulae, both \tool and cb100 are able to terminate within 1800 seconds.
+
+In Table \ref{tab:ind}, we present the results of industrial formulae. Figure \ref{fig:ind-time} presents a plot by increasing running time of industrial instances for \tool and cb100. We categories the random benchmark into 5 groups, according to the community structure of the formula. Table 3 shows the total SAT solving time, average SAT solving time and average SAT solver call for all 3 groups. In each group, we randomly sample 20 instances and presents a plot by increasing run times in Figure \ref{fig:mcs-time}.
 
 All algorithms introduced in this paper have been implemented in \tool, written in C++ interfacing Minisat 2.2 \cite{MINISAT}.
 
 The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1800 seconds and memory limit of 8 GB.
 
-% \subsection{Experimental Strategies}
 
-% Earlier work\cite{JLM15} carried out numerous evaluations of different backbones extraction Algorithms. It shows that Core Based algorithms is more consistent and efficiency for large scale instances. Hence, we compared \tool against cb100 from the st and sc aspects.
-% In order to present an overall evaluations, we focus on the following cluster of benchmarks: (1) Maximal Satisfiable Subset(MSS) from unsatisfiable instances. (2) Satisfiable instances from SAT competition\footnote{http://www.satcompetition.org/}.
+\subsection{Industrial Experimental Results}
 
-% The reason we choose MSS instances is that due to the theory of satisfiability, the density of backbones in MSS instances will be higher on average. It helps reveal how \tool and CB performances with a higher density backbones.
+\begin{table*}
+\centering
+\begin{tabular}{ccccc}
+\toprule
+ &SAT Solving time&\#SAT Solving Count&Average SAT Solving Time\\
+\midrule
+\tool&26663 seconds &272089&0.9890 seconds\\
+cb100&30295 seconds&239112&1.0174 seconds\\
+\bottomrule
+\end{tabular}
+\caption{Experimental Results for 138 Industrial Formulae}
+\label{tab:ind}
+\end{table*}
 
-% The selected satisfiable instances are all from industrial and is guarantied that both \tool and cb100 is able to finish computing under the resource limits.
+SAT competitions evaluate the performance of SAT solvers, they focused on industrial formula, also contain random formulae or crafted large formulae. We select 769 industrial formulae from all benchmarks, and select 388 formulae that MINISAT return a model in 1800 seconds. The formulae are from different applications of practical, including planning, coloring, hardware/software verification, model checking and cryptanalysis.
+
+Table \ref{tab:ind} shows the overview of industrial benchmark results. Among all the 388 instances, there are 138 instances that both \tool and cb100 were able to compute backbone within 1800 seconds.
+
+Figure 1 provide the performance of \tool and cb100 for industrial formulae, including the time that SAT solver need to generate the first model and total SAT solving time. The first observation is that for instances that need a longer time to generate the first model, \tool outperforms cb100 in both total SAT solving time and average SAT solving time. This implies that \tool is more feasible for large formulae and reduce the complexity of SAT solving for hard formulae. For example, \tool is twice faster than cb100 when computing a formula form \emph{manthey} class. Only for formula in \emph{srhd}, \tool needed 28 more seconds than cb100 does to compute backbone, with a first SAT solving time of 437 seconds.
+
+Another conclusion is that for formulae with first SAT solving time less than 30 seconds, \tool and cb100 are compatible, with only a few seconds more than cb100 does. cb100 highly rely on the quality of model returned by SAT solver, it performances better when SAT solver gave it a suitable model. For most of the formulae that need less than 1 second to compute a first model, both \tool and cb100 were able to compute backbone very quickly with barely difference.
+
+In general \tool performances better than cb100 on industrial instances, especially for instances with a longer time to generate the first model, \tool have a notable advantage. Figure \ref{fig:ind-time} depicts the total SAT solving time of \tool and cb100 by increasing running time of cb100 for the 138 formulae. The line represents the time that a formula need to generate the first model, the running time of \tool are lines with crosses and the running time of cb100 are lines with boxes. It's easy to see that for all formulae that need 120 more seconds to generate the first model, \tool outperforms cb100.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{ind2.pdf}
+   \caption{Total time use for formulae from industrial}
+   \label{fig:ind-time}
+\end{figure}
 
 \subsection{MSS Extraction Experimental Results}
 In this section, the effectiveness of \tool and cb100 for MSS instances are presented.
-\begin{definition}[Maximal Satisfiability Sub-formulae(MSS)]
-Given an unsatisfied propositional formula $\Phi$, a sub-formula $\Phi'\subseteq\Phi$ is called a Maximal Satisfiability sub-formula (MSS) of $\Phi$ iff $\Phi'$ is satisfiable and $\Phi'\wedge(\phi\in(\Phi\setminus\Phi'))$ is unsatisfiable.
-\end{definition}
+Unlike other study that focus on the verification instances from industrial, we also study the performance of \tool and cb100 on random instances.
+We propose a novel method to generate large number of random formulae, with the help of Maximal Satisfiable Subset(MSS).
 
-MSS instances are obtained from UUF250 family using the enumeration function of LBX\cite{MPA2015} tool. UUF250 family are formulae that have 250 variables and 1065 clauses. The fixed number of variables and clauses of UUF250 family sustains unbiased results.
-There are two reasons that we choose UUF250 family. First of all, the upper bound of variables and clauses number are fixed. It means that the difficulty of each instances are similar. Moreover, the average SAT call time is more than one second. It means that earlier test per variables approach are not efficiency enough.
-Due to the time and memory limit, it's hard for LBX to enumerate every MSS formula, since \tool suits for dense backbones formulae, we prefer to choose MSS with higher backbones percentage. With more constraints, it's more likely to generate more backbones, therefore, longer MSS formulae are chosen to form MSS benchmark.
+Given an unsatisfiable formula $\Phi$, a subset of clauses $\Phi'\subset\Phi$ is called a MSS iff for every clause $\phi\notin\Phi'$, $\Phi'$ is satisfiable and $\Phi'\wedge\phi$ is unsatisfiable. MSS is maximal satisfiable sub-formula extracted from an unsatisfiable formula. There exist a large number of different MSS for a given unsatisfiable formula. We use LBX tool to generate MSSes from random unsatisfiable benchmark. The MSS generated are also random and with a fixed upper bound of clauses count and variables count to a given unsatisfiable formula.
 
-Figure \ref{fig:mcs-time} describes a comparison of SAT call time is conducted between cb100 and \tool approach, indicating the spent CPU time on the $y$-axis. The first observation is that, for most of the formulae, \tool spent less CPU time than cb100 does. More precisely, for every formula in UUF250 family, there exists a MSS instance, such that \tool needs less time than CB does to compute backbones. However, the SAT call numbers of \tool is not always less than CB does. This means that \tool approach not only able to reduce the SAT call numbers, but also able to simplify SAT calls in each iteration. This can be explained that for high density backbones formulae, \tool can gain by excluding non-backbones ahead in linear $O(n^2)$ time.
+Table \ref{tab:mcs} presents the overview result of MSS formulae. Inspired by the result of industrial formulae, we category MSS formulae into 5 groups according to the computing time of first model. We randomly choose 20 instances from every group and present the running time plot in Figure \ref{fig:mcs-bad}. It's strange that for random formulae, there is no clear relation between the performance of backbone computing and the computing time of first model. It's because that random formulae have more complex community structures \cite{}. We use SATGraph \cite{} tool to generate a graph of a formula. We call a formula with a complex structure if the clusters in the graph are interwind.
 
 \begin{figure}
     \centering
@@ -37,44 +60,7 @@ Figure \ref{fig:mcs-time} describes a comparison of SAT call time is conducted b
    \label{fig:mcs-time}
 \end{figure}
 
-\subsection{Industrial Experimental Results}
 
-For the industrial part, most of the instances were drawn from hardware and software verification. The selection is motivated by the goals of finding instances that contains relatively less clauses and variables and takes a bit longer for SAT solvers to give an implicant. We try to focus on the hard SAT instances because for instances that are easy for SAT solvers, the trivial Test by Variables will be efficiency enough.
-
-In Figure \ref{fig:ind-time}, the total SAT solver time of 104 formulae from industrial track of SAT competition are plotted. The backbones in industrial and practical instances are usually sparse. The experiments results indicate that for most formulae, \tool doesn't need more time than cb100 does. For some of the formulae, cb100 need more time than \tool does. It means that in the aspect of time cost, \tool and cb100 are compatible. The following experiments will show that \tool needs less SAT calls number than cb100 does on average.
-
-This is because that both cb100 and \tool requires iterations of SAT solver calls. The SAT solvers computation spent most of CPU time in backbones extraction. If the CPU time of each SAT solver calls is relatively short, there are less possibilities that the instance will become easier. In general, there are more than one model for a satisfiable formula, cb100 will performs really fast if the model it got from MINISAT randomly suit the algorithm quite well, i.e., for most of the iterations, MINISAT always returns a core that only have one literal. In such cases, cb100 is faster than \tool.
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{ind.pdf}
-   \caption{Total time use for formulae from industrial}
-   \label{fig:ind-time}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{ind2.pdf}
-   \caption{Total time use for formulae from industrial}
-   \label{fig:ind-time2}
-\end{figure}
-
-%\subsection{Fixed Percentage Experiments Results}
-
-%For the fixed percentage part, we take advantages from the CBS family with a fixed backbones percentage of 10\%, 30\%, 70\% and 90\% respectively, also from SATLIB.
-%For each group of the fixed backbone percentage instances, there are 1000 instances in the group.
-
-%With the simply instances, it's sufficient to evaluate the efficiency of algorithms by only calculate the SAT calls number.
-%Figure \ref{fig:fix} illustrates the SAT call numbers needed by MEB and CB for different percentages. It's obvious that for most of the instances, MEB need less SAT call numbers than CB does, despite the percentage of backbones. It proves that MEB is compatible to CB no matter the backbones are dense or not from the SAT calls number perspective.
-%\begin{figure} \centering
-%  \includegraphics[width=.5\linewidth-0.45mm]{bb-10.png}\hfill
-%  \includegraphics[width=.5\linewidth-0.45mm]{bb-30.png}\\[0.5mm]
-%  \includegraphics[width=.5\linewidth-0.25mm]{bb-70.png}\hfill
-%  \includegraphics[width=.5\linewidth-0.25mm]{bb-90.png}
-
-%    \caption{Total SAT calls number for fixed percentages of backbones formulae}
-%   \label{fig:fix}
-%\end{figure}
 
 The results reveal that \tool is as efficiency as cb100 in general. For dense backbones formulae, \tool needs less total SAT solver time. The experiment results present that \tool outperforms cb100 with MSS formulae that generated from unsatisfiable formulae. It's because that \tool is more efficient when dealing with dense backbones. As a result, for dense backbones, \tool is better, no matter the formula is from MSS computing, practical verification or crafted.
 As discussed above, for unsatisfiable formulae, the density of backbones will increase simultaneously with the size of MSS formula. In the application of hardware model checking, planning and fault localization, the backbones are dense. With a proper use of other techniques, \tool will reach better performance in application.
