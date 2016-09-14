@@ -17,6 +17,7 @@
 \usepackage{tikz}
 \usepackage{color}
 \usepackage{calc}
+\usepackage{subfig}
 
 \usepackage{booktabs}
 \usepackage{multirow}
@@ -29,7 +30,7 @@
 
 \pdfinfo{
 /Title (Towards Backbone Computing: A Greedy-Whitening Based Approach)
-/Author (Yueling Zhang,Min Zhang,Fu Song,Geguang Pu)}
+/Author ()}
 \setcounter{secnumdepth}{1}
 
  \begin{document}
@@ -59,13 +60,13 @@
 
 \begin{abstract}
 Backbone is widely used in random SAT solving, \#SAT and planning, etc.
-In this paper, we propose a greedy-whitening based approach for computing backbones of propositional Boolean formulae.
+In this paper, we propose a greedy-whitening based approach for computing backbone of propositional Boolean formulae.
 We present a greedy-based algorithm with two heuristic searching strategies to compute an under-approximation of non-backbone and
 a whitening-based algorithm to compute an approximation of backbone.
 The exact backbone is computed by applying iterative test backbone on the approximations.
 We implemented our approach in a tool \tool and conducted experiments on instances from Industrial and Random tracks of SAT Competitions
-between 2002 and 2015. Experimental results demonstrate that \tool is comparable
-to the state-of-the-art tool cb100. Moreover, \tool outperforms cb100 on most of hard instances.
+between 2002 and 2015. Experimental results demonstrate that \tool is more efficient than
+to the state-of-the-art tool cb100. Moreover, \tool reduces 40\% running time for hard random formulae and cut off 11\% running time for industrial formulae comparing to cb100.
 
 %For the formulae that with disperse backbones, our approach is able to compute an estimation of literals that are highly likely to be %backbones and applied backbones extraction algorithms in the following steps.
 %Experiments show the efficiency of the approach using satisfiable instances from SAT Competition, including both SAT track and Maximal %Satisfiability Sub-formulae(MSS) extracted from UNSAT track. Moreover, compared with state-of-the-art approach proposed in 2015, our %approaches has advantages in hard formulae and MSS formulae.

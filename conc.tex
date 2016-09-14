@@ -1,12 +1,7 @@
 \section{Conclusion}\label{sec:conc}
-This paper develops improvements to algorithms for backbones extraction.
-It's devises new preprocessing techniques for backbones extraction by computing under-approximation of backbones and non-backbones.
-In addition, the paper implemented FCB and compared with CB with formulae from MCSes extraction, practical applications and 4 groups of formulae with a fixed percentage of backbones.
+This paper propose a novel greedy-whitening based approach \tool to compute backbone of a propositional formulae. 
+\tool comprise with two parts, a greedy based part to compute the under-approximation of backbone of a formula, and an whitening-based part to compute the approximation of backbone. The exact backbone is computed by applying iteratively checking on the approximations. We implements \tool and evaluate it on both industrial formulae with a number of 138 and random formulae with a number of 6606 compared to state of art cb100. Experiment results demonstrate that \tool is able to reduce 11\% running time comparing to cb100. Moreover, for hard random formulae, \tool is able to cut off 40\% running time.
 
-The experimental results indicate that FCB is able to reduce the SAT calls number as well as shorten the CPU time cost by a single SAT call.
-However, for some of the formulae, CB needs less SAT calls than FCB does, which opening a possibility for portfolio-based solvers.
-In other words, a suitable model will reduce the SAT calls number for both CB and FCB.
 
-In the future, we plan to explore more practical applications for backbones, such as hardware model checking, SAT model counting and SAT model enumeration.
 
 \newpage
