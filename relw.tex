@@ -11,3 +11,18 @@ Janota et al, proposed an Iterative algorithm (one test per variable) \cite{JLM1
 
 The Core Based Algorithm presented in \cite{JLM15} is stable and effectiveness. The cb100 tool, as our main comparative object, was based on this algorithm. Instead of adding only one unit clause to the original formula, this algorithm added all the unit clause to the formula. It will dramatically accelerate SAT solving. Although there is a high possibility that the new formula is unsatisfiable, whenever there was only one literal in unsatisfiable reason of the new formula, this literal is a backbone literal. In this way, it was able to find backbone literals with little cost. In this paper, the author showed that for formulae with backbone percentages lower than 25\%, Core Based Algorithms are better.
 %significantly better. When the percentage of backbone is over 25\%, Core Based Algorithm behave very similarly Iterative SAT Testing Algorithm.
+
+
+Kilby et al proposed \cite{KST2005} that there was little overlap between backbone and backdoors.
+
+In \cite{CZW2002}, they proposed an algorithm to discover backbone as well as fat variables. Variables that are absent from every optimal solution are fat variables. They proved the validity of the limit-crossing concept as well as other related properties. Then, they applied limit-crossing to Asymmetric Traveling Salesman Problem (ATSP). The experimental results demonstrated that improvements had been made compared with previous approach. 
+
+In \cite{KKW2001}, they partitioned backbone into inadmissible and necessary group. For inadmissible group, literals were false in each satisfying variable assignment. For necessary group, literals were true in each satisfying variable assignment. They described and compared three algorithms for the search of the set of necessary and inadmissible variables, a basic iterative testing and two enhancements. The first one reused the result of satisfiability checks to get more models for free, the second one chose the decision variables for SAT solvers according to the previous information of inadmissible and necessary group.
+
+In \cite{WS2001}, they concluded the correlation of backbone size with the problem of optimization and approximation, using graph coloring, Travel Salesman, Number partition and block words planning. And they suggested that it is necessary to eliminate some symmetries, perform trivial reductions and factor out the effective problem size.
+
+In \cite{KSW2005}, they proved that it is intractable to approximate the backbone with any performance guarantee, assuming that P=NP and there is a limit on the number of edges falsely returned.
+However, in practice, they could find much of the backbone using approximation, but, with a long runtime. Therefore, the suggestion was that use randomization and restarts in backbone searching and optimization searching.
+
+In \cite{DD2001}, they proposed a heuristic search for backbone, and choose this backbone variables as branch nodes for the tree developed by a DPL-type procedure. Experiments showed that a significant performance improvement over the best current algorithms, and enhanced the scalability of the algorithm up to 700 variables.
+

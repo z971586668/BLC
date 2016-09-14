@@ -4,7 +4,7 @@
   \hspace*{-15mm} \includegraphics[scale=0.75]{Fig-backbone}
    \caption{Overview of our approach}
    \label{flow}
-\end{figure*} 
+\end{figure*}
 
 Figure \ref{flow} presents the overview of our approach \tool, which consists of three components. Taking a satisfiable formula
 $\Phi$ as an input, \tool first computes an under-approximation $\NBLap(\Phi)\subseteq \NBL(\Phi)$ of the non-backbone of
@@ -40,15 +40,15 @@ We first iteratively select one literal $l$ from $\BLap(\Phi)\setminus \NBLap(\P
 $l$ is a backbone literal or not by checking the satisfiability of $\Phi\wedge l$ (dashed area in Figure \ref{flow}).
 If $l$ is a backbone, we will add $l$ into $\Phi$ as a clause. Adding known backbone literals into $\Phi$ as clauses potentially speedups the later SAT testing \cite{JLM15,MPA2015}.
 Then, we do the same testing for literals from $\Lit(\Phi)\setminus (\NBLap(\Phi)\cup\BLap(\Phi))$ (dotted area in Figure \ref{flow}).
-After this step, the exact backbone and non-backbone are found.  
+After this step, the exact backbone and non-backbone are found.
 
 
-In general, one can directly test all the literals to compute backbone without the two approximations. 
-However, the test heavily replies on SAT testing which may be time-cost. 
-Our approach makes two contributions compared to this na\"{\i}ve approach. 
+In general, one can directly test all the literals to compute backbone without the two approximations.
+However, the test heavily replies on SAT testing which may be time-cost.
+Our approach makes two contributions compared to this na\"{\i}ve approach.
 One is that we reduce the number of SAT calls using the known non-backbone literals $\BLap(\Phi)$.
 The another one is that we first check literals that have high probability to be backbone literals so that backbone literals can be found as early as possible.
- 
+
 
 
 \section{Computing $\NBLap(\Phi)$}
@@ -89,7 +89,7 @@ $\NBLap(\Phi):=L(\Phi,\lambda)$\; \label{alg1:init}
         \If{$\lambda[\neg l]\models \Phi$}
         {
            $\NBLap(\Phi):=\NBLap(\Phi)\cup L(\Phi,\lambda[\neg l])$\;
-           $\lambda:=\lambda[\neg l]$\; 
+           $\lambda:=\lambda[\neg l]$\;
         }
 }
 %    }
@@ -127,9 +127,9 @@ Let $S$ be the ordered set of literals such that for every $i: 0\leq i<j<|S|$,
 $f(\Phi,S[i])\leq f(\Phi,S[j])$, where $f$ is $\Cnt$ if $i=1$, and $f=\dens$ if $i=2$.
 We define ${\sf HS}_i(\Phi)$ as the prefix sequence $S[0,xn]$ of $S$, for some $x\in[0,1]$.
 \end{quote}
- 
+
 Intuitively, we choose the maximum $xn$ literals from the ordered set of literals.
-The idea is that if the number $\Cnt(\Phi,l)$ of occurrence of a literal $c$ is smaller, 
+The idea is that if the number $\Cnt(\Phi,l)$ of occurrence of a literal $c$ is smaller,
 then the number of clauses that include the literal $l$ is smaller. This implies that the assignment $\lambda[\neg l]$ has a high probability to be a model of
 $\Phi$. From the new model $\lambda[\neg l]$, we may find new non-backbone literals.
 The intuition underlying ${\sf HS}_2(\Phi)$ is similar, in which we use densities of literals to sort literals instead of the numbers of occurrence.
@@ -271,7 +271,7 @@ The reason is that in longer clauses, there is a high possibility that the claus
 
 
 \section{Computing $\BLap(\Phi)$}
-In this section, we propose an Whitening-based Algorithm to compute an approximation $\BLap(\Phi)$ of backbone.
+In this section, we propose a Whitening-based Algorithm to compute an approximation $\BLap(\Phi)$ of backbone.
 
  Whitening Algorithm was proposed in \cite{CJG2001} originated from the coloring problem of graphs. Some non-backbone literals are removed from the result of Whitening Algorithm using heuristic strategy.
 
