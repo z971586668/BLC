@@ -9,7 +9,7 @@
 \usepackage[table]{xcolor}
 \usepackage{graphicx}
 \usepackage{amssymb,amsmath,amsthm,amsfonts}
-\usepackage{hyperref}
+\usepackage{url}
 \usepackage[vlined,ruled,linesnumbered]{algorithm2e}
 
 \usepackage{algpseudocode}
@@ -33,6 +33,7 @@
 /Author ()}
 \setcounter{secnumdepth}{1}
 
+\input{macro}
  \begin{document}
 % The file aaai.sty is the style file for AAAI Press
 % proceedings, working notes, and technical reports.
@@ -56,7 +57,6 @@
 %}
 
 \maketitle
-\input{macro}
 
 \begin{abstract}
 Backbone is widely used in random SAT solving, \#SAT and planning, etc.
@@ -82,7 +82,8 @@ to the state-of-the-art tool cb100. Moreover, \tool reduces 40\% running time fo
 \input {relw.tex}
 \input {conc.tex}
 
-\bibliographystyle{aaai}
+\newpage
 \bibliography{bib}
+\bibliographystyle{aaai}
 
 \end{document}

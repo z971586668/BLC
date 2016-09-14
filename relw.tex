@@ -1,9 +1,8 @@
 \section{Related Work}\label{sec:relw}
 % This paper is concerned with computing backbones of propositional formulae, which was oriented from coloring problem \cite{CJG2001}, with a wide range of practical applications such as MaxSAT \cite{MMBM2005}.
 
-A number of backbones extraction algorithms have been proposed in recent years. SAT solvers, especially MINISAT \cite{MINISAT}, employed in all state-of-the-art backbones extraction approaches.
-
-Model enumeration\cite{MK2002,RSF2004} enumerates models of a given formula $\Phi$ one by one and updates the backbone estimation in each iteration. The negation of the model as a blocking clause is added to $\Phi$. It had to enumerate all models of $\Phi$ before the algorithm terminates, which is unnecessary costly.
+A number of backbones extraction algorithms have been proposed in recent years. 
+Model enumeration \cite{MK2002,RSF2004} enumerates models of a given formula $\Phi$ one by one and updates the backbone estimation in each iteration. The negation of the model as a blocking clause is added to $\Phi$. It had to enumerate all models of $\Phi$ before the algorithm terminates, which is unnecessary costly.
 Zhu et al, proposed an iterative SAT testing algorithm \cite{Z11} which is more efficient than model enumeration. At the first step, this algorithm assigned the first model returned from SAT solver to backbone estimation, which need less memory to compute backbone.
 %The algorithm maintained an estimation of backbone. In each iteration, a clause that formed by the negation of backbone estimation is added to $\Phi$. If $\Phi$ was satisfiable, it implied that at least one non-backbone literal is in the backbone estimation. Intersection between the model given by SAT solver and the backbone estimation indicates the non-backbone literal. In this way, non-backbone literal is removed, the process is repeated until $\Phi'$ is not satisfiable any longer. Along with the estimation, the clauses number of $\Phi$  is monotone increasing due to the continuously insertion in each iteration, which dramatically promote the complexity of $\Phi$. In other words, for each iteration, it takes longer CPU time than the last iteration.
 
