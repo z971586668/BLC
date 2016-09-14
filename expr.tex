@@ -29,7 +29,7 @@ cb100&30295 seconds&239112&1.0174 seconds\\
 
 SAT competitions evaluate the performance of SAT solvers. They focused on industrial formulae, and contain random formulae or crafted large formulae. We select 769 industrial formulae from all benchmarks, and select 388 formulae that MINISAT return a model in 1800 seconds. The formulae are from different applications of practical, including planning, coloring, hardware/software verification, model checking and cryptanalysis.
 
-Table \ref{tab:ind} shows the overview of industrial benchmark results. Among all the 388 instances, there are 138 instances that both \tool and cb100 were able to compute backbone within 1800 seconds. The total running time of \tool is less than 12\% of cb100, and the average running time is less than 11\% of cb100.
+Table \ref{tab:ind} shows the overview of industrial benchmark results. Among all the 388 instances, there are 138 instances that both \tool and cb100 were able to compute backbone within 1800 seconds. The total running time of \tool is 12\% times less than of cb100, and the average running time is 11\% times less than of cb100.
 
 Figure \ref{fig:ind-time} provides the performance of \tool and cb100 for industrial formulae, including the time that SAT solver need to generate the first model and total SAT solving time. The red lines represent for the time that SAT solver need to compute the first model. Lines with crosses represent for the running time of \tool, and lines with boxes represent for the running time of cb100. For instances which need a longer time to generate the first model, \tool outperforms cb100 in total SAT solving time and average SAT solving time. It implies that \tool is more feasible for large formulae and reduce the complexity of SAT solving for hard formulae. 
 For computing a formula from \emph{manthey} class, \tool is twice faster than cb100.
@@ -65,7 +65,7 @@ Based on the observation, we divide MSS benchmark into three groups according to
  
 We observed that in simple group cb100 outperforms \tool. Because the essence of cb100 is trying to find a backbone literal by complementing models as soon as possible, which is exactly the single vertex literal.
 
-For medium xxx, and hard we are fast. Therefore, we are faster. As we can observe that \tool needs less running time than cb100 does in total. 
+For medium formulae, the total running time of \tool is 8\% times less than of cb100 and for hard formulae, the total running time of \tool is 40\% times less than of cb100. In total, the running time of \tool is around 300 seconds less than of cb100. Based on the statistic, \tool is better than cb100 on random formulae, especially for hard random formulae.
 
 \begin{figure}
     \centering
@@ -108,7 +108,7 @@ cb100 & 50414.04 sec & 1532372 & 4413.5 sec & 86232 & 39040 sec & 1353258 & 5893
 
 \medskip
 
-Based on industrial and MSS benchmarks, we show that \tool is more efficient than cb100 on industrial formulae which need more than 120 seconds to compute the first model. We ran a benchmark of 6606 instances on random formulae and concludes that \tool needs less total SAT solving time than cb100 does. \tool performs better on the hard group formulae while cb100 performs better on simple group.
+From the experiments result for industrial and MSS benchmarks, we show that \tool is more efficient than cb100 on industrial formulae which need more than 120 seconds to compute the first model. We ran a benchmark of 6606 instances on random formulae and concludes that for hard group formulae, \tool has competitive advantage.
 
 
 
