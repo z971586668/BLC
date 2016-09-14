@@ -45,7 +45,7 @@ We still get that the assignment $\lambda[\neg x]$ is a model of $\Phi$ and $\la
 Therefore, we can infer that if the variable is $x$ white, then the literals $\neg x$ and $x$ cannot be frozen literals.
 
 Next, Algorithm \ref{alg:whitening} iteratively and alternatively marks each clause that contain at least one white variable and each variable whose value in $\lambda$ do not satisfy any non-white clause are marked as white, until no more clause or variable can be marked as white.
-This loop manages to mark as many as variables as white [possible?].
+This loop manages to mark as many variables as possible as white.
 After Algorithm \ref{alg:whitening} has terminated, if a variable $x$ is non-white, i.e., $x\not\in W_v$, then there does not exist a model $\lambda'\in \cl_\Phi(\lambda)$ such that $\lambda(x)\neq \lambda(x')$. This implies that the literal $x$ (resp. $\neg x$) is a frozen literal
 in the model $\lambda$ if $x\in \Lit(\Phi)$ (resp. $\neg x\in \Lit(\Phi)$).  However, it was pointed out by \cite{LMZ09} that there are cases in which
 a literal $l$ is not a frozen literal, but the corresponding variable $\var(l)$ is marked as white. We refer to \cite{LMZ09} for details.
@@ -64,8 +64,8 @@ $W_v$ (resp. $W_c$) obtained by Algorithm \ref{alg:whitening} taking $\Phi$ and 
 
 From Proposition \ref{prop:Frozen-backbone} (i.e., $\BL(\Phi)\subseteq\FL(\Phi,\lambda)$) and Theorem \ref{thm:whiten},
 we can get that literals in $F(\Phi,\lambda)$ have high probabilities to be backbone literals.
- 
- 
+
+
 However, the set $F(\Phi,\lambda)$ also contains non-backbone literals. We propose a heuristic strategy to remove non-backbone literals from $F(\Phi,\lambda)$.
 
 
@@ -100,7 +100,7 @@ A \emph{path} $\pi$ of a dependency graph $G_\Phi=(V,E)$ is a sequence $l_1...l_
 %We use $\var(\pi)$ (resp. $\Lit(\pi)$) to denote the set of variables (resp. literals) appeared in $\pi$ and $E(\pi)$ to denote the set of edges used in $\pi$.
 %Let $\Phi_\pi$ denote the set of clauses labeled to the edges of $\pi$.
 %
-A \emph{simple cycle} $c$ of $G_\Phi$ is a path of $G_\Phi$ such that the starting and ending nodes are identical and no repetitions of other nodes. 
+A \emph{simple cycle} $c$ of $G_\Phi$ is a path of $G_\Phi$ such that the starting and ending nodes are identical and no repetitions of other nodes.
 We use $G_\Phi^{c}$ to denote the set of all the simple cycles of $G_\Phi$.
 Given a set of cycles $C\subseteq G_\Phi^c$,
 Let $\var(C)$ (resp. $\Lit(C)$ and $E(C)$) denote the set of variables (resp. literals and edges) appeared in $C$,
@@ -126,12 +126,12 @@ the assignment $\lambda[\neg \var_{C}]$ is a model $\Phi_C$.
 
 \begin{proof}
 Consider the assignment $\lambda$ of $\Phi_{C}$ and a cycle $c\in C$, such that for each pair of edges $(l_1,\phi,l_2),(l_1',\phi,l_2')$ of $E(\{c\})$,
-$\lambda\models l_1$ iff $\lambda\models l_1'$, and $\lambda\models l_2$ iff $\lambda\models l_2'$. 
+$\lambda\models l_1$ iff $\lambda\models l_1'$, and $\lambda\models l_2$ iff $\lambda\models l_2'$.
 Then, $\lambda$ is a model of $\Phi_{\{c\}}$. The result immediately follows.
 \end{proof}
 
 \begin{lemma}
-Given a satisfiable formula $\Phi$ and a set of simple cycles $C\subseteq G_\Phi^{c}$, if $\var(C)\cap \var(\Phi\setminus\Phi_{C})=\emptyset$ or $\Lit(C)\cap \Lit(\Phi\setminus\Phi_C)=\{l\}$, where the literal $l$ is a non-backbone literal for the formula $\Phi\setminus\Phi_C$, then the literals in $\Lit(C)$ are non-backbone literals. 
+Given a satisfiable formula $\Phi$ and a set of simple cycles $C\subseteq G_\Phi^{c}$, if $\var(C)\cap \var(\Phi\setminus\Phi_{C})=\emptyset$ or $\Lit(C)\cap \Lit(\Phi\setminus\Phi_C)=\{l\}$, where the literal $l$ is a non-backbone literal for the formula $\Phi\setminus\Phi_C$, then the literals in $\Lit(C)$ are non-backbone literals.
 \end{lemma}
 
 \begin{proof}
@@ -149,10 +149,10 @@ $\lambda_i'(y')=\lambda_j(y')$ for some $j\in\{0,1\}$ with $\lambda_j(x)=\lambda
 Obviously, $\lambda_0'$ and $\lambda_1'$ are two models of $\Phi$. Therefore,
 the literals in $\Lit(C)$ are non-backbone literals.
  \end{proof}
- 
+
 We adapt the algorithm from \cite{Jon75} to identify non-backbone literals from $F(\Phi,\lambda)$ and these non-backbone literals are added in $\NBLap(\Phi)$.
 This gives a more tight approximation set of backbone literals which is the desired set $\BLap(\Phi)$.
- 
+
  \iffalse
 
 We need to use a SAT solver to check the condition of $M(\pi)\wedge\Phi$ are satisfiable in Lemma 2, which is time-cost. We avoid using SAT solvers in this step by trade-offs between time-cost and accuracy, that is, for every valid mutable path, we assume that if $M(\pi)$ are satisfiable, then $M(\pi)\wedge\Phi$ are satisfiable. In this case, an over-approximation of non-backbone literals are computed and removed from $\BLap$ using $F(\Phi, \lambda)$.
