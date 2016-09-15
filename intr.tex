@@ -1,22 +1,22 @@
- 
+
 
 \section{Introduction}
 The \textit{backbone} of a satisfiable formula is a set of literals that are true in all models of the formula,
 which plays in an important role for understanding the hardness of problems in computation complexity.
-For instance, the presence of a backbone provides a good explanation for the apparent inevitably high cost of heuristic search near the phase boundary  for satisfiability problem \cite{MZKST99}. 
+For instance, the presence of a backbone provides a good explanation for the apparent inevitably high cost of heuristic search near the phase boundary  for satisfiability problem \cite{MZKST99}.
 
 The identification of backbone also has many practical applications. Backbone improves the performance of the random SAT solver like  WalkSAT~\cite{SBK1993} by making biased moves in a local search~\cite{ZWR2003,MAR2007} to search for models. For optimization area,  backbone can significantly contribute to the Lin-Kernighan local search algorithms for Travel Salesman Problem~\cite{ZWL2005}. Another recent successful application of backbones is post-silicon fault localisation in integrated circuits~\cite{ZWSM11,ZWM11}, which shows that backbone were suitable in post-silicon validation.
 
 However, computing backbone is co-NP hard \cite{Jan10}.  Many heuristic approaches were propose to compute backbone in different setting, such as model enumeration, iterative SAT-testing and filtering with modern SAT solvers.
 For instance, Climer et al.~\cite{CZ2002} proposed an algorithm to compute backbone of travelling salesman problem.
-Marques-Silva et al.  conducted an experimental evaluation by integration existing algorithms with optimisations in a modern SAT solver and showed that backbone computation for large practical formulae is feasible \cite{MJML2010,JLMS12,JLM15}. 
+Marques-Silva et al.  conducted an experimental evaluation by integration existing algorithms with optimisations in a modern SAT solver and showed that backbone computation for large practical formulae is feasible \cite{MJML2010,JLMS12,JLM15}.
 
 
-In this paper, we propose a novel Greedy-Whitening based approach \tool for computing backbones. The insight of this approach has two-folds: 1) we present a procedure in $O(n^2)$ time to compute an under-approximation non-backbone set, which helps to prune the search space during the computation of backbone; 2) we also construct an approximation of backbone in polynomial time, and the element in this set has high possibility to be a backbone literal. 
+In this paper, we propose a novel Greedy-Whitening based approach \tool for computing backbones. The insight of this approach has two-folds: 1) we present a procedure in $O(n^2)$ time to compute an under-approximation non-backbone set, which helps to prune the search space during the computation of backbone; 2) we also construct an approximation of backbone in polynomial time, and the element in this set has high possibility to be a backbone literal.
 Finally, we compute the exact backbone using SAT solvers.
 
-We implemented our approach in a tool \tool and evaluated this tool with extensive/massive experiments. We tested 6600 random formulae that are automatically constructed, and 388 industrial formulae that all the satisfiable industrial formulae from SAT competitions\footnote{http://www.satcompetition.org/} during 2002-2015. For random formulae, \tool reduces 1\% running time comparing to the state-of-the-art tool \textit{cb100}~\cite{JLM15}. Nevertheless, \tool reduces 40\% running time for hard random formulae. For industrial formulae, \tool reduces 12\% running time.
- 
+We implemented our approach in a tool \tool and evaluated this tool with empirical experiments. We tested 6600 random formulae that are automatically constructed, and 388 industrial formulae that all the satisfiable industrial formulae from SAT competitions\footnote{http://www.satcompetition.org/} during 2002-2015. For random formulae, \tool reduces 1\% running time comparing to the state-of-the-art tool \textit{cb100}~\cite{JLM15}. Nevertheless, \tool reduces 40\% running time for hard random formulae. For industrial formulae, \tool reduces 12\% running time.
+
 
 %% This new approach first computes a base under-approximation $\NBLap$ of backbone literals of a given formula. Given a model $\lambda$ of a formula $\Phi$, the assignment $\lambda[\neg l]$ is a model if for every clause $\phi\in\Phi_l$ that has $l$, $\lambda[\neg l]\models\phi$, i.e., $\lambda[\neg l]\models\Phi_l$. It implies that if a literal $l$ is not an essential(unique satisfy literal) in any clause to the given $\lambda$, then $l\in\NBL(\Phi)$. We apply a Greedy-based algorithm to generate more models without calling a SAT solver and add more non-backbone literals into the base under-approximation, which results in the under-approximation of non-backbone literals $\NBLap$.
 %%  Next, we apply a Whitening-based algorithm to compute the approximation $\BLap$. Whitening Algorithm returns a set of literals $F(\Phi, \lambda)$ which are probably backbone literals. We remove some of the non-backbone literals from $F(\Phi, \lambda)$ and resulted in $\BLap$ with a lower false positive.
