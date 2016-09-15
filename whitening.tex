@@ -1,4 +1,4 @@
-\section{Computing $\BLap(\Phi)$}
+\section{Whitening-based Computing $\BLap(\Phi)$}
 In this section, we propose an Whitening-based Algorithm to compute an approximation $\BLap(\Phi)$ of backbone.
 We fix the satisfiable formula $\Phi$.
 
@@ -28,7 +28,7 @@ $W_v:=\{x\in \var(\Phi)\mid \lambda\models x\Rightarrow x\not\in \Lit(\Psi\setmi
 
 Given a satisfiable formula $\Phi$ and a model $\lambda$ of $\Phi$,
 Algorithm \ref{alg:whitening} computes a set of white clauses $W_c$ and white variables $W_v$ by iteratively making variables and clauses as white.
-The remaining non-while variables give use an under-approximation of frozen literals in the model $\lambda$ of $\Phi$, namely,
+The remaining non-while variables give us an under-approximation of frozen literals in the model $\lambda$ of $\Phi$, namely,
 $F(\Phi,\lambda)=\Lit(\Phi)\cap \{x,\neg x\mid x\in \var(\Phi)\setminus W_v(\Phi,\lambda)\}$ is a subset of frozen literals in the model $\lambda$ of $\Phi$.
 
 
@@ -42,7 +42,7 @@ On the other hand, if $\lambda(x)$ is $0$ and the literal $\neg x$ does not appe
 Since the assignment $\lambda[\neg x]$ satisfies all the non-white clauses thanks to the absence of the literal
 $\neg x$ in them, and satisfies all the white clauses due to fact that there are at least two literals in each of white clauses satisfied by $\lambda$.
 We still get that the assignment $\lambda[\neg x]$ is a model of $\Phi$ and $\lambda[\neg x]\in \cl_\Phi(\lambda)$.
-Therefore, we can infer that if the variable is $x$ white, then the literals $\neg x$ and $x$ cannot be frozen literals.
+Therefore, we can infer that if the variable $x$ is white, then the literals $\neg x$ and $x$ cannot be frozen literals.
 
 Next, Algorithm \ref{alg:whitening} iteratively and alternatively marks each clause that contain at least one white variable and each variable whose value in $\lambda$ do not satisfy any non-white clause are marked as white, until no more clause or variable can be marked as white.
 This loop manages to mark as many variables as possible as white.

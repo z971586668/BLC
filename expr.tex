@@ -4,7 +4,7 @@ In this section, we present the experimental results of \tool.
 The benchmark consists of two parts: 388 industrial formulae and 6606 random formulae.
 The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1800s and memory limit of 8GB.
 The experimental results demonstrate that \tool outperforms the state of the art backbone computing tool
-cb100 \cite{JLM15}.
+\textit{cb100} \cite{JLM15}.
 
 \subsection{Benchmark Setup}
 The benchmark consists of two parts: 388 industrial formulae and 6606 random formulae.
@@ -23,7 +23,7 @@ For a given unsatisfiable formula $\Phi$, there may exist more than one maximal 
 
 
 
-%In Table \ref{tab:ind}, it shows the results of industrial formulae. In Figure \ref{fig:ind-time}, it shows a plot by increasing running time of industrial instances for \tool and cb100. We make the random benchmark into 3 groups, according to the community structure of the formula. In Table 3, it shows the result of random formulae, including total SAT solving time, average SAT solving time and average SAT solver call for all 3 groups and the whole benchmark.
+%In Table \ref{tab:ind}, it shows the results of industrial formulae. In Figure \ref{fig:ind-time}, it shows a plot by increasing running time of industrial instances for \tool and \textit{cb100}. We make the random benchmark into 3 groups, according to the community structure of the formula. In Table 3, it shows the result of random formulae, including total SAT solving time, average SAT solving time and average SAT solver call for all 3 groups and the whole benchmark.
 
 
 \subsection{Experimental Results on Industrial Formulae}
@@ -43,17 +43,17 @@ cb100&30295  &239112&1.0174  \\
 \end{table}
 
 Table \ref{tab:ind} shows the overview of experimental results on industrial formulae.
-Among all the 388 industrial formulae, there are 138 formulae that both \tool and cb100 were able to compute backbone within 1800s.
-Although, the number of SAT calls used by \tool is greater than cb100, \tool reduces by 12\% of the total running time and by 11\% of the average running time for each SAT call.
+Among all the 388 industrial formulae, there are 138 formulae that both \tool and \textit{cb100} were able to compute backbone within 1800s.
+Although, the number of SAT calls used by \tool is greater than \textit{cb100}, \tool reduces by 12\% of the total running time and by 11\% of the average running time for each SAT call.
 
 Figure \ref{fig:ind-time} provides the details of experimental results on industrial formulae, including the running time of the SAT solver for generating the first model and total running time for each formula.
 The red dotted line represents for the time used by the SAT solver for computing the first model, which indicates the hardness of the formula.
-Lines with crosses represents for the running time of \tool, and lines with boxes represents for the running time of cb100. There is a correlation between the hardness of formulae the performance of \tool comparing to cb100.
-For most of hard formulae, \tool outperforms cb100 in terms of total running time and average time of each SAT solver call. This demonstrates that \tool is more feasible for computing backbone of hard formulae. 
+Lines with crosses represents for the running time of \tool, and lines with boxes represents for the running time of \textit{cb100}. There is a correlation between the hardness of formulae the performance of \tool comparing to \textit{cb100}.
+For most of hard formulae, \tool outperforms \textit{cb100} in terms of total running time and average time of each SAT solver call. This demonstrates that \tool is more feasible for computing backbone of hard formulae.
 
-%cb100 highly rely on the quality of model returned by SAT solver, it performances better when SAT solver gave it a suitable model. For most of the formulae that need less than 1 second to compute a first model, both \tool and cb100 were able to compute backbone very quickly with barely difference.
+%\textit{cb100} highly rely on the quality of model returned by SAT solver, it performances better when SAT solver gave it a suitable model. For most of the formulae that need less than 1 second to compute a first model, both \tool and \textit{cb100} were able to compute backbone very quickly with barely difference.
 
-Table \ref{tab:ind} and Figure \ref{fig:ind-time} demonstrate that \tool outperforms cb100 on industrial formulae.
+Table \ref{tab:ind} and Figure \ref{fig:ind-time} demonstrate that \tool outperforms \textit{cb100} on industrial formulae.
 
 
 \begin{figure}
@@ -102,13 +102,15 @@ cb100 & 4413.5   & 86232 & 39040   & 1353258 & 5893.4   & 78114& 50414.04   & 15
 \caption{Results of random formulae}
 \label{tab:mcs-graph}
 \end{table*}
-Figure \ref{fig:mcs-time} depicts the running time of results on  randomly selected 100 random formulae out of 6606 whose time of computing the first model range from 0s to more than 4s. This result demonstrates that there is no correlation between the running time of backbone computing and running time of computing the first model, which is different from the result on industrial formulae. The reason is that random formulae have more complex community structures \cite{NZG2014,LJG2015SAT,LJG015}. Therefore, we cannot use running time of computing the first model to measure how hard a formula is.
+Figure \ref{fig:mcs-time} depicts the running time of results on  randomly formulae.
+%selected 100 random formulae out of 6606 whose time of computing the first model range from 0s to more than 4s. 
+This result demonstrates that there is no correlation between the running time of backbone computing and running time of computing the first model, which is different from the result on industrial formulae. The reason is that random formulae have more complex community structures \cite{NZG2014,LJG2015SAT,LJG015}. Therefore, we cannot use running time of computing the first model to measure how hard a formula is.
 To measure hardness of random formulae, we investigated community structures of all the random formulae, as it is already known that community structure of a formula affects the performance of conflict-driven clause learning based SAT solvers \cite{NZG2014}.
 
 
 We constructed the community structures of all the random formulae using use SATGraph \cite{NZW2015}.
-We observed that cb100 performs better on formulae whose community structures are divergent, i.e., there are vertexes far from the center of structures.
-Figure \ref{fig:cs}(a) shows the community structure of one formula on which cb100 performs better.
+We observed that \textit{cb100} performs better on formulae whose community structures are divergent, i.e., there are vertexes far from the center of structures.
+Figure \ref{fig:cs}(a) shows the community structure of one formula on which \textit{cb100} performs better.
 While \tool performs better on formulae whose community structures are focusing.
 Figure \ref{fig:cs}(b) shows the community structure of one formula on which \tool performs better.
 
@@ -120,16 +122,16 @@ the \emph{hard group} contains 337 formulae whose community structures are focus
 and the \emph{medium} group contains 5898 formulae between divergent and focusing.
 
 
-Table \ref{tab:mcs-graph} shows the experiments results on these three groups. cb100 performs better than \tool on the simple group, as cb100 tries to find a backbone literal by complementing models as soon as possible, which are the vertexes far from the center.
-\tool outperforms cb100 for both medium group and hard group.
+Table \ref{tab:mcs-graph} shows the experiments results on these three groups. \textit{cb100} performs better than \tool on the simple group, as \textit{cb100} tries to find a backbone literal by complementing models as soon as possible, which are the vertexes far from the center.
+\tool outperforms \textit{cb100} for both medium group and hard group.
 \tool reduces by 8\% for medium group and by 40\% for hard group of the total running time.
 
 
 %\begin{figure}
 %    \centering
-%    \includegraphics[scale=0.2]{cb100.jpg}
-%   \caption{Community Structure of Formula Performs better with cb100}
-%   \label{fig:cb100}
+%    \includegraphics[scale=0.2]{\textit{cb100}.jpg}
+%   \caption{Community Structure of Formula Performs better with \textit{cb100}}
+%   \label{fig:\textit{cb100}}
 %\end{figure}
 
 %\begin{figure}
@@ -140,7 +142,7 @@ Table \ref{tab:mcs-graph} shows the experiments results on these three groups. c
 %\end{figure}
 
 
-The experimental results show that \tool performs better than cb100 on hard random formulae and is comparable to cb100 on simple formulae.
+The experimental results show that \tool performs better than \textit{cb100} on hard random formulae and is comparable to \textit{cb100} on simple formulae.
 
 
 

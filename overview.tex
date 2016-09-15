@@ -32,7 +32,7 @@ We use the Whitening-based algorithm of \cite{LMZ09} to compute the approximatio
 \medskip
 \noindent{\bf Computing exact backbone.}
 At this step, we use Algorithm 3 (Iterative algorithm) from \cite{JLM15} to compute backbone.
-This algorithm uses SAT testing to check whether a literal is a backbone literal or not.
+This algorithm uses SAT solvers to test whether a literal is a backbone literal or not.
 For instance, if $\Phi\vee \neg l$ is unsatisfiable but $\Phi$ is satisfiable, then $l$ must be a backbone literal of $\Phi$.
 
 
@@ -44,7 +44,7 @@ After this step, the exact backbone and non-backbone are found.
 
 
 In general, one can directly test all the literals to compute backbone without the two approximations.
-However, the test heavily replies on SAT testing which may be time-cost.
+However, the test heavily relies on SAT solving which may be time-cost.
 Our approach makes two contributions compared to this na\"{\i}ve approach.
 One is that we reduce the number of SAT calls using the known non-backbone literals $\BLap(\Phi)$.
 The another one is that we first check literals that have high probability to be backbone literals so that backbone literals can be found as early as possible.

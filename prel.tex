@@ -23,7 +23,7 @@ let $\Phi_{l}\subseteq \Phi$ be the set of clauses $\{\phi\in\Phi\mid l\in\phi\}
 %A \emph{complete assignment} is a partial assignment in which all the variables are defined.
 
 An \emph{assignment} is a function $\lambda: \X \rightarrow \{0,1\}$, where $1$ (resp. $0$) denotes true (resp. false).
-Given an assignment $\lambda$ and a literal $l$ that is $x$ or $\neq x$, let $\lambda[\neg l]$ be the assignment which is equal to $\lambda$
+Given an assignment $\lambda$ and a literal $l$ that is $x$ or $\neg x$, let $\lambda[\neg l]$ be the assignment which is equal to $\lambda$
 except for $\lambda[\neg l](x)=\neg \lambda(x)$. Given a set of variables $x=\{x_1,...,x_n\}$, let $\lambda[\neg L]$ denote the assignment
 $\lambda[\neg x_1]...[\neg x_n]$.
 An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\models \Phi$, iff assigning $\lambda(x)$ to $x$ for $x\in\var(\Phi)$ makes $\Phi$ true.
@@ -31,7 +31,7 @@ An assignment $\lambda$ \emph{satisfies} a formula $\Phi$, denoted by $\lambda\m
 An assignment $\lambda$ is a \emph{model} of $\Phi$ if $\lambda\models \Phi$.
 Given two models $\lambda_1$ and $\lambda_2$ of $\Phi$, $\lambda_2$ can be \emph{generated} from $\lambda_1$, denoted by $\lambda_1\Rightarrow_\Phi\lambda_2$, if there exists a literal $l$ such that $\lambda_2=\lambda_1[\neg l]$.
 Let $\Rightarrow^*_\Phi$ denote the \emph{reflexive transitive} closure of $\Rightarrow_\Phi$.
-Formally, for every model $\lambda$ of $\Phi$, $\lambda\Rightarrow^*_\Phi\lambda$ and $\lambda_1\Rightarrow^*_\Phi\lambda_3$ if $\lambda_1\Rightarrow\Phi\lambda_2$ and $\lambda_2\Rightarrow^*_\Phi\lambda_3$.
+Formally, for every model $\lambda$ of $\Phi$, $\lambda\Rightarrow^*_\Phi\lambda$ and $\lambda_1\Rightarrow^*_\Phi\lambda_3$ if $\lambda_1\Rightarrow^*_\Phi\lambda_2$ and $\lambda_2\Rightarrow^*_\Phi\lambda_3$.
 A \emph{model cluster} $\cl_\Phi(\lambda)$ of $\lambda$ is the set of models $\{\lambda'\mid \lambda\Rightarrow^*_\Phi\lambda'\}$.
 A literal $l$ is a \emph{frozen literal} in a model $\lambda$ of $\Phi$,
 if $l$ takes the same value in all the models of $\cl_\Phi(\lambda)$. Let $\FL(\Phi,\lambda)$ denote the set of all the frozen literals

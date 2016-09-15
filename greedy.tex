@@ -1,5 +1,5 @@
 
-\section{Computing $\NBLap(\Phi)$}
+\section{Greedy-based Computing $\NBLap(\Phi)$}
 In this section, we propose a Greedy-based algorithm that computes an under-approximation of non-backbone for a given formula
 $\Phi$.
 
@@ -17,7 +17,7 @@ $l$ or contains another literal $l'$ which is also satisfied by the model $\lamb
 the assignment $\lambda[\neg l]$ satisfies $\Phi$.
 In this case, $l$ is also a non-backbone literal.
 
-However, $L(\Phi,\lambda)$ may excludes many other non-backbone literals.
+However, $L(\Phi,\lambda)$ may exclude many other non-backbone literals.
 To get more non-backbone literals, we propose the Greedy-based algorithm shown in Algorithm \ref{alg:greedy}.
 
 \begin{algorithm}
@@ -60,11 +60,11 @@ Each heuristic searching strategy will give us an ordered set $C$ of literals, t
 $C$. For each selected literal $l$, we construct a new assignment $\lambda[\neg l]$ from the model
 $\lambda$ and check whether  $\lambda[\neg l]$ satisfies $\Phi$ or not.
 If $\lambda[\neg l]$ satisfies $\Phi$, then we add the set of non-backbone literals $L(\Phi,\lambda[\neg l])$ into $\NBLap(\Phi)$, and
-assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Phi$ at the next step).
+assign $\lambda[\neg l]$ to $\lambda$ which will be severed as the model of $\Phi$ at the next step.
 Obviously,  $\NBLap(\Phi)$ is an under-approximation of non-backbone of $\Phi$.
-Notices that a literal $l$ such that $\lambda[\neg l]$ does not satisfy $\Phi$ may could be used 
+Notice that a literal $l$ such that $\lambda[\neg l]$ does not satisfy $\Phi$ may could be used
 later, i.e., $\lambda'[\neg l]$ does satisfy $\Phi$ for the later new model $\lambda'$. To make the algorithm efficient,
-we do not consider such literals twice in one iteration. 
+we do not consider such literals twice in one iteration.
 
 \begin{theorem}
 $\NBLap(\Phi)\subseteq\NBL(\Phi)$.
