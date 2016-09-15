@@ -1,31 +1,28 @@
 \section{Related Work}\label{sec:relw}
 % This paper is concerned with computing backbones of propositional formulae, which was oriented from coloring problem \cite{CJG2001}, with a wide range of practical applications such as MaxSAT \cite{MMBM2005}.
 
-A number of backbones extraction algorithms have been proposed in recent years.
-
-Monasson et al. reported an analytic solution and experimental investigation of the phase transition in K-SAT \cite{MZKST99}, in which
-backbones play in an important role. This work showed that the presence of a `backbone' provides a good explanation for the apparent inevitably high cost of heuristic search near the phase boundary. Kaiser and K\"{u}hlin proposed three model enumeration based algorithms for computing backbones \cite{KKW2001}.
-The first one iteratively assigns true (false) to each variable and tests the resulting formula for satisfiability.
-The second one reuse the results of previous satisfiability checks and the last one maximizes the number of variables that
-an be classified without satisfiability checking, which share same purpose as our work.
-
-Dubois and Dequen proposed a heuristic search for computing Backbones of hard 3-SAT formulae which yields DPL-type algorithms with a significant
+%A number of backbones extraction algorithms have been proposed in recent years.
+Kaiser and K\"{u}hlin proposed three model enumeration based algorithms for computing backbones \cite{KKW2001} using SAT solvers. 
+%The first one iteratively assigns true (false) to each variable and tests the resulting formula for satisfiability.
+%The second one reuse the results of previous satisfiability checks and the last one maximizes the number of variables that
+%an be classified without satisfiability checking, which share same purpose as our work.
+%
+Dubois and Dequen proposed a heuristic search for computing backbones of hard 3-SAT formulae which yields DPL-type algorithms with a significant
 performance improvement over the best previous algorithms \cite{DD2001}.
 Climer et al. proposed a graph-based approach to discover backbones which replies on approximate lower and upper bounds to compute
-backbones of instances of the travelling salesman problem \cite{CZ2002}. 
-
-
-Kilby et al. showed that backbones are hard even to approximate and proposed algorithms for computing backdoors, that are literals/variables whose absence will simplify formulas to be solved in polynomial time \cite{KPS2005}. As discussed by \cite{KPS2005}, backbones have little overlap with backdoors.
-
- 
-
-Zhu et al, proposed an iterative SAT testing based algorithm \cite{ZWSM11,ZWM11} which is more efficient than previous model enumeration. At the first step, this algorithm assigned the first model returned from SAT solver to backbone estimation, which need less memory to compute backbone.
+backbones \cite{CZ2002}.% of instances of the travelling salesman problem . 
+Kilby et al. showed that backbones are hard even to approximate and proposed algorithms for computing backdoors which little overlap with backbones \cite{KPS2005}.
+%and proposed algorithms for computing backdoors, that are literals/variables whose absence will simplify formulas to be solved in polynomial time %\cite{KPS2005}. As discussed by \cite{KPS2005}, backbones have little overlap with backdoors.
+%
+%
+Zhu et al, proposed an iterative SAT testing based algorithm \cite{ZWSM11,ZWM11} which is more efficient than previous model enumeration. 
+%At the first step, this algorithm assigned the first model returned from SAT solver to backbone estimation, which need less memory to compute backbone.
 
 Marques-Silva et al.  investigated algorithms for computing backbones emphasizing the integration of existing algorithms which include model enumeration, iterative SAT-testing and filtering with modern SAT solvers, as well as optimisations. 
 They conducted an experimental evaluation of existing techniques and showed that backbone computation for large practical formulae is feasible. \cite{MJML2010,JLMS12,JLM15}. 
-This work proposed a novel Greedy-Whitening based approach \tool.
-Experimental results demonstrated that our approach performs better than the best one of algorithms in \cite{MJML2010,JLMS12,JLM15} for industrial formulae and
-hard random formulae, while for simple formulae, \tool is also comparable.
+%In this work, we proposed a novel Greedy-Whitening based approach \tool.
+%Experimental results demonstrated that our approach performs better than the best one of algorithms in \cite{MJML2010,JLMS12,JLM15} for industrial formulae and
+%hard random formulae, while for simple formulae, \tool is also comparable.
 
 
  
