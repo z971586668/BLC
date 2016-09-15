@@ -18,7 +18,7 @@ the assignment $\lambda[\neg l]$ satisfies $\Phi$.
 In this case, $l$ is also a non-backbone literal.
 
 However, $L(\Phi,\lambda)$ may exclude many other non-backbone literals.
-To get more non-backbone literals, we propose the Greedy-based algorithm shown in Algorithm \ref{alg:greedy}.
+To get more non-backbone literals, we propose the Greedy-based algorithm as shown in Algorithm \ref{alg:greedy}.
 
 \begin{algorithm}
 \SetKwInOut{Input}{Input}
@@ -75,7 +75,7 @@ Instead, we manage to generate new models by changing assignments of literals in
 We use the following two heuristic searching strategies to select literals. % with an order for generating new models.
 \begin{quote}
 Let $S$ be the ordered set of literals such that for every $i: 0\leq i<j<|S|$,
-$f(\Phi,S[i])\leq f(\Phi,S[j])$, where $f$ is $\Cnt$ if $i=1$, and $f=\dens$ if $i=2$.
+$f(\Phi,S[i])\leq f(\Phi,S[j])$, where $f=\Cnt$ if $i=1$, and $f=\dens$ if $i=2$.
 We define ${\sf HS}_i(\Phi)$ as the prefix sequence $S[0,xn]$ of $S$, for some $x\in[0,1]$.
 \end{quote}
 

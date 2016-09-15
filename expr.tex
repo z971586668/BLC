@@ -1,10 +1,10 @@
 \section{Experimental Study}\label{sec:expr}
-We implemented our approach in a tool called \tool written in C++ interfacing Minisat 2.2 \cite{MINISAT}. %It is available at \url{www.lab301.cn/~ylzhang/bone}.
+We implemented our approach in a tool called \tool written in C++ interfacing Minisat 2.2 \cite{MINISAT}. 
 In this section, we present the experimental results of \tool.
 The benchmark consists of two parts: 388 industrial formulae and 6606 random formulae.
 The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1800s and memory limit of 8GB.
-The experimental results demonstrate that \tool outperforms the state of the art backbone computing tool
-\textit{cb100} \cite{JLM15}.
+The experimental results demonstrate that \tool outperforms the  state-of-the-art backbone computing tool
+\textit{cb100} \cite{JLM15}. \tool and our benchmark are available at \url{https://github.com/bone-tool}.
 
 \subsection{Benchmark Setup}
 The benchmark consists of two parts: 388 industrial formulae and 6606 random formulae.
@@ -17,7 +17,7 @@ As only satisfiable formulae make sense for computing backbone, we chose 388 for
 To evaluate the scale  of \tool, we design an interesting approach to generate about 6600 \textit{random} formulae using 100 unsatisfiable formulae as the seeds. We have the fact that for each unsatisfiable formula $\Phi$, we can find the \textit{maximal satisfiable subset} $\Psi\subset \Phi$
 iff $\Psi$ is satisfiable and for every clause $\phi\in\Phi\setminus \Psi$, $\phi\wedge \Psi$ is unsatisfiable.
 Each maximal satisfiable subset is regarded as a satisfiable formula.
-For a given unsatisfiable formula $\Phi$, there may exist more than one maximal satisfiable subsets of $\Phi$. Based on this idea, we use the tool LBX \cite{MPA2015} to generate 6606 maximal satisfiable subsets from 100 unsatisfiable formulae randomly selected.
+For a given unsatisfiable formula $\Phi$, there may exist more than one maximal satisfiable subsets of $\Phi$. Based on this idea, we use the tool LBX \cite{MPA2015} to generate 6606 maximal satisfiable subsets from which 100 unsatisfiable formulae randomly selected.
 
 
 
@@ -64,7 +64,7 @@ Table \ref{tab:ind} and Figure \ref{fig:ind-time} demonstrate that \tool outperf
 \end{figure}
 
 \subsection{Experimental Results on Random Formulae}
-In this section, we present experimental results on random formulae. Before presenting the overview of the experiments of the whole random forumlaes, we  have tested 100 random formulae from 6606 ones, which leads to finding what kind of formula are suitable to be solved by \tool.
+In this section, we present experimental results on random formulae. Before presenting the overview of the experiments of the whole random formulae, we tested 100 random formulae from 6606 ones, which leads to finding what kind of formula are suitable to be solved by \tool.
 
 \begin{figure}
     \centering
@@ -103,7 +103,7 @@ cb100 & 4413.5   & 86232 & 39040   & 1353258 & 5893.4   & 78114& 50414.04   & 15
 \label{tab:mcs-graph}
 \end{table*}
 Figure \ref{fig:mcs-time} depicts the running time of results on  randomly formulae.
-%selected 100 random formulae out of 6606 whose time of computing the first model range from 0s to more than 4s. 
+%selected 100 random formulae out of 6606 whose time of computing the first model range from 0s to more than 4s.
 This result demonstrates that there is no correlation between the running time of backbone computing and running time of computing the first model, which is different from the result on industrial formulae. The reason is that random formulae have more complex community structures \cite{NZG2014,LJG2015SAT,LJG015}. Therefore, we cannot use running time of computing the first model to measure how hard a formula is.
 To measure hardness of random formulae, we investigated community structures of all the random formulae, as it is already known that community structure of a formula affects the performance of conflict-driven clause learning based SAT solvers \cite{NZG2014}.
 
