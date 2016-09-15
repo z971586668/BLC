@@ -1,16 +1,18 @@
 \section{Conclusions}\label{sec:conc}
-This paper proposes a novel greedy-whitening based approach(\tool, for short) to compute backbone of a propositional formulae.
-\tool first computes an under-approximation of non-backbone, which can save SAT solving counts and running time of the formula.
-Then, based on the under-approximation of non-backbone, \tool computes the over-approximation of backbone, which helps \tool to find a backbone literal earlier.
-Finally, \tool iteratively tests literals to see if they are backbone literals, which is inspired by Iterative Algorithm.
+%This paper proposes a novel greedy-whitening based approach(\tool, for short) to compute backbone of a propositional formulae.
+%\tool first computes an under-approximation of non-backbone, which can save SAT solving counts and running time of the formula.
+%Then, based on the under-approximation of non-backbone, \tool computes the over-approximation of backbone, which helps \tool to find a backbone literal %earlier.
+%Finally, \tool iteratively tests literals to see if they are backbone literals, which is inspired by Iterative Algorithm.
 
-The experimental results show our approach is efficient, especially for industrial formulae which need longer time to compute the first model.
-Future improvements to backbone computation algorithms include parallel approximations, automatically identification of partitions and more accurate community structure analysis.
+%The experimental results show our approach is efficient, especially for industrial formulae which need longer time to compute the first model.
+%Future improvements to backbone computation algorithms include parallel approximations, automatically identification of partitions and more accurate community %structure analysis.
 
 
 %\section{Conclusion}\label{sec:conc}
 In this paper, we proposed a novel greedy-whitening based approach \tool to compute backbone of propositional formulae.
 We implemented our approach in a tool \tool. Experimental results demonstrated that
 \tool performs better than the state of the art tool cb100 on industrial formulae and hard random formulae.
+From our experimental results, the time for creating first model can be used to measure hardness of Backbone computing for industrial formulae.
+However, this observation does not hold for random formulae. Our experimental results demonstrated that community structures can be alternative.
 
 
