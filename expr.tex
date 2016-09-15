@@ -1,12 +1,12 @@
 \section{Experimental Study}\label{sec:expr}
-We implemented our approach in a tool called \tool written in C++ interfacing Minisat 2.2 \cite{MINISAT}. It is available at \url{www.lab301.cn/~ylzhang/bone}.
+We implemented our approach in a tool called \tool written in C++ interfacing Minisat 2.2 \cite{MINISAT}. %It is available at \url{www.lab301.cn/~ylzhang/bone}.
 In this section, we present the experimental results of \tool.
 The benchmark consists of two parts: 388 industrial formulae and 6606 random formulae.
 The experiments were conducted on a cluster of IBM iDataPlex 2.83 GHz, each instance was running with a timeout of 1800s and memory limit of 8GB.
 The experimental results demonstrate that \tool outperforms the state of the art backbone computing tool
 cb100 \cite{JLM15}.
 
-\subsection{Benchmark Setup}¡¢
+\subsection{Benchmark Setup}
 The benchmark consists of two parts: 388 industrial formulae and 6606 random formulae.
 Industrial formulae were selected from industrial verification which were selected from SAT competitions between 2002 and 2015.
 There are 1318 formulae in all these benchmarks containing random formulae or crafted large formulae.
@@ -14,15 +14,14 @@ Among them, there are 769 formulae from industrial verification including planni
 As only satisfiable formulae make sense for computing backbone, we chose 388 formulae from 769 formulae that are satisfiable using MiniSat under 1800s.
 
 
-On the random formulae side, we created 255 unsatisfiable random formulae using LBX \cite{MPA2015}, from which
-we extracted 6606 satisfiable formulae using the following approach.
+On the random formulae side, we used 100 unsatisfiable random formulae to extracted 6606 satisfiable formulae using the following approach.
 
 We first introduce some notations.
 For each unsatisfiable formula $\Phi$, a subset of clauses $\Psi\subset \Phi$ is called maximal satisfiable subset  of $\Phi$
 iff $\Psi$ is satisfiable and for every clause $\phi\in\Phi\setminus \Psi$, $\phi\wedge \Psi$ is unsatisfiable.
 Each maximal satisfiable subset is regarded as a satisfiable formula.
 For a given unsatisfiable formula $\Phi$, there may exist more than one maximal satisfiable subsets of $\Phi$.
-We use LBX \cite{MPA2015} to generate 6606 maximal satisfiable subsets from the 255 unsatisfiable random formulae.
+We use LBX \cite{MPA2015} to generate 6606 maximal satisfiable subsets from the 100 unsatisfiable random formulae.
 
 
 
@@ -47,14 +46,14 @@ cb100&30295  &239112&1.0174  \\
 \label{tab:ind}
 \end{table}
 
-Table \ref{tab:ind} shows the overview of experimental results on industrial formulas.
+Table \ref{tab:ind} shows the overview of experimental results on industrial formulae.
 Among all the 388 industrial formulae, there are 138 formulae that both \tool and cb100 were able to compute backbone within 1800s.
 Although, the number of SAT calls used by \tool is greater than cb100, \tool reduces by 12\% of the total running time and by 11\% of the average running time for each SAT call.
 
 Figure \ref{fig:ind-time} provides the details of experimental results on industrial formulae, including the running time of the SAT solver for generating the first model and total running time for each formula.
-The \textcolor{red}{red} line represents for the time used by the SAT solver for computing the first model, which indicates the hardness of the formula.
-Lines with crosses represents for the running time of \tool, and lines with boxes represents for the running time of cb100.
-For most of hard formulae, \tool outperforms cb100 in terms of total running time and  average time of each SAT solver call. This demonstrates that \tool is more feasible for computing backbone of hard formulae. In particular, \tool runs twice time faster than cb100 on the formulae from the \emph{manthey} family.
+The red dotted line represents for the time used by the SAT solver for computing the first model, which indicates the hardness of the formula.
+Lines with crosses represents for the running time of \tool, and lines with boxes represents for the running time of cb100. There is a correlation between the hardness of formulae the performance of \tool comparing to cb100.  
+For most of hard formulae, \tool outperforms cb100 in terms of total running time and average time of each SAT solver call. This demonstrates that \tool is more feasible for computing backbone of hard formulae. In particular, \tool runs twice time faster than cb100 on one formula from the \emph{manthey} family.
 
 %cb100 highly rely on the quality of model returned by SAT solver, it performances better when SAT solver gave it a suitable model. For most of the formulae that need less than 1 second to compute a first model, both \tool and cb100 were able to compute backbone very quickly with barely difference.
 
@@ -96,7 +95,7 @@ In this section, we present experimental results on random formulae.
 \begin{table*}[!htb]
 \begin{tabular}{c|c|c|c|c|c|c|c|c}
 \hline
-\multirow{2}{*}{} & \multicolumn{2}{c|}{Simple} & \multicolumn{2}{c|}{Medium} & \multicolumn{2}{c}{Hard}& \multicolumn{2}{c}{Total} \\
+\multirow{2}{*}{} & \multicolumn{2}{c|}{Simple} & \multicolumn{2}{c|}{Medium} & \multicolumn{2}{c}{Hard}& \multicolumn{2}{|c}{Total} \\
 \cline{2-9}
   & SAT Time (s) & SAT Calls & SAT Time (s)& SAT Calls & SAT Time (s)& SAT Calls&SAT Time (s)& SAT Calls \\
 \hline
@@ -107,7 +106,7 @@ cb100 & 4413.5   & 86232 & 39040   & 1353258 & 5893.4   & 78114& 50414.04   & 15
 \caption{Results of random formulae}
 \label{tab:mcs-graph}
 \end{table*}
-Figure \ref{fig:mcs-time} depicts the running time of results on randomly selected 100 random formulae whose time of computing the first model range from 1s to 5s. This result demonstrates that there is no relation between the running time of backbone computing and running time of computing the first model, which is different from the result on industrial formulae. The reason is that random formulae have more complex community structures \cite{NZG2014,LJG2015SAT,LJG015}. Therefore, we cannot use running time of computing the first model to measure how hard a formula is.
+Figure \ref{fig:mcs-time} depicts the running time of results on randomly selected 100 random formulae whose time of computing the first model range from 0s to more than 4s. This result demonstrates that there is no correlation between the running time of backbone computing and running time of computing the first model, which is different from the result on industrial formulae. The reason is that random formulae have more complex community structures \cite{NZG2014,LJG2015SAT,LJG015}. Therefore, we cannot use running time of computing the first model to measure how hard a formula is.
 To measure hardness of random formulae, we investigated community structures of all the random formulae, as it is already known that community structure of a formula affects the performance of conflict-driven clause learning based SAT solvers \cite{NZG2014}.
 
 
